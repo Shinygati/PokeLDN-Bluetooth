@@ -11,9 +11,7 @@
 
 # PokeLDN Bluetooth
 
-This fork adds an Android Bluetooth LE connection to the ESP32 radio. The app is named
-**PokeLDN Bluetooth** in the launcher, welcome screen, permission prompts and session notifications.
-The welcome screen now explains Bluetooth setup and that console keys stay on the phone.
+This fork adds an Android Bluetooth LE connection to the ESP32 radio for Android devices.
 
 ## Bluetooth setup
 
