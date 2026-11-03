@@ -40,7 +40,7 @@ from gui.app import App, keys_found  # noqa: E402
 from gui.localization import flet_locale  # noqa: E402
 from gui.views.widgets import SHORTCUTS, page_key  # noqa: E402
 from pokeldn import __version__, popup  # noqa: E402
-from pokeldn.app import settings, update  # noqa: E402
+from pokeldn.app import android, settings, update  # noqa: E402
 from pokeldn.app.paths import ROOT  # noqa: E402
 
 PAGES = (
@@ -69,7 +69,7 @@ def main(page: ft.Page) -> None:
     t.compact = bool(page.width) and page.width < t.COMPACT_WIDTH
     t.field_density = 8.0 if page.platform in (ft.PagePlatform.MACOS, ft.PagePlatform.WINDOWS,
                                                ft.PagePlatform.LINUX) else 0.0
-    page.title = "pokeldn"
+    page.title = android.APP_NAME if ANDROID else "pokeldn"
     page.theme_mode = ft.ThemeMode.DARK
     page.theme = page.dark_theme = t.app_theme()
     page.locale_configuration = flet_locale()
@@ -440,16 +440,20 @@ def welcome(app: App) -> None:
         app.page.pop_dialog()
         app.navigate("docs", doc="guide")
 
+    welcome_title = (tr('main.android_bluetooth_welcome', 'Welcome to {name}', name=android.APP_NAME)
+                     if ANDROID else tr('main.welcome_to_pokeldn_319d9e', 'Welcome to pokeldn'))
     body = ft.Column([
         ft.Row([ft.Image(src="logo.svg", width=28, height=32), ft.Container(expand=True),
                 t.icon_button("close", close, tr('main.close_welcome_dcd26c', 'Close welcome'))],
                vertical_alignment=ft.CrossAxisAlignment.START),
-        t.text(tr('main.welcome_to_pokeldn_319d9e', 'Welcome to pokeldn'), 22, weight=ft.FontWeight.W_600),
-        t.text(tr('main.trade_and_send_gifts_over_local_wireless_right_from_you_11fb42', 'Trade and send gifts over local wireless, right from your computer.'), 13, t.MUTED),
+        t.text(welcome_title, 22, weight=ft.FontWeight.W_600),
+        t.text(tr('main.android_bluetooth_intro', 'Trade and send gifts from your phone using an ESP32 connected over Bluetooth.') if ANDROID else
+               tr('main.trade_and_send_gifts_over_local_wireless_right_from_you_11fb42', 'Trade and send gifts over local wireless, right from your computer.'), 13, t.MUTED),
         ft.Container(height=6),
         t.step_list([
+            tr('main.android_console_keys', 'Choose prod.keys dumped from your own console. The keys decrypt local wireless messages and stay on your phone.') if ANDROID else
             tr('main.choose_prod_keys_dumped_from_your_own_console_the_keys__07399e', 'Choose prod.keys dumped from your own console. The keys decrypt local wireless messages and stay on this computer.'),
-            tr('main.android_board_step', 'Plug an ESP32-S3, C3 or C6 into the phone with a USB data cable.') if ANDROID else
+            tr('main.android_bluetooth_board_step', 'Install the Bluetooth wireless firmware on your ESP32 over USB once. Then power the board near your phone, open Board, tap Use a Bluetooth board, and allow Bluetooth access.') if ANDROID else
             tr('main.ios_board_step', 'Power an ESP32-C6, S3 or C3 running the Bluetooth radio firmware; the app finds it on its own.') if IOS else
             tr('main.plug_in_your_esp32_with_a_usb_data_cable_0b0ddf', 'Plug in your ESP32 with a USB data cable.'),
             tr('main.pick_a_game_choose_a_tool_and_follow_the_console_steps_a4a338', 'Pick a game, choose a tool and follow the console steps.'),
@@ -465,7 +469,7 @@ def welcome(app: App) -> None:
     app.page.show_dialog(t.dialog(
         content_padding=0, actions_padding=0, inset_padding=14 if t.compact else 32,   # Esc is Later
         clip_behavior=ft.ClipBehavior.ANTI_ALIAS,
-        semantics_label=tr('main.welcome_to_pokeldn_319d9e', 'Welcome to pokeldn'),
+        semantics_label=welcome_title,
         content=drop.target(ft.Container(ft.Column([
             ft.Container(body, padding=ft.Padding(28, 22, 18, 8)),
             ft.Container(footer, padding=ft.Padding(28, 12, 24, 24)),

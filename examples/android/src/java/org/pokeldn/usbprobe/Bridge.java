@@ -1,7 +1,11 @@
 package org.pokeldn.usbprobe;
 
 import android.app.Activity;
+import android.Manifest;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.pm.PackageManager;
 import android.content.*;
 import android.hardware.usb.*;
 import android.net.Uri;
@@ -17,7 +21,7 @@ import java.util.concurrent.SynchronousQueue;
  *  Settings, saving a file the player picks a place for, keeping the screen on during a run. */
 public final class Bridge {
     private static final String PERMISSION = "org.pokeldn.usbprobe.BRIDGE_USB_PERMISSION";
-    private static final int SAVE = 11, OPEN = 12, CREATE = 13;
+    private static final int SAVE = 11, OPEN = 12, CREATE = 13, BLE_PERMISSION = 14;
     private static final SynchronousQueue<Object> answers = new SynchronousQueue<>();
     private static Activity activity;
     private static UsbManager manager;
@@ -25,6 +29,12 @@ public final class Bridge {
     private static volatile int changes;
     private static boolean serviceStarted;
     private static File saving;
+    // The Bluetooth radio board (BleStream): found and kept connected in the background while the app
+    // is open, the way the iOS app does, and listed as a serial port only once connected.
+    private static volatile BleStream ble;
+    private static volatile boolean bleWanted, bleScanning, bleForeground = true;
+    private static volatile String bleError = "";
+    private static Thread bleKeeper;
 
     private static final BroadcastReceiver events = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
@@ -40,9 +50,16 @@ public final class Bridge {
         IntentFilter filter = new IntentFilter(PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         if (Build.VERSION.SDK_INT >= 33) owner.registerReceiver(events, filter, Context.RECEIVER_NOT_EXPORTED);
         else owner.registerReceiver(events, filter);
+        // A player who allowed Bluetooth before keeps the board found without asking again.
+        bleWanted = blePermitted();
+        startBleKeeper();
     }
+
+    /** The activity's foreground state: scanning stops in the background, a connection stays. */
+    static void foreground(boolean on) { bleForeground = on; changes++; }
 
     static void refresh() { changes++; }
 
@@ -114,7 +131,7 @@ public final class Bridge {
         });
         // Android 14 grants a connected-device foreground service only with USB access to a device, and
         // crashes an app whose foreground start is refused: no board, no service (an online-only run).
-        boolean service = on && "ready".equals(usbState());
+        boolean service = on && ("ready".equals(usbState()) || bleConnected());
         if (service == serviceStarted) return;
         serviceStarted = service;
         Intent intent = new Intent(activity, RunService.class);
@@ -123,6 +140,123 @@ public final class Bridge {
             if (Build.VERSION.SDK_INT >= 26) activity.startForegroundService(intent);
             else activity.startService(intent);
         } catch (RuntimeException error) { Log.e("PokeLDN", "Foreground service", error); }
+    }
+
+    // The Bluetooth radio board
+
+    private static String[] blePermissions() {
+        if (Build.VERSION.SDK_INT >= 31)
+            return new String[] {Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT};
+        return new String[] {Manifest.permission.ACCESS_FINE_LOCATION};
+    }
+
+    private static boolean blePermitted() {
+        if (activity == null) return false;
+        for (String permission : blePermissions())
+            if (activity.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) return false;
+        return true;
+    }
+
+    private static BluetoothAdapter bluetooth() {
+        if (activity == null) return null;
+        BluetoothManager m = (BluetoothManager)activity.getSystemService(Context.BLUETOOTH_SERVICE);
+        return m == null ? null : m.getAdapter();
+    }
+
+    /** "unsupported", "unasked", "permission", "off", "scanning" or "ready" (a board connected). */
+    public static String bleState() {
+        BluetoothAdapter adapter = bluetooth();
+        if (adapter == null) return "unsupported";
+        if (!blePermitted()) return bleWanted ? "permission" : "unasked";
+        if (!adapter.isEnabled()) return "off";
+        return bleConnected() ? "ready" : "scanning";
+    }
+
+    /** Why the last connection attempt failed, or "". */
+    public static String bleError() { return bleError; }
+
+    public static boolean bleConnected() { BleStream s = ble; return s != null && !s.isClosed(); }
+    public static String bleName() { BleStream s = ble; return s == null ? "" : s.name(); }
+    public static String bleAddress() { BleStream s = ble; return s == null ? "" : s.address(); }
+    public static int bleRssi() { BleStream s = ble; return s == null ? 0 : s.rssi(); }
+
+    /** The player chose a Bluetooth board: ask for the permissions it needs, then look for it. */
+    public static void useBluetooth() {
+        bleWanted = true;
+        changes++;
+        if (blePermitted()) { startBleKeeper(); return; }
+        activity.runOnUiThread(() -> activity.requestPermissions(blePermissions(), BLE_PERMISSION));
+    }
+
+    static void onPermissions(int request) {
+        if (request != BLE_PERMISSION) return;
+        if (blePermitted()) startBleKeeper();
+        changes++;
+    }
+
+    /** Looks for the board while the app is in front and keeps one connection: Android allows few scan
+     *  starts a minute, so the keeper waits between scans, and a connected board is left alone. */
+    private static synchronized void startBleKeeper() {
+        if (bleKeeper != null || !bleWanted || !blePermitted()) return;
+        bleKeeper = new Thread(() -> {
+            while (true) {
+                try {
+                    BluetoothAdapter adapter = bluetooth();
+                    boolean look = bleForeground && adapter != null && adapter.isEnabled() && !bleConnected();
+                    if (look) {
+                        BleStream old = ble;
+                        if (old != null) { ble = null; old.close(); changes++; }
+                        bleScanning = true;
+                        changes++;
+                        try {
+                            ble = BleStream.connect(activity, BleStream.NAME, 10000);
+                            bleError = "";
+                            Log.i("PokeLDN", "Bluetooth board connected: " + ble.address());
+                        } catch (IOException error) {
+                            bleError = error.getMessage() == null ? "" : error.getMessage();
+                        } finally {
+                            bleScanning = false;
+                            changes++;
+                        }
+                        Thread.sleep(bleConnected() ? 1000 : 6000);
+                    } else {
+                        Thread.sleep(1000);
+                    }
+                } catch (InterruptedException stop) {
+                    return;
+                } catch (RuntimeException error) {
+                    Log.e("PokeLDN", "Bluetooth keeper", error);
+                    try { Thread.sleep(6000); } catch (InterruptedException stop) { return; }
+                }
+            }
+        }, "android-ble-keeper");
+        bleKeeper.setDaemon(true);
+        bleKeeper.start();
+    }
+
+    /** The connected board's stream for pyserial; input left from an earlier session is dropped. */
+    public static BleStream openBle() throws IOException {
+        BleStream s = ble;
+        if (s == null || s.isClosed()) throw new IOException(
+            bleError.isEmpty() ? "No Bluetooth board is connected." : bleError);
+        s.discardInput();
+        return s;
+    }
+
+    /** Drops the connection; the keeper finds the board again. */
+    public static void disconnectBle() {
+        BleStream s = ble;
+        ble = null;
+        if (s != null) s.close();
+        changes++;
+    }
+
+    /** Asks Android to turn Bluetooth on. */
+    public static void enableBluetooth() {
+        Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.runOnUiThread(() -> {
+            try { activity.startActivity(intent); } catch (RuntimeException error) { openSettings(); }
+        });
     }
 
     /** Asks where to put a copy of `path`; Android's picker names it `name`. */

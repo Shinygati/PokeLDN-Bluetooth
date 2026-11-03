@@ -1,4 +1,5 @@
 #if POKELDN_BLE
+#include "soc/soc_caps.h"
 #include "ble.h"
 
 #include <stdatomic.h>
@@ -79,8 +80,12 @@ static int gap_event(struct ble_gap_event *event, void *arg)
         ask_fast_interval(event->connect.conn_handle);
         /* 251-byte link-layer packets instead of 27 (data length extension). */
         ble_gap_set_data_len(event->connect.conn_handle, 251, 2120);
-        ble_gap_set_prefered_le_phy(event->connect.conn_handle, BLE_GAP_LE_PHY_2M_MASK,
-                                    BLE_GAP_LE_PHY_2M_MASK, BLE_GAP_LE_PHY_CODED_ANY);
+#if defined(SOC_BLE_50_SUPPORTED) && SOC_BLE_50_SUPPORTED
+        ble_gap_set_prefered_le_phy(event->connect.conn_handle,
+                                    BLE_GAP_LE_PHY_1M_MASK | BLE_GAP_LE_PHY_2M_MASK,
+                                    BLE_GAP_LE_PHY_1M_MASK | BLE_GAP_LE_PHY_2M_MASK,
+                                    BLE_GAP_LE_PHY_CODED_ANY);
+#endif
         break;
     case BLE_GAP_EVENT_DISCONNECT:
         atomic_store(&s_subscribed, false);

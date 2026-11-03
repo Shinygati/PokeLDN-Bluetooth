@@ -5,12 +5,18 @@ sources (stage.py), then the APK. Run with the repository's .venv Python from th
     .venv\\Scripts\\python.exe examples\\android\\build.py         (Windows)
 """
 import argparse
+import base64
+import configparser
+import csv
 import glob
+import hashlib
+import io
 import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
+import zipfile
 
 HERE = Path(__file__).resolve().parent
 WHEELS = HERE / 'wheels'
@@ -19,6 +25,49 @@ WHEELS = HERE / 'wheels'
 LOCAL = (('python-netlink==0.0.15', {}), ('esptool==5.6.0', {}), ('esp-pylib==1.2.0', {}),
          ('intelhex==2.3.0', {}), ('reedsolo==1.7.0', {}),
          ('msgpack==1.2.4', {'MSGPACK_PUREPYTHON': '1'}))
+
+
+def normalize_console_aliases(wheel: Path) -> None:
+    """Avoid Windows .exe collisions from identical foo / foo.py console aliases.
+
+    Android uses the package modules, not desktop console aliases. Preserve the
+    canonical command and all modules, and update the wheel's RECORD hash.
+    """
+    with zipfile.ZipFile(wheel) as archive:
+        entries = archive.infolist()
+        data = {entry.filename: archive.read(entry) for entry in entries}
+    name = next((n for n in data if n.endswith('.dist-info/entry_points.txt')), None)
+    if name is None:
+        return
+    config = configparser.ConfigParser(interpolation=None)
+    config.optionxform = str
+    config.read_string(data[name].decode('utf-8'))
+    if not config.has_section('console_scripts'):
+        return
+    commands = config['console_scripts']
+    aliases = [key for key in commands if key.endswith('.py') and
+               commands.get(key[:-3]) == commands[key]]
+    if not aliases:
+        return
+    for key in aliases:
+        del commands[key]
+    text = io.StringIO()
+    config.write(text)
+    data[name] = text.getvalue().encode('utf-8')
+    record = name.rsplit('/', 1)[0] + '/RECORD'
+    rows = list(csv.reader(io.StringIO(data[record].decode('utf-8'))))
+    digest = base64.urlsafe_b64encode(hashlib.sha256(data[name]).digest()).rstrip(b'=').decode()
+    for row in rows:
+        if row[0] == name:
+            row[1:] = ['sha256=' + digest, str(len(data[name]))]
+    output = io.StringIO(newline='')
+    csv.writer(output, lineterminator='\n').writerows(rows)
+    data[record] = output.getvalue().encode('utf-8')
+    temporary = wheel.with_suffix('.whl.part')
+    with zipfile.ZipFile(temporary, 'w') as archive:
+        for entry in entries:
+            archive.writestr(entry, data[entry.filename])
+    temporary.replace(wheel)
 
 
 def android_home() -> str:
@@ -57,6 +106,8 @@ def main() -> int:
         if not list(WHEELS.glob(f'{name}-*.whl')):
             subprocess.run([sys.executable, '-m', 'pip', 'wheel', '--no-deps', '--no-binary', ':all:',
                             '-w', str(WHEELS), spec], check=True, env={**env, **extra})
+    for wheel in WHEELS.glob('*.whl'):
+        normalize_console_aliases(wheel)
     libs = HERE / 'jniLibs' / 'arm64-v8a'
     if args.native or not all((libs / n).is_file() for n in ('libpokeldn_pkhex.so', 'libunicorn.so')):
         subprocess.run([sys.executable, str(HERE / 'build_native.py')], check=True, env=env)

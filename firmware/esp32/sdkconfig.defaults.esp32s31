@@ -1,0 +1,4 @@
+# Use one core on this preview target: ESP-IDF 6.1's SMP sleep-retention code
+# uses non-atomic storage with C11 atomic operations, which Clang rejects.
+# The radio already supports single-core C-series chips; no SDK patch is needed.
+CONFIG_FREERTOS_UNICORE=y

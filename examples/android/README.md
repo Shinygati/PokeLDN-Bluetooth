@@ -1,7 +1,7 @@
 # Android app
 
-The Android app runs the desktop app's own interface on a phone, with an ESP32-S3, C3 or C6 radio
-board on its native USB port, or a classic ESP32 on a CP210x bridge (`10c4:ea60`), on the phone's USB
+The Android app runs the desktop app's own interface on a phone, with a radio board running the
+Bluetooth wireless firmware powered nearby, or an ESP32-S3, C3 or C6 radio board on its native USB port, or a classic ESP32 on a CP210x bridge (`10c4:ea60`), on the phone's USB
 port. Every page, game and tool is the code in `gui/` and `pokeldn/`; only the shell in this folder is Android's. A OnePlus CPH2621 running Android 16 completed a
 smooth retail FireRed trade with a XIAO ESP32C6 through the earlier diagnostic frontend
 (`MainActivity`, below). The full app on the same phone and board completes FireRed host trades at the
@@ -31,6 +31,7 @@ the app aborted (JNI DeleteRef, JNIEnv from another thread), even after attachin
 | `pokeldn/app/runner.py` `InProcess` | runs a launcher on the app's own interpreter, since Android starts no second Python; it holds stdout, argv, the environment and the working directory while it runs |
 | `Bridge.java` | USB state, the USB access prompt, Settings, the file pickers and the foreground service, called from Python |
 | `RunService.java` | a connected-device foreground service while a run holds the board |
+| `BleStream.java` | the Bluetooth wireless firmware's link (`POKELDN-RADIO`, service `7a1e0101-...`): scan by name, connect with the 2M PHY and high priority, MTU 247, subscribe, then one write without response at a time; `UsbStream`'s interface, listed as `android://ble` ([Bluetooth on Android](../../docs/gui.md#bluetooth-on-android)) |
 | `src/python/fastapi/` | the part of FastAPI that Flet's web server uses, on starlette: pydantic-core has no Android build |
 | `build_native.py` | PKHeX (`services/pkhex`) compiled ahead of time for linux-bionic-arm64, and an ARM-only Unicorn; both ship as native libraries |
 

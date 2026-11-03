@@ -65,12 +65,35 @@ A classic ESP32 works only on a CP210x bridge (`10c4:ea60`, `UsbStream.java`); C
 named as unsupported. PKHeX runs on the phone. Saving and "Open the folder" (a zip) use Android's
 file picker.
 
+### Bluetooth on Android
+
+A board running the Bluetooth wireless firmware matching its chip needs USB only for power.
+Images are bundled for classic ESP32, S3, C2, C3, C5, C6, C61 and the experimental S31 target;
+see the chip-to-image table in the repository README. With no USB board plugged in, the Board page offers
+**Use a Bluetooth board**: Android asks for Nearby devices (Android 12 and later) or location (earlier),
+and `Bridge.java` then looks for `POKELDN-RADIO` while the app is in front and keeps one connection
+(`BleStream.java`). The connected board is listed as the port `android://ble`, as native USB, and every
+page and launcher opens it unchanged; closing a session leaves the connection up for the next.
+
+| state (`Bridge.bleState`) | Board page |
+|---|---|
+| `unasked` | Use a Bluetooth board |
+| `permission` | Allow Bluetooth, or Settings when Android stops asking |
+| `off` | Turn on Bluetooth |
+| `scanning` | Looking for the Bluetooth radio, with the last connection error |
+| `ready` | the board, its firmware, address and signal; Disconnect |
+
+A board on Bluetooth cannot be reset into its loader: its firmware is changed over USB, from the phone
+(S3, C3, C6) or a computer. A Mystery Gift kept on the board over Bluetooth starts at once (BEACON
+START) instead of at the next power-up, and keeps going once the app disconnects; opening the board
+in the app again stops it, as a computer does.
+
 ## iOS setup
 
 The [iOS app](../examples/ios/README.md) is this interface on an iPhone or iPad (AltStore or
 SideStore). It reaches the board over Bluetooth: install the Bluetooth wireless firmware from the
-desktop Board page (`pokeldn-radio-ble-c6.bin` for an ESP32-C6, `pokeldn-radio-ble.bin` for a
-classic ESP32); USB only powers it. While the phone holds the board, the board ignores USB: close the
+desktop Board page (`pokeldn-radio-ble-c6.bin` for an ESP32-C6, `pokeldn-radio-ble-s3.bin` for an
+ESP32-S3, `pokeldn-radio-ble.bin` for a classic ESP32); USB only powers it. While the phone holds the board, the board ignores USB: close the
 iOS app before using it elsewhere. App files are under Files, On My iPhone, pokeldn.
 
 ## Window sizes

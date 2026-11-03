@@ -1088,6 +1088,10 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_wifi_init(&init));
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+#if CONFIG_SOC_WIFI_SUPPORT_5G
+    /* Switch local wireless uses 2.4 GHz. AUTO on dual-band chips rejects set_protocol. */
+    ESP_ERROR_CHECK(esp_wifi_set_band_mode(WIFI_BAND_MODE_2G_ONLY));
+#endif
     s_ap_joins = xQueueCreate(8, 6);
     install_hooks();
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, wifi_event, NULL));

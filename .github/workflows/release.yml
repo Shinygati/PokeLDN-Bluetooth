@@ -27,12 +27,27 @@ jobs:
             file: pokeldn-radio-c3.bin
           - target: esp32c6
             file: pokeldn-radio-c6.bin
-          # The Bluetooth host link for the iOS app (docs/hardware_esp32.md, Bluetooth).
+          # The Bluetooth host link for the iOS and Android apps (docs/hardware_esp32.md, Bluetooth).
           - target: esp32c6
             file: pokeldn-radio-ble-c6.bin
             ble: true
+          - target: esp32s3
+            file: pokeldn-radio-ble-s3.bin
+            ble: true
           - target: esp32
             file: pokeldn-radio-ble.bin
+            ble: true
+          - target: esp32c2
+            file: pokeldn-radio-ble-c2.bin
+            ble: true
+          - target: esp32c3
+            file: pokeldn-radio-ble-c3.bin
+            ble: true
+          - target: esp32c5
+            file: pokeldn-radio-ble-c5.bin
+            ble: true
+          - target: esp32c61
+            file: pokeldn-radio-ble-c61.bin
             ble: true
     steps:
       - uses: actions/checkout@v7
@@ -142,6 +157,15 @@ jobs:
         with:
           name: firmware-esp32c6-ble
           path: gui/firmware
+      - uses: actions/download-artifact@v8
+        with:
+          name: firmware-esp32s3-ble
+          path: gui/firmware
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: firmware-esp32c*-ble
+          path: gui/firmware
+          merge-multiple: true
       - name: Install
         run: python -m pip install -r gui/requirements.txt
       # The wheel's prebuilt run.exe is shared with much PyInstaller malware; Defender's ML flagged 0.31.0.

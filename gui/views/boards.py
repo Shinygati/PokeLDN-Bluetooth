@@ -213,6 +213,7 @@ class BoardView:
                 t.pixel_icon("usb", color=t.FAINT),
                 t.text(tr('boards.no_board_found_6df721', 'No board found'), 13, t.MUTED, weight=ft.FontWeight.W_600),
                 t.text(tr('boards.ios_list_hint', 'Power the board near the phone. It shows up here over Bluetooth on its own.') if ios.active() else
+                       tr('boards.android_list_hint', 'Plug it in with a USB data cable, or power a Bluetooth board near the phone. It shows up here on its own.') if android.active() else
                        tr('boards.plug_it_into_this_computer_with_a_data_cable_it_shows_u_ca5481', 'Plug it into this computer with a data cable. It shows up here on its own.'), 12,
                        t.FAINT, text_align=ft.TextAlign.CENTER),
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=6), padding=24))
@@ -246,10 +247,18 @@ class BoardView:
             ft.Column([t.text(status.title, 17, weight=ft.FontWeight.W_600),
                        t.text(status.detail, 13, t.MUTED)], spacing=2, expand=True),
         ], spacing=14, vertical_alignment=ft.CrossAxisAlignment.START)]
-        if android.active():   # the two things a phone's player can fix from here
-            actions = ([t.button(tr('boards.android_allow_usb', 'Allow USB access'), lambda e: android.ask_permission(), "usb")]
-                       if status.state == "denied" else
-                       [t.secondary_button(tr('boards.android_settings', 'Open Settings'), lambda e: android.open_settings(), "gear")])
+        if android.active():   # the things a phone's player can fix from here
+            if status.state == "denied":
+                actions = [t.button(tr('boards.android_allow_usb', 'Allow USB access'), lambda e: android.ask_permission(), "usb")]
+            elif status.state == "ble-off":
+                actions = [t.button(tr('boards.android_ble_turn_on', 'Turn on Bluetooth'), lambda e: android.enable_bluetooth(), "radio")]
+            elif status.state == "ble-permission":
+                actions = [t.button(tr('boards.android_ble_allow', 'Allow Bluetooth'), lambda e: android.use_bluetooth(), "radio"),
+                           t.secondary_button(tr('boards.android_settings', 'Open Settings'), lambda e: android.open_settings(), "gear")]
+            else:
+                actions = [t.secondary_button(tr('boards.android_settings', 'Open Settings'), lambda e: android.open_settings(), "gear")]
+                if android.ble_state() == "unasked":
+                    actions.insert(0, t.button(tr('boards.android_ble_use', 'Use a Bluetooth board'), lambda e: android.use_bluetooth(), "radio"))
             rows.append(ft.Row(actions, alignment=ft.MainAxisAlignment.END))
         elif not ios.active():
             rows.append(ft.Row([self.report_button()], alignment=ft.MainAxisAlignment.END))
@@ -325,6 +334,12 @@ class BoardView:
         return t.surface(ft.Container(ft.Column(body, spacing=14, tight=True), padding=ft.Padding(20, 18, 20, 18)))
 
     def firmware_card(self, f: Facts) -> ft.Control:
+        if android.active() and android.over_bluetooth(f.key):
+            # A board on Bluetooth cannot be reset into its loader: firmware goes on over USB.
+            return t.card(tr('boards.firmware_c2a314', 'Firmware'), ft.Column([
+                t.text(tr('boards.android_ble_firmware', 'Installed: {value0} {value1}', value0=f.firmware.name if f.firmware else '', value1=f.version).strip(), 14),
+                t.text(tr('boards.android_ble_flash_over_usb', 'To change or update the firmware, plug the board into this phone (S3, C3 or C6, native USB port) or into a computer with the desktop app.'), 12, t.MUTED),
+            ], spacing=6))
         busy = self.app.busy or bool(self.installing) or f.state in ("checking", "busy", "denied")
         rows = []
         for fw in board.FIRMWARES:
@@ -364,6 +379,12 @@ class BoardView:
                 info(tr('boards.firmware_c2a314', 'Firmware'), tr('boards._54ef3b', '{value0} {value1}', value0=f.firmware.name, value1=f.version).strip() if f.firmware else tr('boards.none_dc937b', 'None'))]
         if f.key == CONTROLLER:
             rows.append(info(tr('boards.connection_639a40', 'Connection'), tr('boards.usb_to_this_computer_as_a_controller_bluetooth_to_this__acd2c7', 'USB to this computer, as a controller; Bluetooth to this app')))
+        elif f.port and android.active() and android.over_bluetooth(f.key):
+            rssi = android.ble_rssi()
+            rows += [info(tr('boards.connection_639a40', 'Connection'), tr('boards.android_ble_connection', 'Bluetooth LE, {value0}', value0=f.port.serial_number or f.port.bridge)),
+                     info(tr('boards.android_ble_signal', 'Signal'), tr('boards.android_ble_dbm', '{value0} dBm', value0=rssi) if rssi else tr('boards.unknown_b764cd', 'Unknown')),
+                     ft.Row([t.secondary_button(tr('boards.android_ble_disconnect', 'Disconnect'), lambda e: android.disconnect_bluetooth(), "radio",
+                                                disabled=self.app.busy)])]
         elif f.port:
             rows += [info(tr('boards.connection_639a40', 'Connection'), tr('boards.usb_serial_408b47', 'USB serial, {value0}', value0=f.port.bridge)),
                      info(tr('boards.port_72e9a5', 'Port'), t.text(f.port.device, 13, font_family=t.MONO))]
@@ -689,7 +710,8 @@ class BoardView:
         lines = [t.text(tr('boards.try_another_cable_or_usb_port_many_cables_only_charge_d90a3a', 'Try another cable or USB port. Many cables only charge.'), 13)]
         if android.active():   # Bridge.java drives native USB only
             lines += [t.text(tr('boards.android_boards', "A phone drives an ESP32-S3, C3 or C6 through its native USB port, the one marked USB. A classic ESP32 needs a computer."), 13, t.MUTED),
-                      t.text(tr('boards.android_adapter', "A phone with a USB-C socket needs a USB-C cable or an OTG adapter; a USB-A board cable alone does not fit."), 13, t.MUTED)]
+                      t.text(tr('boards.android_adapter', "A phone with a USB-C socket needs a USB-C cable or an OTG adapter; a USB-A board cable alone does not fit."), 13, t.MUTED),
+                      t.text(tr('boards.android_ble_family_help', "Install the Bluetooth wireless firmware matching your chip over USB once: {chips}. The board then needs USB only for power. Keep it near the phone and close the app on other devices: it connects to one host at a time. Bluetooth-only chips without Wi-Fi cannot be used.", chips=", ".join(board.BLUETOOTH_CHIPS)), 13, t.MUTED)]
             return t.card(tr('boards.board_not_listed_or_not_answering_1a424c', 'Board not listed, or not answering?'), ft.Column(lines, spacing=8))
         if sys.platform == "win32":
             lines += [

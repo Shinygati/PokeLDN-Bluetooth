@@ -372,6 +372,16 @@ class Radio:
             from pokeldn.ldn import esp32_ble
             s = esp32_ble.BleStream(port[4:] or esp32_ble.NAME)
             fast_baud, left_at = 0, ()
+        elif port.startswith("android://ble"):
+            # The Android app's Bluetooth link (examples/android, BleStream.java): no line rate either.
+            import serial
+            s = serial.Serial()
+            s.port = port
+            s.baudrate = baud
+            s.timeout = 0.02
+            s.write_timeout = WRITE_TIMEOUT
+            s.open()
+            fast_baud, left_at = 0, ()
         elif port.startswith("socket://"):
             # The iOS app's Bluetooth bridge (examples/ios): a byte stream with no line rate.
             import serial

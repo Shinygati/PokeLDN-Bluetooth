@@ -27,7 +27,7 @@
 #endif
 #if CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32C6
 #define BUTTON_GPIO 9
-#else
+#elif CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S3
 #define BUTTON_GPIO 0   /* BOOT: low while pressed, pulled up */
 #endif
 #define BUTTON_TICKS 3  /* 30 ms of one level makes it the button's state */
@@ -102,7 +102,11 @@ static void led_task(void *arg)
     TickType_t wake = xTaskGetTickCount();
     for (;;) {
         const int64_t now = now_ms();
+#ifdef BUTTON_GPIO
         const int button_level = gpio_get_level(BUTTON_GPIO);
+#else
+        const int button_level = 1;   /* Generic new targets do not assume board-specific wiring. */
+#endif
         same_level = button_level == last_level ? same_level + 1 : 0;
         last_level = button_level;
         if (same_level == BUTTON_TICKS && pressed != (button_level == 0)) {
@@ -177,12 +181,14 @@ void led_start(led_state_t state, led_button_t button)
 {
     s_state = state;
     s_button = button;
+#ifdef BUTTON_GPIO
     const gpio_config_t input = {
         .pin_bit_mask = 1ULL << BUTTON_GPIO, .mode = GPIO_MODE_INPUT,
         .pull_up_en = GPIO_PULLUP_ENABLE, .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_DISABLE,
     };
     gpio_config(&input);
+#endif
 #ifdef LED_GPIO
     const ledc_timer_config_t timer = {
         .speed_mode = LEDC_LOW_SPEED_MODE, .duty_resolution = LEDC_TIMER_13_BIT,

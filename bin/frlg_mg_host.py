@@ -890,9 +890,13 @@ def _save_to_board(parser, args, config, plan):
                   file=sys.stderr)
             return 1
         state = radio.store_beacon(image)
+        started = esp32_wlan.keep_running(radio)
     except (OSError, RuntimeError, esp32.RadioError) as exc:
         print(str(exc), file=sys.stderr)
         return 1
+    if started:
+        print(f"saved on the board: {state.length} bytes. {esp32_wlan.KEPT_OVER_BLUETOOTH}")
+        return 0
     print(f"saved on the board: {state.length} bytes. Unplug it and power it from any USB charger; "
           "3 s after power-up it hosts the gift for every console that joins, until a computer "
           "opens it.")

@@ -622,6 +622,27 @@ def show_done() -> bool:
     return led(*DONE_LOOK)
 
 
+def over_bluetooth() -> bool:
+    """The board is this process's radio over Bluetooth (the phone apps, or `esp32:ble`), not a USB
+    cable: it stays powered and in reach while the app is closed, so a kept gift can start at once."""
+    port = os.environ.get("POKELDN_RADIO", "")[len("esp32:"):]
+    return port.startswith(("android://ble", "ble", "socket://"))
+
+
+KEPT_OVER_BLUETOOTH = ("It is hosting now, on its own: close the app or move the board to any USB charger "
+                       "and it keeps going. Opening the board in the app again stops it until the "
+                       "board next powers up.")
+
+
+def keep_running(radio: esp32.Radio) -> bool:
+    """Starts a just-stored portable beacon when the board is reached over Bluetooth; True when started.
+    Over USB the board is unplugged first and starts it itself 3 s after power-up."""
+    if not over_bluetooth():
+        return False
+    radio.start_beacon()
+    return True
+
+
 def use_from_environment(log=None) -> esp32.Radio | None:
     """`POKELDN_RADIO=esp32:PORT` selects the board for the whole process; `esp32:auto` finds it."""
     spec = os.environ.get("POKELDN_RADIO", "")

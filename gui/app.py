@@ -171,8 +171,20 @@ class App:
         return BoardStatus("checking", tr('app.checking_the_board_f7ce4a', 'Checking the board'), tr('app.asking_the_board_for_its_firmware_21d622', 'Asking the board for its firmware.'), port)
 
     def android_status(self) -> BoardStatus:
-        """The phone's USB state before any firmware answers (docs/gui.md, Android setup requirements)."""
+        """The phone's USB state before any firmware answers (docs/gui.md, Android setup requirements),
+        and the Bluetooth board's while no USB board is plugged in."""
         state = android.usb_state()
+        if state == "missing":
+            ble = android.ble_state()
+            if ble == "scanning":
+                return BoardStatus("missing", tr('app.android_ble_looking', 'Looking for the Bluetooth radio'),
+                                   android.ble_error() or tr('app.android_ble_looking_detail', 'Power a board running the Bluetooth radio firmware near the phone, or plug a board in with a USB data cable.'))
+            if ble == "off":
+                return BoardStatus("ble-off", tr('app.android_ble_off', 'Bluetooth is off'),
+                                   tr('app.android_ble_off_detail', 'Turn Bluetooth on to use a board running the Bluetooth radio firmware, or plug a board in with a USB data cable.'))
+            if ble == "permission":
+                return BoardStatus("ble-permission", tr('app.android_ble_allow', 'Allow Bluetooth'),
+                                   tr('app.android_ble_allow_detail_named', '{value0} needs the Nearby devices permission to find a Bluetooth board. If Android no longer asks, allow it in Settings, Apps, {value0}, Permissions.', value0=android.APP_NAME))
         titles = {"missing": tr('app.no_board_plugged_in_0ea8e5', 'No board plugged in'),
                   "bridge": tr('app.android_bridge_board', 'This board needs a computer'),
                   "permission": tr('app.android_allow_usb', 'Allow USB access'),

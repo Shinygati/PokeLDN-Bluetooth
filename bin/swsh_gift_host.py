@@ -98,6 +98,10 @@ def save_to_board(args, record, fragments, keys_path):
                            dwell_ms=round(args.dwell * 1000),
                            display=screen.gift_payloads("Mystery Gift", line, species=species))
     state = radio.store_beacon(image)
+    if esp32_wlan.keep_running(radio):
+        print(f"saved on the board: {state.fragments} fragments, {state.length} bytes. "
+              f"{esp32_wlan.KEPT_OVER_BLUETOOTH}")
+        return 0
     print(f"saved on the board: {state.fragments} fragments, {state.length} bytes. "
           "Unplug it and power it from any USB charger; it advertises the card 3 s after power-up, "
           "until a computer opens it.")

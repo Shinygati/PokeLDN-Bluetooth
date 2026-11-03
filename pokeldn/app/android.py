@@ -1,6 +1,7 @@
-"""The app on Android (examples/android): the radio board's USB link as a serial port, so the Board page,
-the launchers and esptool reach it unchanged, and the Android calls that stand in for a desktop's
-folders. Everything here needs Chaquopy's `java` module; nothing imports it off Android."""
+"""The app on Android (examples/android): the radio board's USB link, or its Bluetooth link with the
+Bluetooth radio firmware, as a serial port, so the Board page, the launchers and esptool reach it
+unchanged, and the Android calls that stand in for a desktop's folders. Everything here needs
+Chaquopy's `java` module; nothing imports it off Android."""
 import os
 import sys
 import time
@@ -9,6 +10,11 @@ import serial
 from serial.serialutil import PortNotOpenError, SerialBase, SerialException, Timeout
 
 PORT = "android://board"
+# The app's name on Android, as the launcher and Settings show it (examples/android/AndroidManifest.xml).
+APP_NAME = "PokeLDN Bluetooth"
+# The Bluetooth radio board (BleStream.java), listed once Bridge.java has found and connected it.
+BLE_PORT = "android://ble"
+NATIVE_USB = (0x303A, 0x1001)   # the Bluetooth board is listed as native USB: it speaks the same wire
 
 
 def active() -> bool:
@@ -20,14 +26,30 @@ def bridge():
     return jclass("org.pokeldn.usbprobe.Bridge")
 
 
+def over_bluetooth(device: str) -> bool:
+    """The board is reached over Bluetooth: it cannot be reset into its loader or flashed from here."""
+    return device == BLE_PORT
+
+
 class Serial(SerialBase):
-    """pyserial's interface over UsbStream.java; serial.Serial and serial_for_url("android://board") are this."""
+    """pyserial's interface over UsbStream.java or BleStream.java; serial.Serial and
+    serial_for_url("android://board" or "android://ble") are this."""
 
     def open(self):
         if self.is_open:
             raise SerialException("Port is already open.")
+        if self._port == BLE_PORT:
+            # Bridge keeps the connection; opening takes it with the earlier session's input dropped.
+            try:
+                self._usb = bridge().openBle()
+            except Exception as error:
+                raise SerialException(str(error)) from error
+            self._ble = True
+            self.is_open = True
+            return
         if self._port != PORT:
-            raise SerialException(f"Only {PORT} exists on this phone, not {self._port!r}.")
+            raise SerialException(f"Only {PORT} and {BLE_PORT} exist on this phone, not {self._port!r}.")
+        self._ble = False
         # A reset into the ROM loader re-enumerates native USB (esptool reopens the port): wait for it.
         deadline = time.monotonic() + 10
         while True:
@@ -45,7 +67,8 @@ class Serial(SerialBase):
     def close(self):
         if self.is_open:
             self.is_open = False
-            self._usb.close()
+            if not getattr(self, "_ble", False):   # the Bluetooth link stays up for the next session
+                self._usb.close()
 
     def from_url(self, url):
         return url
@@ -86,7 +109,8 @@ class Serial(SerialBase):
             chunk = bytes(self._usb.read(size - len(data)))   # waits up to 20 ms for a USB transfer
             data += chunk
             if self._usb.isClosed() and not chunk:
-                raise SerialException("The board's USB link closed.")
+                raise SerialException("The board's Bluetooth link dropped." if getattr(self, "_ble", False)
+                                      else "The board's USB link closed.")
             if timeout.expired():
                 break
         return bytes(data)
@@ -140,8 +164,26 @@ class _Port:
         return (self.device, self.description, self.hwid)[index]
 
 
+class _BlePort:
+    """The Bluetooth board as a ListPortInfo, as the iOS app lists its own (pokeldn.app.ios)."""
+
+    def __init__(self):
+        self.device = BLE_PORT
+        self.vid, self.pid = NATIVE_USB
+        name = str(bridge().bleName()) or "Bluetooth radio"
+        self.serial_number = str(bridge().bleAddress())
+        self.description = self.product = name
+        self.manufacturer, self.hwid, self.location, self.interface = "Espressif", "BLE", "", ""
+
+    def __getitem__(self, index):
+        return (self.device, self.description, self.hwid)[index]
+
+
 def comports(include_links=False):
-    return [_Port()] if bridge().usbState() == "ready" else []
+    found = [_Port()] if bridge().usbState() == "ready" else []
+    if bridge().bleState() == "ready":
+        found.append(_BlePort())
+    return found
 
 
 def install() -> None:
@@ -182,6 +224,33 @@ def usb_guidance(state: str) -> str:
 
 def ask_permission() -> None:
     bridge().askPermission()
+
+
+def ble_state() -> str:
+    """unsupported, unasked, permission, off, scanning or ready (Bridge.bleState)."""
+    return str(bridge().bleState())
+
+
+def ble_error() -> str:
+    return str(bridge().bleError())
+
+
+def ble_rssi() -> int:
+    """The connected board's signal strength in dBm, 0 when none."""
+    return int(bridge().bleRssi())
+
+
+def use_bluetooth() -> None:
+    """Asks for Bluetooth access if needed, then looks for a board running the Bluetooth radio firmware."""
+    bridge().useBluetooth()
+
+
+def enable_bluetooth() -> None:
+    bridge().enableBluetooth()
+
+
+def disconnect_bluetooth() -> None:
+    bridge().disconnectBle()
 
 
 def open_settings() -> None:

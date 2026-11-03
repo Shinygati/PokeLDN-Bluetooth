@@ -19,7 +19,14 @@ host, except in the [portable beacon](#portable-beacon). `pokeldn.ldn.esp32_wlan
 | ESP32-S3 | native USB Serial/JTAG | `pokeldn-radio-s3.bin` |
 | ESP32-C3 | native USB Serial/JTAG | `pokeldn-radio-c3.bin` |
 | ESP32-C6 | native USB Serial/JTAG | `pokeldn-radio-c6.bin` |
-| classic ESP32, ESP32-C6 | Bluetooth LE (the iOS app), and USB as above | `pokeldn-radio-ble.bin`, `pokeldn-radio-ble-c6.bin` |
+| classic ESP32, ESP32-S3, ESP32-C2, ESP32-C3, ESP32-C5, ESP32-C6, ESP32-C61 | Bluetooth LE (the iOS and Android apps) | `pokeldn-radio-ble.bin`, or `pokeldn-radio-ble-<suffix>.bin` (`s3`, `c2`, `c3`, `c5`, `c6`, `c61`) |
+| ESP32-S31 (preview) | Bluetooth LE; experimental single-core build | `pokeldn-radio-ble-s31.bin` |
+
+The expanded Bluetooth builds require at least 2 MB flash and no PSRAM. They have been compiled,
+not validated on hardware in this build session. C2 uses UART for its USB cable connection;
+C5/C61/S31 use native USB Serial/JTAG. New targets do not assume an attached display, LED or button.
+Classic ESP32 Bluetooth firmware uses one core to also boot on SOLO-1 boards. Dual-band chips are
+held to 2.4 GHz. H-series Bluetooth-only chips lack the Wi-Fi this radio requires.
 
 All targets use 2.4 GHz; ESP32-S2 is unsupported. An S3, C3 or C6 with separate UART and native USB
 sockets must use the native socket (S3 GPIO19/20, C3 GPIO18/19); through the UART socket the firmware
@@ -532,7 +539,13 @@ CDC `SET_CONTROL_LINE_STATE` instead.
 ### Bluetooth
 
 A build with `POKELDN_BLE=1` also carries the host link over Bluetooth LE, for the iOS app, which
-cannot open a USB serial device; the board then needs USB only for power.
+cannot open a USB serial device, and the Android app's Bluetooth option ([Bluetooth on
+Android](gui.md#bluetooth-on-android)); the board then needs USB only for power.
+
+The ESP32-S3 image (`pokeldn-radio-ble-s3.bin`) is the same build for `esp32s3`: ESP-IDF v6.1 builds it
+from `sdkconfig.defaults;sdkconfig.defaults.ble` with no S3-only setting, 867 KB in the 1.5 MB app
+partition. The S3 is a Bluetooth 5 part with the 2M PHY and data length extension, as the C6 is; its
+link loop over Bluetooth is not yet measured against a console.
 
     POKELDN_BLE=1 idf.py -B ../../scratchpad/esp/build-ble \
         -D SDKCONFIG=../../scratchpad/esp/build-ble/sdkconfig \

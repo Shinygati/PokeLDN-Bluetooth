@@ -42,9 +42,13 @@ FIRMWARE = os.path.join(ROOT, "gui", "firmware", "pokeldn-radio.bin")   # writte
 FIRMWARE_S3 = os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-s3.bin")
 FIRMWARE_C3 = os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-c3.bin")
 FIRMWARE_C6 = os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-c6.bin")
-# The Bluetooth host link for the iOS app (docs/hardware_esp32.md, Bluetooth); built for these two chips.
+# The Bluetooth host link for the iOS and Android apps (docs/hardware_esp32.md, Bluetooth); built for
+# each Wi-Fi/Bluetooth chip family; images are not interchangeable.
 FIRMWARE_BLE = {"ESP32": os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-ble.bin"),
-                "ESP32-C6": os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-ble-c6.bin")}
+                "ESP32-S3": os.path.join(ROOT, "gui", "firmware", "pokeldn-radio-ble-s3.bin"),
+                **{f"ESP32-{suffix.upper()}": os.path.join(ROOT, "gui", "firmware", f"pokeldn-radio-ble-{suffix}.bin")
+                   for suffix in ("c2", "c3", "c5", "c6", "c61", "s31")}}
+BLUETOOTH_CHIPS = tuple(FIRMWARE_BLE)
 # The controller firmware (firmware/pad), docs/hardware_pad.md: an S3 over USB, a classic ESP32 over
 # Bluetooth Classic. C3 and C6 cannot be a Switch controller.
 FIRMWARE_PAD = os.path.join(ROOT, "gui", "firmware", "pokeldn-pad-s3.bin")
@@ -66,12 +70,12 @@ class Firmware:
 
 FIRMWARES = (
     Firmware("radio", tr('board.wireless_da1d2f', 'Wireless'), tr('board.the_board_is_the_radio_for_trades_mystery_gift_and_ever_9d0251', 'The board is the radio for trades, Mystery Gift and every tool on the Games page.'), "globe", ("ESP32", "ESP32-S3", "ESP32-C3", "ESP32-C6"), tr('board.the_radio_for_trades_a18fb5', 'the radio for trades')),
-    Firmware("radio_ble", tr('board.bluetooth_wireless', 'Bluetooth wireless'), tr('board.bluetooth_wireless_summary', 'The radio for the iPhone app: the phone reaches the board over Bluetooth, and a computer still reaches it over USB.'), "radio", ("ESP32", "ESP32-C6"), tr('board.the_radio_for_the_iphone_app', 'the radio for the iPhone app')),
+    Firmware("radio_ble", tr('board.bluetooth_wireless', 'Bluetooth wireless'), tr('board.bluetooth_wireless_summary_phones', 'The radio for the iPhone and Android apps: the phone reaches the board over Bluetooth, and a computer still reaches it over USB.'), "radio", BLUETOOTH_CHIPS, tr('board.the_radio_for_phones', 'the radio for the phone apps')),
     Firmware("pad", tr('board.controller_31df66', 'Controller'), tr('board.the_board_is_a_controller_for_the_switch_this_computer__6feaec', 'The board is a controller for the Switch: this computer presses its buttons and plays macros from the Control page.'), "joystick", ("ESP32-S3", "ESP32"),
              tr('board.a_controller_for_the_switch_889ffc', 'a controller for the Switch')),
 )
 FIRMWARE_BY_KIND = {f.kind: f for f in FIRMWARES}
-CHIP_NAMES = {"esp32": "ESP32", "esp32s3": "ESP32-S3", "esp32c3": "ESP32-C3", "esp32c6": "ESP32-C6"}
+CHIP_NAMES = {name.lower().replace("-", ""): name for name in BLUETOOTH_CHIPS}
 
 
 def image_for(kind: str, chip: str) -> str:
@@ -137,7 +141,7 @@ class Port:
 
 def wrong_port(port: Port, chip: str) -> bool:
     """S3, C3 and C6 firmware talks over native USB only; flashing through a UART bridge still works."""
-    return chip in ("ESP32-S3", "ESP32-C3", "ESP32-C6") and not port.native
+    return chip in ("ESP32-S3", "ESP32-C3", "ESP32-C5", "ESP32-C6", "ESP32-C61", "ESP32-S31") and not port.native
 
 
 @dataclass(frozen=True)
@@ -390,13 +394,15 @@ def flash(port: str, firmware: str = "", kind: str = "radio", from_loader: bool 
     from esptool.bin_image import LoadFirmwareImage
 
     with _connect(port, kind, from_loader) as chip:
-        if chip.CHIP_NAME not in ("ESP32", "ESP32-S3", "ESP32-C3", "ESP32-C6"):
-            raise esptool.FatalError(tr('board.is_not_supported_use_an_esp32_esp32_s3_esp32_c3_or_esp3_9f0b35', '{value0} is not supported. Use an ESP32, ESP32-S3, ESP32-C3 or ESP32-C6.', value0=chip.CHIP_NAME))
+        if chip.CHIP_NAME not in BLUETOOTH_CHIPS:
+            raise esptool.FatalError(tr('board.wifi_bluetooth_chip_required', '{chip} is not supported. This radio needs both Wi-Fi and Bluetooth. Supported chips: {chips}.', chip=chip.CHIP_NAME, chips=", ".join(BLUETOOTH_CHIPS)))
+        if kind == "radio" and not firmware and chip.CHIP_NAME not in FIRMWARE_BY_KIND["radio"].chips:
+            raise esptool.FatalError(tr('board.select_bluetooth_firmware', 'Choose Bluetooth wireless firmware for {chip}.', chip=chip.CHIP_NAME))
         if kind == "pad" and chip.CHIP_NAME not in ("ESP32-S3", "ESP32"):
             raise esptool.FatalError(tr('board.the_controller_firmware_needs_an_esp32_s3_its_usb_acts__5cef45', 'The controller firmware needs an ESP32-S3 (its USB acts as a controller) or a classic ESP32 (Bluetooth Classic); an {value0} can be neither.', value0=chip.CHIP_NAME))
         pad_image = FIRMWARE_PAD if chip.CHIP_NAME == "ESP32-S3" else FIRMWARE_PAD_ESP32
         if kind == "radio_ble" and chip.CHIP_NAME not in FIRMWARE_BLE:
-            raise esptool.FatalError(tr('board.bluetooth_firmware_chips', 'The Bluetooth firmware is built for an ESP32 or an ESP32-C6, not an {value0}.', value0=chip.CHIP_NAME))
+            raise esptool.FatalError(tr('board.bluetooth_firmware_chip_list', 'Bluetooth firmware is available for {chips}, not {chip}.', chips=", ".join(BLUETOOTH_CHIPS), chip=chip.CHIP_NAME))
         path = firmware or (pad_image if kind == "pad" else image_for(kind, chip.CHIP_NAME))
         if not os.path.isfile(path):
             raise esptool.FatalError(tr('board.missing_firmware_for_c62c63', 'Missing firmware for {value0}: {value1}', value0=chip.CHIP_NAME, value1=path))

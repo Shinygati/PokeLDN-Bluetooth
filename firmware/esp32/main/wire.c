@@ -8,7 +8,8 @@
 
 /* S3, C3 and C6 use native USB Serial/JTAG; ESP32 uses UART0. Connect the matching USB port.
    docs/hardware_esp32.md, Supported boards. */
-#if CONFIG_IDF_TARGET_ESP32S3 || CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32C6
+#include "soc/soc_caps.h"
+#if SOC_USB_SERIAL_JTAG_SUPPORTED
 #define WIRE_USB 1
 #include "driver/usb_serial_jtag.h"
 #else

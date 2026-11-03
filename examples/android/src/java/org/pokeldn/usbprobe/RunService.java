@@ -23,13 +23,14 @@ public final class RunService extends Service {
         PendingIntent open = PendingIntent.getActivity(this, 0, new Intent(this, PokeldnActivity.class),
             PendingIntent.FLAG_IMMUTABLE);
         Notification.Builder builder = Build.VERSION.SDK_INT >= 26 ? new Notification.Builder(this, CHANNEL) : new Notification.Builder(this);
-        Notification note = builder.setContentTitle("pokeldn").setContentText("A session is running with the board.")
+        Notification note = builder.setContentTitle(PokeldnActivity.APP_NAME).setContentText("A session is running with the board.")
             .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth).setContentIntent(open).setOngoing(true).build();
         try {
             if (Build.VERSION.SDK_INT >= 29) startForeground(1, note, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
             else startForeground(1, note);
         } catch (RuntimeException error) {
-            // Android 14 grants a connected-device service only with USB access to a device; without it the run goes on unprotected.
+            // Android 14 grants a connected-device service only with USB access to a device or the Bluetooth
+            // connect permission; without either the run goes on unprotected.
             android.util.Log.w("PokeLDN", "No foreground service: " + error);
             stopSelf();
             return START_NOT_STICKY;

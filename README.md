@@ -9,7 +9,103 @@
   <img alt="Python 3.13" src="https://img.shields.io/badge/python-3.13-3fa9f5?style=flat-square&logo=python&logoColor=white">
 </p>
 
-# pokeldn
+# PokeLDN Bluetooth
+
+This fork adds an Android Bluetooth LE connection to the ESP32 radio. The app is named
+**PokeLDN Bluetooth** in the launcher, welcome screen, permission prompts and session notifications.
+The welcome screen now explains Bluetooth setup and that console keys stay on the phone.
+
+## Bluetooth setup
+
+1. Install `PokeLDN-Bluetooth-arm64.apk` on an ARM64 Android phone (Android 8.0 or later).
+2. Flash the **Bluetooth wireless** image matching the ESP32 chip over USB once. The files are
+   merged images: with esptool, write the matching file at **offset `0x0`**. Do not flash an S3 image
+   onto another chip. A desktop app whose chip list predates this fork may need esptool instead.
+3. Power the board near the phone. Disconnect the USB data connection between phone and board
+   when using Bluetooth; a USB charger can supply the board's power.
+4. Open **Board → Use a Bluetooth board** and grant Nearby devices permission (location permission
+   on older Android). Enable Bluetooth when prompted. The app finds `POKELDN-RADIO` automatically;
+   no manual pairing in Android Settings is required.
+5. When connected, the Board page shows the firmware, address and signal strength. Add your own
+   `prod.keys` in Settings, choose a game and tool, and follow the console instructions.
+
+The board connects to one host at a time. Close other apps or computers holding its Bluetooth link.
+Firmware is installed over USB, not over Bluetooth.
+
+For PowerShell and Linux terminal commands, chip/port identification, BOOT/RESET recovery and Linux
+serial permissions, follow [Flash Bluetooth firmware on Windows or Linux](docs/flashing_bluetooth.md).
+Locally compiled deliverables are stored in `dist/bluetooth/` (APK) and `dist/bluetooth/firmware/`
+(merged images); these generated build outputs are ignored by Git.
+
+## Bluetooth firmware by chip
+
+Each chip family needs its own image. These builds use a 2 MB flash layout and require at least
+2 MB flash; external PSRAM is not required. Hardware must provide **both Bluetooth LE and Wi-Fi**.
+
+| Chip family | Merged Bluetooth image |
+|---|---|
+| Classic ESP32, including WROOM-32 / WROVER / PICO / SOLO-1 | `pokeldn-radio-ble.bin` |
+| ESP32-S3 | `pokeldn-radio-ble-s3.bin` |
+| ESP32-C2 / ESP8684 | `pokeldn-radio-ble-c2.bin` |
+| ESP32-C3 / ESP8685 | `pokeldn-radio-ble-c3.bin` |
+| ESP32-C5 | `pokeldn-radio-ble-c5.bin` |
+| ESP32-C6 | `pokeldn-radio-ble-c6.bin` |
+| ESP32-C61 | `pokeldn-radio-ble-c61.bin` |
+| ESP32-S31 (preview, single core) | `pokeldn-radio-ble-s31.bin` |
+
+ESP32-S2 and P4 have no built-in Bluetooth. Bluetooth-only H-series chips have no Wi-Fi for the
+Switch connection, so this application cannot use them as standalone radios. The S31 is an ESP-IDF
+preview target; its image compiled, but remains experimental. It and the classic ESP32 image use
+one core (classic ESP32 also covers single-core SOLO-1); S3 retains its usual dual-core build.
+
+## Changes in this fork
+
+- Android Bluetooth discovery, permissions, reconnects and the `android://ble` radio port.
+- Board-page Bluetooth setup, status, signal strength and disconnect controls.
+- Classic ESP32 and newer BLE PHY compatibility: keep 1M available and request 2M only when
+  supported, rather than requiring a Bluetooth 5 PHY from every device.
+- Firmware target support for the chip families listed above, with matching chip detection and
+  firmware selection in the app. The flasher validates the image against the detected chip.
+- Capability-based USB serial selection and no assumed LED/button wiring on the new chip targets.
+- Explicit 2.4 GHz operation on dual-band Wi-Fi chips for the Switch local-wireless protocol.
+- Portable Mystery Gifts kept on the board can start immediately over Bluetooth and continue
+  after the phone disconnects, as described in `CHANGES-bluetooth-android.md`.
+- Corrected Android welcome text and renamed the app to make Bluetooth support visible.
+
+## Build status and rebuilding
+
+The Android APK, PKHeX helper, Unicorn library and the seven standard Bluetooth firmware targets
+and the S31 preview firmware were compiled locally. **No app launch, installation, unit tests, emulator tests or hardware tests
+were run for these deliverables.** A successful compile does not verify radio timing, available
+runtime heap, board-specific wiring, or trades on each chip. New target support needs device testing.
+
+Firmware was built with ESP-IDF 6.1 and Espressif Clang because the installed Windows GCC executables
+could not start. ESP-IDF labels Clang support experimental. Compiler warnings are retained in the
+build logs; PKHeX also reports NativeAOT warnings around JSON handling and some upstream methods.
+The APK uses a local development signing key, so it updates only installations signed with that key.
+
+With ESP-IDF 6.1 activated, build the standard Bluetooth firmware set using:
+
+```sh
+python scripts/build_bluetooth_firmware.py
+# Or build just the chips you own:
+python scripts/build_bluetooth_firmware.py --targets esp32 esp32s3 esp32c3
+# Preview S31 (single-core configuration avoids an SDK 6.1 Clang SMP-retention issue):
+python scripts/build_bluetooth_firmware.py --targets esp32s31
+```
+
+Images are written to `gui/firmware/`. Then build the Android APK with the repository's Python 3.13
+environment and the Android prerequisites in [the Android build guide](examples/android/README.md):
+
+```sh
+python examples/android/build.py --release
+```
+
+The Android build script normalizes duplicate console aliases in its local wheels so Windows does
+not generate conflicting `.exe` files during Chaquopy packaging. The Android protocol is unchanged; the application
+ID stays `org.pokeldn.usbprobe` so changing the display name does not create a separate app.
+
+## Upstream pokeldn
 
 pokeldn trades with retail Pokémon games on Switch and Switch 2 through an ESP32 board connected to a
 computer by USB. Nothing is installed on the console.

@@ -1,10 +1,10 @@
 idf_build_get_property(idf_target IDF_TARGET)
-if(idf_target STREQUAL "esp32s3" OR idf_target STREQUAL "esp32c3" OR idf_target STREQUAL "esp32c6")
+if(idf_target MATCHES "^(esp32s3|esp32c3|esp32c5|esp32c6|esp32c61|esp32s31)$")
     set(wire_driver esp_driver_usb_serial_jtag)
-elseif(idf_target STREQUAL "esp32")
+elseif(idf_target STREQUAL "esp32" OR idf_target STREQUAL "esp32c2")
     set(wire_driver esp_driver_uart)
 else()
-    message(FATAL_ERROR "pokeldn supports esp32, esp32s3, esp32c3 and esp32c6 targets only")
+    message(FATAL_ERROR "This radio requires a supported ESP32 with both Wi-Fi and Bluetooth: esp32, esp32s3, esp32c2, esp32c3, esp32c5, esp32c6, esp32c61 or esp32s31 (preview)")
 endif()
 
 # The screen's panel, POKELDN_DISPLAY in the environment of idf.py: OLED (the default, an SSD1306 on

@@ -20,6 +20,8 @@ import java.net.URL;
 
 /** The app: the desktop interface (gui/main.py) served by the embedded Python, shown full screen. */
 public class PokeldnActivity extends Activity {
+    /** The app's name as the launcher, Settings and its notification show it (AndroidManifest.xml's label). */
+    static final String APP_NAME = "PokeLDN Bluetooth";
     private static final String TAG = "PokeLDN";
     static final int PORT = 8550;
     private static final int PICK = 10;
@@ -139,7 +141,7 @@ public class PokeldnActivity extends Activity {
             boolean old = info.major > 0 && info.major < MIN_WEBVIEW;
             if (!found.contains("G") || !found.contains("W") || old || getIntent().getBooleanExtra("oldwebview", false))
                 showNotice("Update Android System WebView",
-                        "pokeldn draws its screens with Android System WebView, and the version on this phone is too old "
+                        APP_NAME + " draws its screens with Android System WebView, and the version on this phone is too old "
                         + "or cannot use the graphics features they need. The app may show blank screens or no text.\n\n"
                         + "Update Android System WebView (and Google Chrome) from the Play Store, then open pokeldn again.",
                         info, false);
@@ -164,7 +166,7 @@ public class PokeldnActivity extends Activity {
             }
             if (seconds == 60 && notice == null)
                 showNotice("The interface has not started",
-                        "pokeldn has been loading for a minute. On some phones an outdated Android System WebView keeps "
+                        APP_NAME + " has been loading for a minute. On some phones an outdated Android System WebView keeps "
                         + "the screen blank.\n\nUpdate Android System WebView from the Play Store, or keep waiting.",
                         PackageInfoLine.current(), true);
             if (seconds < 600) watchFirstFrame(seconds + 2);
@@ -272,5 +274,12 @@ public class PokeldnActivity extends Activity {
         else moveTaskToBack(true);
     }
 
-    @Override protected void onResume() { super.onResume(); Bridge.refresh(); }
+    @Override protected void onResume() { super.onResume(); Bridge.foreground(true); Bridge.refresh(); }
+
+    @Override protected void onPause() { super.onPause(); Bridge.foreground(false); }
+
+    @Override public void onRequestPermissionsResult(int request, String[] permissions, int[] results) {
+        super.onRequestPermissionsResult(request, permissions, results);
+        Bridge.onPermissions(request);
+    }
 }

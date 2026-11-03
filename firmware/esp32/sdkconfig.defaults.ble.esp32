@@ -1,0 +1,3 @@
+# One image can boot on both dual-core WROOM/WROVER/PICO and single-core SOLO-1.
+# The wire and LED workers already select the last available FreeRTOS core.
+CONFIG_FREERTOS_UNICORE=y
