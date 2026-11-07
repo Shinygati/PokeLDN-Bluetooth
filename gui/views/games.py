@@ -330,8 +330,8 @@ class GamesView:
                              width=40, height=36, alignment=ft.Alignment.CENTER),
                 t.text(game.name, 13, t.TEXT if open_ else t.SOFT, weight=ft.FontWeight.W_600, expand=True),
             ], spacing=10), padding=ft.Padding(8, 6, 8, 6), border_radius=12,
-                on_click=lambda e, g=game: self.select(g, g.tools[0])))
-            if open_:
+                on_click=lambda e, g=game: self.pick(g, g.tools[0]) if g.key == "nintendo-ds" else self.select(g, g.tools[0])))
+            if open_ and game.key != "nintendo-ds":
                 for activity in activities(game):
                     active = self.tool in activity.tools
                     soon = all(x.unavailable for x in activity.tools)
@@ -340,7 +340,21 @@ class GamesView:
                     shown = next((x for x in activity.tools if x.key == self.last.get((game.key, activity.key))),
                                  activity.tools[0])
                     rows.append(ft.Container(ft.Row([
-                        t.pixel_icon(activity.icon, color=t.BLUE if active else t.FAINT),
+                        (
+                            ft.Image(
+                                src=t.image_src((Path(game.icon).parent / (
+                                    "badge-" + shown.key.removeprefix("nds-wondercard-") + ".png"
+                                )).read_bytes()),
+                                width=36, height=36, fit=ft.BoxFit.CONTAIN,
+                                filter_quality=ft.FilterQuality.HIGH,
+                            )
+                            if game.key == "nintendo-ds"
+                            and shown.key.startswith("nds-wondercard-")
+                            and (Path(game.icon).parent / (
+                                "badge-" + shown.key.removeprefix("nds-wondercard-") + ".png"
+                            )).is_file()
+                            else t.pixel_icon(activity.icon, color=t.BLUE if active else t.FAINT)
+                        ),
                         ft.Column([name, t.text(role, 11, t.FAINT, max_lines=2, overflow=ft.TextOverflow.ELLIPSIS)],
                                   spacing=0, expand=True) if role else
                         ft.Container(name, expand=True),
@@ -466,7 +480,10 @@ class GamesView:
                 out.append(t.card(item, ft.Column(rows, spacing=10),
                                   " ".join(f.help for f in fields if f.help), trailing=sprite))
         if not self.tool.fields:
-            out.append(t.text(tr('games.nothing_to_fill_in_10f2c5', 'Nothing to fill in.'), 13, t.MUTED))
+            if self.game.key == "nintendo-ds":
+                out.append(t.text("Open the Session tab and press Start to launch the Wonder Card Sender.", 13, t.MUTED))
+            else:
+                out.append(t.text(tr('games.nothing_to_fill_in_10f2c5', 'Nothing to fill in.'), 13, t.MUTED))
         owner = plugins.owner(self.tool.key)
         self.plugin_cards = StatusCards(owner) if owner is not None else None
         self.library_card = LibraryCard(self.app, owner) if owner is not None and owner.library else None

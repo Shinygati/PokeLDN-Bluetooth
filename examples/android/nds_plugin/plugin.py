@@ -1,28 +1,24 @@
-"""Native Wonder Card sender available under Nintendo DS in PokeLDN's Games page."""
+"""One Nintendo DS entry in PokeLDN; select the game inside the native sender."""
 from pokeldn.plugins import Game, Tool
 
-NAMES = (
-    "Diamond", "Pearl", "Platinum", "Heart Gold", "Soul Silver",
-    "Black", "White", "Black 2", "White 2",
-)
 
 def register(api):
-    tools = []
-    for index, name in enumerate(NAMES):
-        generation = "IV" if index < 5 else "V"
-        tools.append(Tool(
-            "nds-wondercard-" + name.lower().replace(" ", "-"),
-            name,
-            "launch.py",
-            f"Open the Gen {generation} Wonder Card sender for {name}.",
-            (
-                "Connect the ESP32-S3 running Gen IV/V Wondercard Sender firmware.",
-                "Press Start to open the Nintendo DS sender screen.",
-                "Choose a language and a built-in card, or import a custom Wonder Card.",
-                "Scan and select your ESP32-S3, then send the selected gift.",
-            ),
-            fixed=("--game-index", str(index)),
-            radio=False,
-            joins=False,
-        ))
-    api.add_game(Game("nintendo-ds", "Nintendo DS", "NDS", "", tuple(tools)), icon="nds-console.png")
+    sender = Tool(
+        "nds-wondercard",
+        "Wonder Card Sender",
+        "launch.py",
+        "Open the Nintendo DS Wonder Card Sender and choose your game there.",
+        (
+            "Open the Session tab and select Start to launch the Wonder Card Sender.",
+            "Choose Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black 2, or White 2 inside the sender.",
+            "Choose a language and Wonder Card, or import a compatible card.",
+            "Connect the ESP32-S3 and start Wonder Card distribution.",
+        ),
+        fixed=("--game-index", "0"),  # Default to Diamond; sender has its own game selector.
+        radio=False,
+        joins=False,
+    )
+    api.add_game(
+        Game("nintendo-ds", "Nintendo DS", "NDS", "", (sender,)),
+        icon="nds-console.png",
+    )
