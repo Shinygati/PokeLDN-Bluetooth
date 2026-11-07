@@ -22,6 +22,13 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.content.res.ColorStateList;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+import android.widget.BaseAdapter;
+import android.view.MotionEvent;
+import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.os.Handler;
@@ -66,7 +73,53 @@ public final class NdsWondercardActivity extends Activity {
     private boolean stopCommandPending=false;
     private int mtu=23;
     private Spinner langSpinner,gameSpinner,cardSpinner;
+
+    private static final String[] LANGUAGE_LABELS={"English","日本語","Français","Deutsch","Italiano","Español","한국어"};
+    private LinearLayout languageTabRow;
+    private void refreshLanguageTabs(){
+        if(languageTabRow==null||langSpinner==null)return;
+        int selected=langSpinner.getSelectedItemPosition();
+        for(int i=0;i<languageTabRow.getChildCount();i++){
+            TextView chip=(TextView)languageTabRow.getChildAt(i);
+            boolean active=i==selected;
+            chip.setTextColor(active?(dark?0xFF102138:Color.WHITE):textColor);
+            chip.setBackground(touchBackground(active?accentColor:panelColor,active?accentColor:outlineColor,10));
+            chip.setContentDescription(LANGUAGE_LABELS[i]+(active?", selected":""));
+            chip.setSelected(active);
+        }
+    }
+    private void addLanguageTabs(LinearLayout parent){
+        android.widget.HorizontalScrollView scroll=new android.widget.HorizontalScrollView(this);
+        scroll.setHorizontalScrollBarEnabled(false);
+        scroll.setFillViewport(false);
+        languageTabRow=new LinearLayout(this);
+        languageTabRow.setOrientation(LinearLayout.HORIZONTAL);
+        for(int i=0;i<LANGUAGE_LABELS.length;i++){
+            final int language=i;
+            TextView chip=label(LANGUAGE_LABELS[i],13,true);
+            chip.setGravity(Gravity.CENTER);
+            chip.setPadding(dp(14),dp(11),dp(14),dp(11));
+            chip.setClickable(true);
+            chip.setFocusable(true);
+            chip.setOnClickListener(v->{
+                chip.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
+                langSpinner.setSelection(language);
+                refreshLanguageTabs();
+                updateCards();
+            });
+            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-2,dp(45));
+            lp.rightMargin=dp(8);
+            languageTabRow.addView(chip,lp);
+        }
+        scroll.addView(languageTabRow);
+        LinearLayout.LayoutParams rowLp=new LinearLayout.LayoutParams(-1,dp(51));
+        rowLp.topMargin=dp(7);rowLp.bottomMargin=dp(12);
+        parent.addView(scroll,rowLp);
+        refreshLanguageTabs();
+    }
+
     private TextView status, cardCount;
+    private volatile boolean libraryLoading=true;
     private boolean dark;
     private int bgColor, panelColor, textColor, mutedColor, accentColor, outlineColor, errorColor;
     private ArrayAdapter<String> deviceAdapter,cardAdapter;
@@ -74,7 +127,7 @@ public final class NdsWondercardActivity extends Activity {
     private final Map<String,Integer> importGame=new HashMap<>();
     static class Card {final String lang,name,path;final byte[] bytes;Card(String l,String n,String p,byte[] b){lang=l;name=n;path=p;bytes=b;}}
     static class WriteOp {final BluetoothGattCharacteristic characteristic;final byte[] value;WriteOp(BluetoothGattCharacteristic c,byte[] v){characteristic=c;value=v;}}
-    private void log(String s){handler.post(()->status.setText(s));}
+    private void log(String s){handler.post(()->{if(status!=null)status.setText(s);});}
 
     private int dp(int value){return (int)(getResources().getDisplayMetrics().density*value+0.5f);}
     private static int color(String hex){return Color.parseColor(hex);}
@@ -84,6 +137,30 @@ public final class NdsWondercardActivity extends Activity {
         drawable.setCornerRadius(dp(radius));
         if(stroke!=Color.TRANSPARENT)drawable.setStroke(dp(1),stroke);
         return drawable;
+    }
+    private android.graphics.drawable.Drawable touchBackground(int surface,int border,int radius){
+        GradientDrawable normal=background(surface,border,radius);
+        GradientDrawable pressed=background(blend(surface,accentColor,0.18f),accentColor,radius);
+        android.graphics.drawable.StateListDrawable states=new android.graphics.drawable.StateListDrawable();
+        states.addState(new int[]{android.R.attr.state_pressed},pressed);
+        states.addState(new int[]{},normal);
+        return new RippleDrawable(ColorStateList.valueOf(blend(accentColor,Color.WHITE,0.15f)),states,null);
+    }
+    private static int blend(int from,int to,float mix){
+        float inv=1f-mix;
+        return Color.rgb((int)(Color.red(from)*inv+Color.red(to)*mix),
+                         (int)(Color.green(from)*inv+Color.green(to)*mix),
+                         (int)(Color.blue(from)*inv+Color.blue(to)*mix));
+    }
+    private void touchFeedback(View v){
+        v.setOnTouchListener((view,event)->{
+            if(event.getActionMasked()==MotionEvent.ACTION_DOWN){
+                view.animate().cancel();view.animate().scaleX(0.985f).scaleY(0.985f).setDuration(75).start();
+            } else if(event.getActionMasked()==MotionEvent.ACTION_UP||event.getActionMasked()==MotionEvent.ACTION_CANCEL){
+                view.animate().cancel();view.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
+            }
+            return false; // Let the normal Android click, accessibility and scrolling behavior work.
+        });
     }
     private void palette(){
         dark=(getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)==Configuration.UI_MODE_NIGHT_YES;
@@ -116,9 +193,13 @@ public final class NdsWondercardActivity extends Activity {
     private Button actionButton(LinearLayout root,String name,boolean primary,Runnable action){
         Button b=new Button(this);b.setText(name);b.setAllCaps(false);b.setTextSize(14);
         b.setTypeface(null,Typeface.BOLD);b.setTextColor(primary?bgColor:textColor);
-        b.setBackground(background(primary?accentColor:panelColor,primary?Color.TRANSPARENT:outlineColor,12));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(48));lp.bottomMargin=dp(8);
-        root.addView(b,lp);b.setOnClickListener(v->action.run());return b;
+        b.setBackground(touchBackground(primary?accentColor:panelColor,
+                primary?Color.TRANSPARENT:outlineColor,12));
+        b.setElevation(dp(1));b.setMinHeight(dp(52));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(52));lp.bottomMargin=dp(10);
+        root.addView(b,lp);touchFeedback(b);
+        b.setOnClickListener(v->{b.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);action.run();});
+        return b;
     }
     private Spinner spinner(LinearLayout root,String[] choices){
         Spinner s=new Spinner(this);
@@ -131,8 +212,62 @@ public final class NdsWondercardActivity extends Activity {
             }
         };
         a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(a);s.setBackground(background(bgColor,outlineColor,10));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(52));lp.bottomMargin=dp(10);root.addView(s,lp);return s;
+        s.setAdapter(a);s.setBackground(touchBackground(bgColor,outlineColor,10));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(54));lp.bottomMargin=dp(12);root.addView(s,lp);return s;
+    }
+    private static final String[] GAME_INITIALS={"D","P","PT","HG","SS","B","W","B2","W2"};
+    private static final int[] GAME_COLORS={
+        0xFF1663D8,0xFFE66EAE,0xFF68707C,0xFFE4B442,0xFFBBC0C5,
+        0xFF191A1E,0xFFF6F8FC,0xFF151619,0xFFF5F7FB
+    };
+    private LinearLayout gameRow(int index,boolean dropdown){
+        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER_VERTICAL);
+        row.setPadding(dp(12),dp(dropdown?8:6),dp(12),dp(dropdown?8:6));
+        if(dropdown)row.setBackground(touchBackground(panelColor,Color.TRANSPARENT,8));
+        TextView tile=label(GAME_INITIALS[index],14,true);
+        tile.setGravity(Gravity.CENTER);
+        tile.setTextColor((index==6||index==8)?0xFF182235:Color.WHITE);
+        tile.setBackground(background(GAME_COLORS[index],index==6||index==8?0xFFAFB9C9:Color.TRANSPARENT,9));
+        row.addView(tile,new LinearLayout.LayoutParams(dp(45),dp(36)));
+        TextView name=label("Pokémon "+Gen5.GAMES[index],15,true);
+        LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(0,-2,1f);
+        np.leftMargin=dp(13);row.addView(name,np);
+        return row;
+    }
+    private Spinner gamePicker(LinearLayout root){
+        Spinner spinner=new Spinner(this);
+        spinner.setAdapter(new BaseAdapter(){
+            @Override public int getCount(){return Gen5.GAMES.length;}
+            @Override public Object getItem(int index){return Gen5.GAMES[index];}
+            @Override public long getItemId(int index){return index;}
+            @Override public View getView(int index,View old,android.view.ViewGroup parent){return gameRow(index,false);}
+            @Override public View getDropDownView(int index,View old,android.view.ViewGroup parent){return gameRow(index,true);}
+        });
+        spinner.setBackground(touchBackground(bgColor,outlineColor,10));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(60));lp.bottomMargin=dp(12);
+        root.addView(spinner,lp);
+        return spinner;
+    }
+    private void loadBundledCards(){
+        new Thread(()->{
+            ArrayList<Card> loaded=new ArrayList<>();
+            String failure=null;
+            try(InputStream in=getAssets().open("catalog.tsv")){
+                String txt=new String(readAll(in),StandardCharsets.UTF_8);
+                for(String line:txt.split("\n")){
+                    String[] c=line.split("\t",3);
+                    if(c.length==3)loaded.add(new Card(c[0],c[1],c[2],readAsset(c[2])));
+                }
+            }catch(Exception e){failure=e.getMessage();}
+            final String error=failure;
+            handler.post(()->{
+                if(isFinishing()||isDestroyed())return;
+                allCards.clear();allCards.addAll(loaded);
+                libraryLoading=false;updateCards();
+                if(error!=null)log("Could not read built-in cards: "+error);
+            });
+        },"wondercard-library").start();
     }
     @Override public void onCreate(Bundle saved){
         super.onCreate(saved);
@@ -143,17 +278,33 @@ public final class NdsWondercardActivity extends Activity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Keep content below the clock, camera cut-out and status bar on modern phones.
         LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(18),dp(24),dp(18),dp(30));root.setBackgroundColor(bgColor);
-        root.setFitsSystemWindows(true);
+        root.setPadding(dp(18),dp(18),dp(18),dp(30));root.setBackgroundColor(bgColor);
         ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
-        scroll.setClipToPadding(false);scroll.setFitsSystemWindows(true);scroll.addView(root);setContentView(scroll);
+        scroll.setClipToPadding(false);scroll.setFitsSystemWindows(true);
+        scroll.setVerticalScrollBarEnabled(false);
+        scroll.addView(root);setContentView(scroll);
+        root.setAlpha(0f);
+        root.animate().alpha(1f).setDuration(180).start();
 
-        TextView kicker=label("NINTENDO DS  /  MYSTERY GIFT",11,true);kicker.setTextColor(accentColor);
-        root.addView(kicker);
-        TextView heading=label("Wonder Card Sender",26,true);
-        LinearLayout.LayoutParams hl=new LinearLayout.LayoutParams(-1,-2);hl.topMargin=dp(6);root.addView(heading,hl);
-        TextView intro=label("Gen IV + Gen V  •  ESP32-S3",13,false);intro.setTextColor(mutedColor);
-        LinearLayout.LayoutParams il=new LinearLayout.LayoutParams(-1,-2);il.topMargin=dp(5);il.bottomMargin=dp(16);root.addView(intro,il);
+        LinearLayout hero=new LinearLayout(this);hero.setGravity(Gravity.CENTER_VERTICAL);
+        LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);
+        hero.addView(words,new LinearLayout.LayoutParams(0,-2,1f));
+        TextView kicker=label("DS  /  MYSTERY GIFT",11,true);kicker.setTextColor(accentColor);
+        words.addView(kicker);
+        TextView heading=label("Wonder Card Sender",24,true);
+        LinearLayout.LayoutParams hl=new LinearLayout.LayoutParams(-1,-2);hl.topMargin=dp(6);words.addView(heading,hl);
+        TextView intro=label("Wonder Cards for compatible DS family systems  •  ESP32-S3",13,false);intro.setTextColor(mutedColor);
+        LinearLayout.LayoutParams il=new LinearLayout.LayoutParams(-1,-2);il.topMargin=dp(6);words.addView(intro,il);
+        try(InputStream in=getAssets().open("nds-phat.png")){
+            ImageView ds=new ImageView(this);
+            ds.setImageBitmap(BitmapFactory.decodeStream(in));
+            ds.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            ds.setContentDescription("White original Nintendo DS console");
+            LinearLayout.LayoutParams dpImg=new LinearLayout.LayoutParams(dp(104),dp(108));
+            dpImg.leftMargin=dp(6);hero.addView(ds,dpImg);
+        }catch(Exception ignored){} // A missing illustration never prevents the sender from running.
+        LinearLayout.LayoutParams heroLp=new LinearLayout.LayoutParams(-1,-2);
+        heroLp.bottomMargin=dp(18);root.addView(hero,heroLp);
 
         LinearLayout connectionPanel=panel(root);
         TextView connectionTitle=label("Connection",16,true);connectionPanel.addView(connectionTitle);
@@ -173,9 +324,11 @@ public final class NdsWondercardActivity extends Activity {
         section(root,"CHOOSE YOUR GIFT");
         LinearLayout selectionPanel=panel(root);
         selectionPanel.addView(label("Game",13,true));
-        gameSpinner=spinner(selectionPanel,Gen5.GAMES);
+        gameSpinner=gamePicker(selectionPanel);
         selectionPanel.addView(label("Language",13,true));
         langSpinner=spinner(selectionPanel,Gen5.LANG);
+        langSpinner.setVisibility(View.GONE);
+        addLanguageTabs(selectionPanel);
         selectionPanel.addView(label("Wonder Card",13,true));
         cardSpinner=spinner(selectionPanel,new String[]{"Loading Wonder Cards..."});
         cardAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,new ArrayList<>()){
@@ -188,7 +341,7 @@ public final class NdsWondercardActivity extends Activity {
             }
         };cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);cardSpinner.setAdapter(cardAdapter);
         cardCount=label("Loading library...",12,false);cardCount.setTextColor(mutedColor);selectionPanel.addView(cardCount);
-        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){updateCards();}});
+        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){refreshLanguageTabs();updateCards();}});
         gameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){updateCards();}});
         button(selectionPanel,"Import a Wonder Card",()->{
             Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("*/*");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,FILE_PICK);
@@ -202,15 +355,11 @@ public final class NdsWondercardActivity extends Activity {
         help.setTextColor(mutedColor);sendPanel.addView(help);
         TextView footer=label("Experimental wireless distribution  •  Keep your ESP32-S3 powered during use.",12,false);
         footer.setTextColor(mutedColor);root.addView(footer);
-        try(InputStream in=getAssets().open("catalog.tsv")){byte[] b=readAll(in);String txt=new String(b,StandardCharsets.UTF_8);
-            for(String line:txt.split("\n")){String[] c=line.split("\t",3);if(c.length==3){
-                byte[] content=readAsset(c[2]);allCards.add(new Card(c[0],c[1],c[2],content));
-            }}
-        }catch(Exception e){log("Could not read built-in cards: "+e.getMessage());}
         restoreImports();
         int initialGame=getIntent().getIntExtra("game_index",0);
         if(initialGame>=0&&initialGame<Gen5.GAMES.length)gameSpinner.setSelection(initialGame);
         updateCards();requestPermissionsIfNeeded();
+        loadBundledCards();
     }
     private byte[] readAsset(String name)throws Exception{try(InputStream in=getAssets().open(name)){return readAll(in);}}
     private static byte[] readAll(InputStream in)throws Exception{ByteArrayOutputStream o=new ByteArrayOutputStream();byte[] buf=new byte[4096];for(int n;(n=in.read(buf))!=-1;)o.write(buf,0,n);return o.toByteArray();}
@@ -221,7 +370,8 @@ public final class NdsWondercardActivity extends Activity {
         for(Card c:importedCards)if(c.lang.equals(lang) && importGame.getOrDefault(c.path,-1)==gi)addCard(c);
         for(Card c:allCards){if(c.lang.equals(lang) && compatible(c,gi,bit))addCard(c);}
         cardAdapter.notifyDataSetChanged();
-        if(cardCount!=null)cardCount.setText(shownCards.size()==0?
+        if(cardCount!=null)cardCount.setText(libraryLoading?
+            "Loading Wonder Card library…":shownCards.size()==0?
             "No matching Wonder Cards for this game and language":
             shownCards.size()+" compatible Wonder Cards available");
     }
