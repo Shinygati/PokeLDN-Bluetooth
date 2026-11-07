@@ -33,4 +33,6 @@ binding = Path(unicorn.__file__).parent
 shutil.copytree(binding, DEST / 'unicorn', ignore=shutil.ignore_patterns('lib', 'include', '__pycache__'))
 for filename in ('test_esp32.py', 'test_host_end_to_end.py'):
     shutil.copy2(ROOT / 'tests' / filename, DEST / ('android_' + filename))
+# The Nintendo DS Games category is packaged with the Android APK, no user plugins folder.
+shutil.copytree(HERE / 'nds_plugin', DEST / 'pokeldn' / 'nds_plugin', dirs_exist_ok=True)
 print('Staged tracked repository code and package data:', DEST)

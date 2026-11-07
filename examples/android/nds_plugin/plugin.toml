@@ -1,0 +1,6 @@
+id = "nintendo-ds-android"
+name = "Nintendo DS Wondercard Sender"
+version = "1.0.0"
+author = "Shinygati"
+description = "Nintendo DS Gen IV/V Mystery Gift distribution via ESP32-S3 BLE. Bundled with PokeLDN Android."
+api = "1.1"

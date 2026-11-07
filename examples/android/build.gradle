@@ -44,6 +44,7 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src/java']
             res.srcDirs = ['res']
+            assets.srcDirs = ['nds-assets']
             jniLibs.srcDirs = ['jniLibs']
         }
         test {

@@ -29,6 +29,10 @@
             </intent-filter>
             <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/usb_boards" />
         </activity>
+        <!-- Nintendo DS sender: internal activity launched from Games; not a second launcher. -->
+        <activity android:name=".NdsWondercardActivity" android:exported="false"
+            android:label="Nintendo DS Wondercard Sender"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
         <service android:name=".RunService" android:exported="false" android:foregroundServiceType="connectedDevice" />
         <provider android:name=".Files" android:authorities="org.pokeldn.usbprobe.files" android:exported="false" android:grantUriPermissions="true" />
         <!-- The developer diagnostic: adb shell am start -n org.pokeldn.usbprobe/.MainActivity -->

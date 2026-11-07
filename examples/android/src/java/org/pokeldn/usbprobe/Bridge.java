@@ -120,6 +120,16 @@ public final class Bridge {
         return new UsbStream(manager, device);
     }
 
+    /** Open Gen IV/V Mystery Gift sender over its dedicated FFF0 BLE service. */
+    public static void openNdsWondercards(int gameIndex) {
+        if (activity == null) throw new IllegalStateException("Android activity is unavailable");
+        activity.runOnUiThread(() -> {
+            Intent intent = new Intent(activity, NdsWondercardActivity.class);
+            intent.putExtra("game_index", gameIndex);
+            activity.startActivity(intent);
+        });
+    }
+
     public static void openSettings() {
         activity.startActivity(new Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
