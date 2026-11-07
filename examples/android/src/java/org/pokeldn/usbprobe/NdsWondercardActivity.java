@@ -18,6 +18,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.view.Window;
+import android.view.WindowManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.OpenableColumns;
@@ -25,6 +31,7 @@ import android.database.Cursor;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -56,9 +63,12 @@ public final class NdsWondercardActivity extends Activity {
     private BluetoothGatt gatt;
     private BluetoothGattCharacteristic dataChar,ctrlChar;
     private boolean scanning=false,writing=false,connected=false,ready=false,mtuReady=false;
+    private boolean stopCommandPending=false;
     private int mtu=23;
     private Spinner langSpinner,gameSpinner,cardSpinner;
-    private TextView status;
+    private TextView status, cardCount;
+    private boolean dark;
+    private int bgColor, panelColor, textColor, mutedColor, accentColor, outlineColor, errorColor;
     private ArrayAdapter<String> deviceAdapter,cardAdapter;
     private final ArrayList<Card> importedCards=new ArrayList<>();
     private final Map<String,Integer> importGame=new HashMap<>();
@@ -66,43 +76,142 @@ public final class NdsWondercardActivity extends Activity {
     static class WriteOp {final BluetoothGattCharacteristic characteristic;final byte[] value;WriteOp(BluetoothGattCharacteristic c,byte[] v){characteristic=c;value=v;}}
     private void log(String s){handler.post(()->status.setText(s));}
 
+    private int dp(int value){return (int)(getResources().getDisplayMetrics().density*value+0.5f);}
+    private static int color(String hex){return Color.parseColor(hex);}
+    private GradientDrawable background(int background,int stroke,int radius){
+        GradientDrawable drawable=new GradientDrawable();
+        drawable.setColor(background);
+        drawable.setCornerRadius(dp(radius));
+        if(stroke!=Color.TRANSPARENT)drawable.setStroke(dp(1),stroke);
+        return drawable;
+    }
+    private void palette(){
+        dark=(getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)==Configuration.UI_MODE_NIGHT_YES;
+        bgColor=color(dark?"#0B1120":"#F3F6FB");
+        panelColor=color(dark?"#172235":"#FFFFFF");
+        textColor=color(dark?"#F2F6FF":"#18243A");
+        mutedColor=color(dark?"#AABAD0":"#52647D");
+        accentColor=color(dark?"#76C9FF":"#1667C7");
+        outlineColor=color(dark?"#33445E":"#D9E2ED");
+        errorColor=color(dark?"#FFB3AC":"#A4342D");
+    }
+    private TextView label(String text,int size,boolean heavy){
+        TextView v=new TextView(this);v.setText(text);v.setTextSize(size);v.setTextColor(textColor);
+        if(heavy)v.setTypeface(null,Typeface.BOLD);
+        return v;
+    }
+    private void section(LinearLayout root,String text){
+        TextView v=label(text,14,true);v.setTextColor(mutedColor);
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.topMargin=dp(18);lp.bottomMargin=dp(8);root.addView(v,lp);
+    }
+    private LinearLayout panel(LinearLayout root){
+        LinearLayout v=new LinearLayout(this);v.setOrientation(LinearLayout.VERTICAL);v.setPadding(dp(16),dp(14),dp(16),dp(14));
+        v.setBackground(background(panelColor,outlineColor,16));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.bottomMargin=dp(12);
+        root.addView(v,lp);return v;
+    }
+    private Button button(LinearLayout root,String name,Runnable action){
+        return actionButton(root,name,false,action);
+    }
+    private Button actionButton(LinearLayout root,String name,boolean primary,Runnable action){
+        Button b=new Button(this);b.setText(name);b.setAllCaps(false);b.setTextSize(14);
+        b.setTypeface(null,Typeface.BOLD);b.setTextColor(primary?bgColor:textColor);
+        b.setBackground(background(primary?accentColor:panelColor,primary?Color.TRANSPARENT:outlineColor,12));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(48));lp.bottomMargin=dp(8);
+        root.addView(b,lp);b.setOnClickListener(v->action.run());return b;
+    }
+    private Spinner spinner(LinearLayout root,String[] choices){
+        Spinner s=new Spinner(this);
+        ArrayAdapter<String> a=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,choices){
+            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
+                TextView t=(TextView)super.getView(pos,convert,parent);t.setTextColor(textColor);t.setTextSize(15);t.setPadding(dp(12),dp(10),dp(8),dp(10));return t;
+            }
+            @Override public View getDropDownView(int pos,View convert,android.view.ViewGroup parent){
+                TextView t=(TextView)super.getDropDownView(pos,convert,parent);t.setTextColor(textColor);t.setBackgroundColor(panelColor);t.setPadding(dp(16),dp(12),dp(16),dp(12));return t;
+            }
+        };
+        a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(a);s.setBackground(background(bgColor,outlineColor,10));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(52));lp.bottomMargin=dp(10);root.addView(s,lp);return s;
+    }
     @Override public void onCreate(Bundle saved){
         super.onCreate(saved);
-        LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(22,22,22,22);
-        ScrollView scroll=new ScrollView(this);scroll.addView(root);setContentView(scroll);
-        TextView heading=new TextView(this);heading.setText("Gen IV/V Wondercard Sender");heading.setTextSize(22);root.addView(heading);
-        TextView note=new TextView(this);note.setText("Gen IV/V controller. Scan, tap your ESP32, choose a card, then Send. Wi-Fi stays off until Send.");root.addView(note);
-        status=new TextView(this);status.setPadding(0,16,0,16);root.addView(status);log("Not connected");
-        Button scan=button(root,"Scan for ESP32 (manual)",()->startScan());
-        Button disconnect=button(root,"Disconnect",()->disconnect());
-        ListView deviceList=new ListView(this);deviceList.setMinimumHeight(145);root.addView(deviceList,new LinearLayout.LayoutParams(-1,170));
-        deviceAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,new ArrayList<>());deviceList.setAdapter(deviceAdapter);
+        palette();
+        Window window=getWindow();
+        window.setStatusBarColor(bgColor);window.setNavigationBarColor(bgColor);
+        window.getDecorView().setSystemUiVisibility(dark?0:(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR|View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR));
+        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Keep content below the clock, camera cut-out and status bar on modern phones.
+        LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);
+        root.setPadding(dp(18),dp(24),dp(18),dp(30));root.setBackgroundColor(bgColor);
+        root.setFitsSystemWindows(true);
+        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
+        scroll.setClipToPadding(false);scroll.setFitsSystemWindows(true);scroll.addView(root);setContentView(scroll);
+
+        TextView kicker=label("NINTENDO DS  /  MYSTERY GIFT",11,true);kicker.setTextColor(accentColor);
+        root.addView(kicker);
+        TextView heading=label("Wonder Card Sender",26,true);
+        LinearLayout.LayoutParams hl=new LinearLayout.LayoutParams(-1,-2);hl.topMargin=dp(6);root.addView(heading,hl);
+        TextView intro=label("Gen IV + Gen V  •  ESP32-S3",13,false);intro.setTextColor(mutedColor);
+        LinearLayout.LayoutParams il=new LinearLayout.LayoutParams(-1,-2);il.topMargin=dp(5);il.bottomMargin=dp(16);root.addView(intro,il);
+
+        LinearLayout connectionPanel=panel(root);
+        TextView connectionTitle=label("Connection",16,true);connectionPanel.addView(connectionTitle);
+        status=label("Not connected",13,false);status.setTextColor(mutedColor);status.setPadding(0,dp(8),0,dp(12));connectionPanel.addView(status);
+        actionButton(connectionPanel,"Find my ESP32-S3",true,()->startScan());
+        button(connectionPanel,"Disconnect",()->disconnect());
+        ListView deviceList=new ListView(this);deviceList.setDividerHeight(dp(1));
+        deviceList.setDivider(new android.graphics.drawable.ColorDrawable(outlineColor));
+        connectionPanel.addView(deviceList,new LinearLayout.LayoutParams(-1,dp(100)));
+        deviceAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,new ArrayList<>()){
+            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
+                TextView v=(TextView)super.getView(pos,convert,parent);v.setTextColor(textColor);v.setTextSize(12);return v;
+            }
+        };deviceList.setAdapter(deviceAdapter);
         deviceList.setOnItemClickListener((parent,view,pos,id)->{if(pos<devices.size())connect(devices.get(pos));});
-        langSpinner=spinner(root,Gen5.LANG);gameSpinner=spinner(root,Gen5.GAMES);
-        cardSpinner=new Spinner(this);root.addView(cardSpinner);
-        cardAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,new ArrayList<>());cardSpinner.setAdapter(cardAdapter);
-        langSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener(){public void onNothingSelected(android.widget.AdapterView<?> p){}public void onItemSelected(android.widget.AdapterView<?> p,View v,int pos,long id){updateCards();}});
-        gameSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener(){public void onNothingSelected(android.widget.AdapterView<?> p){}public void onItemSelected(android.widget.AdapterView<?> p,View v,int pos,long id){updateCards();}});
-        button(root,"Import Wonder Card for selected game",()->{
+
+        section(root,"CHOOSE YOUR GIFT");
+        LinearLayout selectionPanel=panel(root);
+        selectionPanel.addView(label("Game",13,true));
+        gameSpinner=spinner(selectionPanel,Gen5.GAMES);
+        selectionPanel.addView(label("Language",13,true));
+        langSpinner=spinner(selectionPanel,Gen5.LANG);
+        selectionPanel.addView(label("Wonder Card",13,true));
+        cardSpinner=spinner(selectionPanel,new String[]{"Loading Wonder Cards..."});
+        cardAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,new ArrayList<>()){
+            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
+                TextView v=(TextView)super.getView(pos,convert,parent);v.setTextColor(textColor);v.setPadding(dp(12),dp(10),dp(8),dp(10));return v;
+            }
+            @Override public View getDropDownView(int pos,View convert,android.view.ViewGroup parent){
+                TextView v=(TextView)super.getDropDownView(pos,convert,parent);v.setTextColor(textColor);
+                v.setBackgroundColor(panelColor);v.setPadding(dp(12),dp(12),dp(8),dp(12));return v;
+            }
+        };cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);cardSpinner.setAdapter(cardAdapter);
+        cardCount=label("Loading library...",12,false);cardCount.setTextColor(mutedColor);selectionPanel.addView(cardCount);
+        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){updateCards();}});
+        gameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){updateCards();}});
+        button(selectionPanel,"Import a Wonder Card",()->{
             Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("*/*");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,FILE_PICK);
         });
-        button(root,"Send selected gift",()->sendGift());
-        button(root,"STOP sending",()->stopGift());
-        TextView footer=new TextView(this);footer.setPadding(0,20,0,0);
-        footer.setText("Gen IV and V BLE transmission (experimental). No automatic connection. Bluetooth is unpaired: anyone nearby with compatible software could control this prototype.");root.addView(footer);
+
+        section(root,"DISTRIBUTION CONTROL");
+        LinearLayout sendPanel=panel(root);
+        actionButton(sendPanel,"Start Wonder Card Distribution",true,()->sendGift());
+        button(sendPanel,"Stop Wonder Card Distribution",()->stopGift());
+        TextView help=label("Start uploads the selected gift and tells the ESP32-S3 to broadcast it. Stop sends a command to end the ESP32-S3 wireless broadcast — not just the phone upload.",12,false);
+        help.setTextColor(mutedColor);sendPanel.addView(help);
+        TextView footer=label("Experimental wireless distribution  •  Keep your ESP32-S3 powered during use.",12,false);
+        footer.setTextColor(mutedColor);root.addView(footer);
         try(InputStream in=getAssets().open("catalog.tsv")){byte[] b=readAll(in);String txt=new String(b,StandardCharsets.UTF_8);
             for(String line:txt.split("\n")){String[] c=line.split("\t",3);if(c.length==3){
                 byte[] content=readAsset(c[2]);allCards.add(new Card(c[0],c[1],c[2],content));
             }}
         }catch(Exception e){log("Could not read built-in cards: "+e.getMessage());}
         restoreImports();
-        int initialGame = getIntent().getIntExtra("game_index", 0);
-        if (initialGame >= 0 && initialGame < Gen5.GAMES.length) gameSpinner.setSelection(initialGame);
-        updateCards();
-        requestPermissionsIfNeeded();
+        int initialGame=getIntent().getIntExtra("game_index",0);
+        if(initialGame>=0&&initialGame<Gen5.GAMES.length)gameSpinner.setSelection(initialGame);
+        updateCards();requestPermissionsIfNeeded();
     }
-    private Button button(LinearLayout root,String name,Runnable action){Button b=new Button(this);b.setText(name);root.addView(b);b.setOnClickListener(v->action.run());return b;}
-    private Spinner spinner(LinearLayout root,String[] choices){Spinner s=new Spinner(this);root.addView(s);ArrayAdapter<String> a=new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,choices);s.setAdapter(a);return s;}
     private byte[] readAsset(String name)throws Exception{try(InputStream in=getAssets().open(name)){return readAll(in);}}
     private static byte[] readAll(InputStream in)throws Exception{ByteArrayOutputStream o=new ByteArrayOutputStream();byte[] buf=new byte[4096];for(int n;(n=in.read(buf))!=-1;)o.write(buf,0,n);return o.toByteArray();}
     private void updateCards(){if(langSpinner==null||gameSpinner==null||cardAdapter==null)return;
@@ -112,13 +221,86 @@ public final class NdsWondercardActivity extends Activity {
         for(Card c:importedCards)if(c.lang.equals(lang) && importGame.getOrDefault(c.path,-1)==gi)addCard(c);
         for(Card c:allCards){if(c.lang.equals(lang) && compatible(c,gi,bit))addCard(c);}
         cardAdapter.notifyDataSetChanged();
+        if(cardCount!=null)cardCount.setText(shownCards.size()==0?
+            "No matching Wonder Cards for this game and language":
+            shownCards.size()+" compatible Wonder Cards available");
     }
     private boolean compatible(Card c,int gi,int bit){
         try {return gi<5 ? c.bytes.length==856 && (Gen4.versionMask(c.bytes)&bit)!=0
                           : (c.bytes.length==204||c.bytes.length==720) && (Gen5.versionMask(c.name,c.bytes)&bit)!=0;}
         catch(Exception e){return false;}
     }
-    private void addCard(Card c){shownCards.add(c);cardAdapter.add(c.name);}
+    // Generation IV uses its own 16-bit glyph indices (not regular UTF-16).
+    // The international glyph table below follows PKHeX's StringConverter4Util.
+    private static final String GEN4_GLYPHS="\u0000\u3000\u3041\u3042\u3043\u3044\u3045\u3046\u3047\u3048\u3049\u304A\u304B\u304C\u304D\u304E\u304F\u3050\u3051\u3052\u3053\u3054\u3055\u3056\u3057\u3058\u3059\u305A\u305B\u305C"
+            + "\u305D\u305E\u305F\u3060\u3061\u3062\u3063\u3064\u3065\u3066\u3067\u3068\u3069\u306A\u306B\u306C\u306D\u306E\u306F\u3070\u3071\u3072\u3073\u3074\u3075\u3076\u3077\u3078\u3079\u307A"
+            + "\u307B\u307C\u307D\u307E\u307F\u3080\u3081\u3082\u3083\u3084\u3085\u3086\u3087\u3088\u3089\u308A\u308B\u308C\u308D\u308F\u3092\u3093\u30A1\u30A2\u30A3\u30A4\u30A5\u30A6\u30A7\u30A8"
+            + "\u30A9\u30AA\u30AB\u30AC\u30AD\u30AE\u30AF\u30B0\u30B1\u30B2\u30B3\u30B4\u30B5\u30B6\u30B7\u30B8\u30B9\u30BA\u30BB\u30BC\u30BD\u30BE\u30BF\u30C0\u30C1\u30C2\u30C3\u30C4\u30C5\u30C6"
+            + "\u30C7\u30C8\u30C9\u30CA\u30CB\u30CC\u30CD\u30CE\u30CF\u30D0\u30D1\u30D2\u30D3\u30D4\u30D5\u30D6\u30D7\u30D8\u30D9\u30DA\u30DB\u30DC\u30DD\u30DE\u30DF\u30E0\u30E1\u30E2\u30E3\u30E4"
+            + "\u30E5\u30E6\u30E7\u30E8\u30E9\u30EA\u30EB\u30EC\u30ED\u30EF\u30F2\u30F3\uFF10\uFF11\uFF12\uFF13\uFF14\uFF15\uFF16\uFF17\uFF18\uFF19\uFF21\uFF22\uFF23\uFF24\uFF25\uFF26\uFF27\uFF28"
+            + "\uFF29\uFF2A\uFF2B\uFF2C\uFF2D\uFF2E\uFF2F\uFF30\uFF31\uFF32\uFF33\uFF34\uFF35\uFF36\uFF37\uFF38\uFF39\uFF3A\uFF41\uFF42\uFF43\uFF44\uFF45\uFF46\uFF47\uFF48\uFF49\uFF4A\uFF4B\uFF4C"
+            + "\uFF4D\uFF4E\uFF4F\uFF50\uFF51\uFF52\uFF53\uFF54\uFF55\uFF56\uFF57\uFF58\uFF59\uFF5A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            + "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            + "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u0041"
+            + "\u0042\u0043\u0044\u0045\u0046\u0047\u0048\u0049\u004A\u004B\u004C\u004D\u004E\u004F\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057\u0058\u0059\u005A\u0061\u0062\u0063\u0064\u0065"
+            + "\u0066\u0067\u0068\u0069\u006A\u006B\u006C\u006D\u006E\u006F\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077\u0078\u0079\u007A\u007A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            + "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            + "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            + "\u0000\u0000\u0000\u0000\u0024\u00A1\u00BF\u0021\u003F\u002C\u002E\u0000\u0000\u002F\u2018\u0027\u201C\u201D\u0000\u0000\u0000\u0000\u0000\u002B\u002D\u002A\u0000\u0000\u0023\u003D"
+            + "\u0026\u0000\u003A\u003B\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0025\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0020\u0000"
+            + "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u00B0\u005F\u0000\u0000\u0000";
+
+    private static String decodeGen4Title(byte[] bytes){
+        if(bytes.length!=856)return "";
+        final int offset=0x104, limit=0x104+0x48;
+        // Some archived PCDs (including the English Ranger Manaphy Egg)
+        // store a literal UTF-16LE title instead of DS character indices.
+        StringBuilder raw=new StringBuilder();
+        boolean plain=true, hasAsciiSpace=false;
+        for(int i=offset;i<limit;i+=2){
+            int value=(bytes[i]&255)|((bytes[i+1]&255)<<8);
+            if(value==0||value==0xffff)break;
+            if(value<' '||value>0x7e)plain=false;
+            if(value==0x20)hasAsciiSpace=true;
+            raw.append((char)value);
+        }
+        if(plain&&hasAsciiSpace&&raw.length()>=4)return raw.toString().trim();
+        StringBuilder title=new StringBuilder();
+        int unknown=0;
+        for(int i=offset;i<limit;i+=2){
+            int glyph=(bytes[i]&255)|((bytes[i+1]&255)<<8);
+            if(glyph==0||glyph==0xffff)break;
+            char c=(glyph<GEN4_GLYPHS.length())?GEN4_GLYPHS.charAt(glyph):0;
+            if(c==0){unknown++;continue;}
+            title.append(c);
+        }
+        // Korean card glyphs are above the international table. Until a Korean
+        // decoder is available, keep the existing catalog name rather than garble it.
+        return unknown>0||title.length()==0?"":title.toString().trim();
+    }
+
+    private static String decodeGen5Title(byte[] bytes){
+        if(bytes.length!=204&&bytes.length!=720)return "";
+        // PGF at the start of PGF and WC5Full; title is at 0x60, 37 UTF-16 units.
+        StringBuilder title=new StringBuilder();
+        for(int i=0x60;i<0x60+74;i+=2){
+            int cp=(bytes[i]&255)|((bytes[i+1]&255)<<8);
+            if(cp==0||cp==0xffff||cp==0xfffe)break;
+            if(Character.isISOControl((char)cp))return "";
+            title.append((char)cp);
+        }
+        return title.toString().trim();
+    }
+
+    private static String wonderCardDisplayName(Card card){
+        String embedded=card.bytes.length==856?decodeGen4Title(card.bytes):decodeGen5Title(card.bytes);
+        // Do not alter any card bytes or its catalog name: only the spinner label.
+        String label=embedded.isEmpty()?card.name:embedded;
+        label=label.replaceFirst("(?i)^\\s*mystery\\s+gift\\s*[:：]\\s*", "");
+        return label.isEmpty()?card.name:label;
+    }
+
+    private void addCard(Card c){shownCards.add(c);cardAdapter.add(wonderCardDisplayName(c));}
     private boolean permissionsOk(){if(Build.VERSION.SDK_INT>=31)return checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN)==PackageManager.PERMISSION_GRANTED&&checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT)==PackageManager.PERMISSION_GRANTED;
         return checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED;}
     private void requestPermissionsIfNeeded(){if(!permissionsOk())requestPermissions(Build.VERSION.SDK_INT>=31?new String[]{Manifest.permission.BLUETOOTH_SCAN,Manifest.permission.BLUETOOTH_CONNECT}:new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERM);}
@@ -182,7 +364,7 @@ public final class NdsWondercardActivity extends Activity {
     private void enqueue(BluetoothGattCharacteristic c,byte[] packet){writes.add(new WriteOp(c,packet));}
     private void nextWrite(){
         if(gatt==null||!connected){writes.clear();writing=false;return;}
-        WriteOp op=writes.poll();if(op==null){writing=false;log("Upload/command sequence complete. Check DS for gift.");return;}
+        WriteOp op=writes.poll();if(op==null){writing=false;log(stopCommandPending?"Stop command acknowledged by ESP32-S3. Wireless distribution stopped.":"Gift uploaded. ESP32-S3 is now distributing until you stop it or disconnect.");stopCommandPending=false;return;}
         try{
             boolean ok;
             if(Build.VERSION.SDK_INT>=33)ok=gatt.writeCharacteristic(op.characteristic,op.value,BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT)==0;
@@ -201,7 +383,7 @@ public final class NdsWondercardActivity extends Activity {
             byte[][] frags=generation==4?Gen4.prepare(c.name,c.bytes)
                 :Gen5.prepare(c.name,c.bytes,Gen5.LANG_ID[langSpinner.getSelectedItemPosition()],
                         importGame.containsKey(c.path)?Gen5.GAME_ID[gi]:-1);
-            writes.clear();enqueue(ctrlChar,new byte[]{2});
+            stopCommandPending=false;writes.clear();enqueue(ctrlChar,new byte[]{2});
             enqueue(ctrlChar,new byte[]{3,(byte)generation,(byte)langSpinner.getSelectedItemPosition()});
             for(int i=0;i<frags.length;i++){byte[] pkt=new byte[113];pkt[0]=(byte)i;System.arraycopy(frags[i],0,pkt,1,112);enqueue(dataChar,pkt);}
             enqueue(ctrlChar,new byte[]{1});writing=true;
@@ -211,7 +393,7 @@ public final class NdsWondercardActivity extends Activity {
     private void stopGift(){
         writes.clear();writing=false;
         if(!connected||ctrlChar==null){log("Not connected");return;}
-        enqueue(ctrlChar,new byte[]{0});writing=true;log("Stopping transmitter...");nextWrite();
+        stopCommandPending=true;enqueue(ctrlChar,new byte[]{0});writing=true;log("Requesting ESP32-S3 to stop wireless distribution...");nextWrite();
     }
     @Override protected void onActivityResult(int req,int result,Intent data){super.onActivityResult(req,result,data);
         if(req!=FILE_PICK||result!=RESULT_OK||data==null||data.getData()==null)return;

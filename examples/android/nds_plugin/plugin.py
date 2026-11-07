@@ -25,4 +25,4 @@ def register(api):
             radio=False,
             joins=False,
         ))
-    api.add_game(Game("nintendo-ds", "Nintendo DS", "NDS", "", tuple(tools)))
+    api.add_game(Game("nintendo-ds", "Nintendo DS", "NDS", "", tuple(tools)), icon="nds-console.png")
