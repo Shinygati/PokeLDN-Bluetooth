@@ -20,6 +20,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
@@ -74,180 +80,278 @@ public final class NdsWondercardActivity extends Activity {
     private int mtu=23;
     private Spinner langSpinner,gameSpinner,cardSpinner;
 
-    private static final String[] LANGUAGE_LABELS={"English","日本語","Français","Deutsch","Italiano","Español","한국어"};
-    private LinearLayout languageTabRow;
-    private void refreshLanguageTabs(){
-        if(languageTabRow==null||langSpinner==null)return;
-        int selected=langSpinner.getSelectedItemPosition();
-        for(int i=0;i<languageTabRow.getChildCount();i++){
-            TextView chip=(TextView)languageTabRow.getChildAt(i);
-            boolean active=i==selected;
-            chip.setTextColor(active?(dark?0xFF102138:Color.WHITE):textColor);
-            chip.setBackground(touchBackground(active?accentColor:panelColor,active?accentColor:outlineColor,10));
-            chip.setContentDescription(LANGUAGE_LABELS[i]+(active?", selected":""));
-            chip.setSelected(active);
-        }
-    }
-    private void addLanguageTabs(LinearLayout parent){
-        android.widget.HorizontalScrollView scroll=new android.widget.HorizontalScrollView(this);
-        scroll.setHorizontalScrollBarEnabled(false);
-        scroll.setFillViewport(false);
-        languageTabRow=new LinearLayout(this);
-        languageTabRow.setOrientation(LinearLayout.HORIZONTAL);
-        for(int i=0;i<LANGUAGE_LABELS.length;i++){
-            final int language=i;
-            TextView chip=label(LANGUAGE_LABELS[i],13,true);
-            chip.setGravity(Gravity.CENTER);
-            chip.setPadding(dp(14),dp(11),dp(14),dp(11));
-            chip.setClickable(true);
-            chip.setFocusable(true);
-            chip.setOnClickListener(v->{
-                chip.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
-                langSpinner.setSelection(language);
-                refreshLanguageTabs();
-                updateCards();
-            });
-            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-2,dp(45));
-            lp.rightMargin=dp(8);
-            languageTabRow.addView(chip,lp);
-        }
-        scroll.addView(languageTabRow);
-        LinearLayout.LayoutParams rowLp=new LinearLayout.LayoutParams(-1,dp(51));
-        rowLp.topMargin=dp(7);rowLp.bottomMargin=dp(12);
-        parent.addView(scroll,rowLp);
-        refreshLanguageTabs();
-    }
+    private static final String[] LANGUAGE_LABELS={"English","Japanese","French","German","Italian","Spanish","Korean"};
+    private static final String[] LANGUAGE_SHORT={"English","日本語","Français","Deutsch","Italiano","Español","한국어"};
+    private static final String[] GAME_INITIALS={"D","P","Pt","HG","SS","B","W","B2","W2"};
+    private static final int[] GAME_COLORS={0xFF287EDF,0xFFD14E96,0xFF757985,0xFFDDA525,0xFFAEB5C3,0xFF202127,0xFFF6F6FA,0xFF151518,0xFFF5F5F8};
+    private LinearLayout languageTabRow, gameRows, connectionTools;
+    private TextView connectionBadge, connectionIndicator, selectedCardText, cardChevron;
+    private View connectionDot;
+    private TextView[] gameChoices=new TextView[9];
+    private HorizontalScrollView languageStrip;
+    private boolean distributing=false;
 
     private TextView status, cardCount;
     private volatile boolean libraryLoading=true;
     private boolean dark;
-    private int bgColor, panelColor, textColor, mutedColor, accentColor, outlineColor, errorColor;
+    private int bgColor, panelColor, textColor, mutedColor, accentColor, highlightColor, outlineColor, errorColor;
     private ArrayAdapter<String> deviceAdapter,cardAdapter;
     private final ArrayList<Card> importedCards=new ArrayList<>();
     private final Map<String,Integer> importGame=new HashMap<>();
     static class Card {final String lang,name,path;final byte[] bytes;Card(String l,String n,String p,byte[] b){lang=l;name=n;path=p;bytes=b;}}
     static class WriteOp {final BluetoothGattCharacteristic characteristic;final byte[] value;WriteOp(BluetoothGattCharacteristic c,byte[] v){characteristic=c;value=v;}}
-    private void log(String s){handler.post(()->{if(status!=null)status.setText(s);});}
+    private void log(String s){handler.post(()->setStatusVisuals(s));}
 
     private int dp(int value){return (int)(getResources().getDisplayMetrics().density*value+0.5f);}
     private static int color(String hex){return Color.parseColor(hex);}
-    private GradientDrawable background(int background,int stroke,int radius){
-        GradientDrawable drawable=new GradientDrawable();
-        drawable.setColor(background);
-        drawable.setCornerRadius(dp(radius));
-        if(stroke!=Color.TRANSPARENT)drawable.setStroke(dp(1),stroke);
-        return drawable;
+    private static int blend(int a,int b,float fraction){
+        float n=1-fraction;
+        return Color.rgb((int)(Color.red(a)*n+Color.red(b)*fraction),(int)(Color.green(a)*n+Color.green(b)*fraction),(int)(Color.blue(a)*n+Color.blue(b)*fraction));
     }
-    private android.graphics.drawable.Drawable touchBackground(int surface,int border,int radius){
-        GradientDrawable normal=background(surface,border,radius);
-        GradientDrawable pressed=background(blend(surface,accentColor,0.18f),accentColor,radius);
+    private GradientDrawable surface(int fill,int stroke,int radius){
+        GradientDrawable d=new GradientDrawable();d.setColor(fill);d.setCornerRadius(dp(radius));
+        if(stroke!=Color.TRANSPARENT)d.setStroke(dp(1),stroke);return d;
+    }
+    private Drawable gradient(int first,int second,int stroke,int radius){
+        GradientDrawable d=new GradientDrawable(GradientDrawable.Orientation.TL_BR,new int[]{first,second});
+        d.setCornerRadius(dp(radius));if(stroke!=Color.TRANSPARENT)d.setStroke(dp(1),stroke);return d;
+    }
+    private Drawable touchBackground(int fill,int stroke,int radius){
         android.graphics.drawable.StateListDrawable states=new android.graphics.drawable.StateListDrawable();
-        states.addState(new int[]{android.R.attr.state_pressed},pressed);
-        states.addState(new int[]{},normal);
-        return new RippleDrawable(ColorStateList.valueOf(blend(accentColor,Color.WHITE,0.15f)),states,null);
+        states.addState(new int[]{android.R.attr.state_pressed},surface(blend(fill,highlightColor,0.27f),highlightColor,radius));
+        states.addState(new int[]{},surface(fill,stroke,radius));
+        return new RippleDrawable(ColorStateList.valueOf(0x55B77CFF),states,null);
     }
-    private static int blend(int from,int to,float mix){
-        float inv=1f-mix;
-        return Color.rgb((int)(Color.red(from)*inv+Color.red(to)*mix),
-                         (int)(Color.green(from)*inv+Color.green(to)*mix),
-                         (int)(Color.blue(from)*inv+Color.blue(to)*mix));
-    }
-    private void touchFeedback(View v){
-        v.setOnTouchListener((view,event)->{
-            if(event.getActionMasked()==MotionEvent.ACTION_DOWN){
-                view.animate().cancel();view.animate().scaleX(0.985f).scaleY(0.985f).setDuration(75).start();
-            } else if(event.getActionMasked()==MotionEvent.ACTION_UP||event.getActionMasked()==MotionEvent.ACTION_CANCEL){
-                view.animate().cancel();view.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
-            }
-            return false; // Let the normal Android click, accessibility and scrolling behavior work.
+    private void clickResponse(View v){
+        v.setOnTouchListener((w,e)->{
+            int a=e.getActionMasked();
+            if(a==MotionEvent.ACTION_DOWN)w.animate().scaleX(0.988f).scaleY(0.975f).setDuration(65).start();
+            if(a==MotionEvent.ACTION_UP||a==MotionEvent.ACTION_CANCEL)w.animate().scaleX(1f).scaleY(1f).setDuration(115).start();
+            return false;
         });
     }
     private void palette(){
         dark=(getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)==Configuration.UI_MODE_NIGHT_YES;
-        bgColor=color(dark?"#0B1120":"#F3F6FB");
-        panelColor=color(dark?"#172235":"#FFFFFF");
-        textColor=color(dark?"#F2F6FF":"#18243A");
-        mutedColor=color(dark?"#AABAD0":"#52647D");
-        accentColor=color(dark?"#76C9FF":"#1667C7");
-        outlineColor=color(dark?"#33445E":"#D9E2ED");
-        errorColor=color(dark?"#FFB3AC":"#A4342D");
+        bgColor=color(dark?"#111020":"#F5F3FC");
+        panelColor=color(dark?"#201F33":"#FFFFFF");
+        textColor=color(dark?"#FAF8FF":"#201B32");
+        mutedColor=color(dark?"#B8B5CF":"#5B5970");
+        accentColor=color(dark?"#A66AFF":"#7336D9");
+        highlightColor=color(dark?"#8847E7":"#9058E4");
+        outlineColor=color(dark?"#4A476A":"#D6D0E8");
+        errorColor=color(dark?"#FF777F":"#BC293D");
     }
-    private TextView label(String text,int size,boolean heavy){
-        TextView v=new TextView(this);v.setText(text);v.setTextSize(size);v.setTextColor(textColor);
-        if(heavy)v.setTypeface(null,Typeface.BOLD);
-        return v;
+    private TextView label(String name,int size,boolean bold){
+        TextView v=new TextView(this);v.setText(name);v.setTextColor(textColor);v.setTextSize(size);
+        if(bold)v.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
+        v.setIncludeFontPadding(true);return v;
     }
-    private void section(LinearLayout root,String text){
-        TextView v=label(text,14,true);v.setTextColor(mutedColor);
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.topMargin=dp(18);lp.bottomMargin=dp(8);root.addView(v,lp);
-    }
+    private LinearLayout vertical(){LinearLayout l=new LinearLayout(this);l.setOrientation(LinearLayout.VERTICAL);return l;}
+    private LinearLayout horizontal(){LinearLayout l=new LinearLayout(this);l.setOrientation(LinearLayout.HORIZONTAL);l.setGravity(Gravity.CENTER_VERTICAL);return l;}
+    private LinearLayout.LayoutParams dims(int width,int height){return new LinearLayout.LayoutParams(width<0?width:dp(width),height<0?height:dp(height));}
+    private void marginBottom(LinearLayout parent,View child,int bottom){LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.bottomMargin=dp(bottom);parent.addView(child,p);}
     private LinearLayout panel(LinearLayout root){
-        LinearLayout v=new LinearLayout(this);v.setOrientation(LinearLayout.VERTICAL);v.setPadding(dp(16),dp(14),dp(16),dp(14));
-        v.setBackground(background(panelColor,outlineColor,16));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.bottomMargin=dp(12);
-        root.addView(v,lp);return v;
+        LinearLayout v=vertical();v.setPadding(dp(15),dp(16),dp(15),dp(16));
+        v.setBackground(gradient(panelColor,blend(panelColor,bgColor,.28f),outlineColor,18));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.bottomMargin=dp(14);root.addView(v,lp);return v;
     }
+    private TextView smallHeader(String title){TextView v=label(title,17,true);v.setPadding(0,0,0,dp(12));return v;}
+    private TextView interactiveLabel(String text,Runnable action,boolean primary){
+        TextView b=label(text,15,true);b.setGravity(Gravity.CENTER);b.setPadding(dp(12),dp(12),dp(12),dp(12));
+        b.setTextColor(primary?Color.WHITE:textColor);
+        b.setBackground(primary?new RippleDrawable(ColorStateList.valueOf(0x88D2B3FF),
+                gradient(color(dark?"#AF74FF":"#995DE9"),color(dark?"#6F34CF":"#7038D0"),accentColor,17),null):
+                touchBackground(blend(panelColor,bgColor,.22f),outlineColor,17));
+        b.setClickable(true);b.setFocusable(true);clickResponse(b);
+        b.setOnClickListener(v->{v.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);action.run();});return b;
+    }
+    // Keep compatible button API for the BLE and import code, while using the new visual style.
     private Button button(LinearLayout root,String name,Runnable action){
-        return actionButton(root,name,false,action);
+        Button b=new Button(this);b.setText(name);b.setAllCaps(false);b.setTextColor(textColor);b.setTextSize(14);
+        b.setBackground(touchBackground(panelColor,outlineColor,12));
+        LinearLayout.LayoutParams p=dims(-1,46);p.bottomMargin=dp(7);root.addView(b,p);
+        clickResponse(b);b.setOnClickListener(v->{v.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);action.run();});return b;
     }
-    private Button actionButton(LinearLayout root,String name,boolean primary,Runnable action){
-        Button b=new Button(this);b.setText(name);b.setAllCaps(false);b.setTextSize(14);
-        b.setTypeface(null,Typeface.BOLD);b.setTextColor(primary?bgColor:textColor);
-        b.setBackground(touchBackground(primary?accentColor:panelColor,
-                primary?Color.TRANSPARENT:outlineColor,12));
-        b.setElevation(dp(1));b.setMinHeight(dp(52));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(52));lp.bottomMargin=dp(10);
-        root.addView(b,lp);touchFeedback(b);
-        b.setOnClickListener(v->{b.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);action.run();});
-        return b;
-    }
-    private Spinner spinner(LinearLayout root,String[] choices){
+    private Spinner hiddenSpinner(String[] values){
         Spinner s=new Spinner(this);
-        ArrayAdapter<String> a=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,choices){
-            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
-                TextView t=(TextView)super.getView(pos,convert,parent);t.setTextColor(textColor);t.setTextSize(15);t.setPadding(dp(12),dp(10),dp(8),dp(10));return t;
-            }
-            @Override public View getDropDownView(int pos,View convert,android.view.ViewGroup parent){
-                TextView t=(TextView)super.getDropDownView(pos,convert,parent);t.setTextColor(textColor);t.setBackgroundColor(panelColor);t.setPadding(dp(16),dp(12),dp(16),dp(12));return t;
+        ArrayAdapter<String> a=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,values);
+        s.setAdapter(a);return s;
+    }
+    private View circle(final int fill,int diameter){
+        View v=new View(this);v.setBackground(surface(fill,Color.TRANSPARENT,diameter/2));
+        v.setLayoutParams(dims(diameter,diameter));return v;
+    }
+    private View pokeball(int size){
+        return new View(this){
+            final Paint paint=new Paint(3);
+            @Override protected void onDraw(Canvas canvas){
+                super.onDraw(canvas);float w=getWidth(),h=getHeight(),cx=w/2,cy=h/2,r=Math.min(w,h)*.46f;
+                paint.setStyle(Paint.Style.FILL);paint.setColor(0xFFF45462);canvas.drawCircle(cx,cy,r,paint);
+                RectF bottom=new RectF(cx-r,cy-r,cx+r,cy+r);
+                canvas.save();canvas.clipRect(cx-r,cy,cx+r,cy+r);
+                paint.setColor(0xFFEAF0FF);canvas.drawCircle(cx,cy,r,paint);canvas.restore();
+                paint.setColor(0xFF222342);canvas.drawRect(cx-r,cy-dp(3),cx+r,cy+dp(3),paint);
+                paint.setColor(0xFF222342);canvas.drawCircle(cx,cy,r*.35f,paint);
+                paint.setColor(0xFFECF1FF);canvas.drawCircle(cx,cy,r*.23f,paint);
             }
         };
-        a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(a);s.setBackground(touchBackground(bgColor,outlineColor,10));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(54));lp.bottomMargin=dp(12);root.addView(s,lp);return s;
     }
-    private static final String[] GAME_INITIALS={"D","P","PT","HG","SS","B","W","B2","W2"};
-    private static final int[] GAME_COLORS={
-        0xFF1663D8,0xFFE66EAE,0xFF68707C,0xFFE4B442,0xFFBBC0C5,
-        0xFF191A1E,0xFFF6F8FC,0xFF151619,0xFFF5F7FB
-    };
-    private LinearLayout gameRow(int index,boolean dropdown){
-        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);
-        row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(dp(12),dp(dropdown?8:6),dp(12),dp(dropdown?8:6));
-        if(dropdown)row.setBackground(touchBackground(panelColor,Color.TRANSPARENT,8));
-        TextView tile=label(GAME_INITIALS[index],14,true);
-        tile.setGravity(Gravity.CENTER);
-        tile.setTextColor((index==6||index==8)?0xFF182235:Color.WHITE);
-        tile.setBackground(background(GAME_COLORS[index],index==6||index==8?0xFFAFB9C9:Color.TRANSPARENT,9));
-        row.addView(tile,new LinearLayout.LayoutParams(dp(45),dp(36)));
-        TextView name=label("Pokémon "+Gen5.GAMES[index],15,true);
-        LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(0,-2,1f);
-        np.leftMargin=dp(13);row.addView(name,np);
-        return row;
+    private void setStatusVisuals(String message){
+        boolean linked=connected&&ready;
+        if(connectionBadge!=null){connectionBadge.setText(linked?"◉ Connected":"♧ Connect");
+            connectionBadge.setTextColor(linked?0xFF37EF84:accentColor);
+            connectionBadge.setBackground(touchBackground(linked?0xFF103326:panelColor,
+                    linked?0xFF24D875:outlineColor,18));}
+        if(connectionIndicator!=null){connectionIndicator.setText(linked?(distributing?"Distributing":"Ready"):(connected?"Connecting":"Not connected"));}
+        if(connectionDot!=null)connectionDot.setBackground(surface(linked?0xFF39E979:0xFFF45259,Color.TRANSPARENT,7));
+        if(status!=null){status.setText(message);status.setTextColor(mutedColor);}
     }
-    private Spinner gamePicker(LinearLayout root){
-        Spinner spinner=new Spinner(this);
-        spinner.setAdapter(new BaseAdapter(){
-            @Override public int getCount(){return Gen5.GAMES.length;}
-            @Override public Object getItem(int index){return Gen5.GAMES[index];}
-            @Override public long getItemId(int index){return index;}
-            @Override public View getView(int index,View old,android.view.ViewGroup parent){return gameRow(index,false);}
-            @Override public View getDropDownView(int index,View old,android.view.ViewGroup parent){return gameRow(index,true);}
-        });
-        spinner.setBackground(touchBackground(bgColor,outlineColor,10));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(60));lp.bottomMargin=dp(12);
-        root.addView(spinner,lp);
-        return spinner;
+    private LinearLayout createConnectionTools(){
+        LinearLayout tools=vertical();tools.setPadding(dp(12),dp(13),dp(12),dp(8));
+        tools.setBackground(surface(panelColor,outlineColor,14));
+        TextView prompt=label("ESP32-S3 Bluetooth connection",14,true);marginBottom(tools,prompt,8);
+        button(tools,"Find my ESP32-S3",()->startScan());
+        button(tools,"Disconnect",()->disconnect());
+        ListView deviceList=new ListView(this);deviceList.setDividerHeight(dp(1));
+        deviceList.setDivider(new android.graphics.drawable.ColorDrawable(outlineColor));
+        tools.addView(deviceList,dims(-1,105));
+        deviceAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,new ArrayList<>()){
+            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
+                TextView v=(TextView)super.getView(pos,convert,parent);v.setTextColor(textColor);v.setTextSize(12);return v;
+            }
+        };deviceList.setAdapter(deviceAdapter);
+        deviceList.setOnItemClickListener((parent,view,pos,id)->{if(pos<devices.size())connect(devices.get(pos));});
+        return tools;
+    }
+    private void addGameRows(LinearLayout parent){
+        gameRows=vertical();
+        for(int i=0;i<Gen5.GAMES.length;i++){
+            final int game=i;
+            LinearLayout line=horizontal();line.setPadding(dp(9),dp(7),dp(9),dp(7));
+            TextView tile=label(GAME_INITIALS[i],14,true);tile.setGravity(Gravity.CENTER);
+            tile.setTextColor(i==6||i==8?0xFF12121C:Color.WHITE);
+            tile.setBackground(gradient(blend(GAME_COLORS[i],Color.WHITE,.17f),GAME_COLORS[i],
+                    i==6||i==8?0xFFBFC0C9:Color.TRANSPARENT,9));
+            line.addView(tile,dims(45,37));
+            TextView text=label("Pokémon "+Gen5.GAMES[i].replace("Heart Gold","HeartGold").replace("Soul Silver","SoulSilver"),15,false);
+            LinearLayout.LayoutParams nameP=new LinearLayout.LayoutParams(0,-2,1);nameP.leftMargin=dp(12);
+            line.addView(text,nameP);
+            TextView radio=label("○",24,false);radio.setGravity(Gravity.CENTER);
+            line.addView(radio,dims(27,42));gameChoices[i]=radio;
+            line.setBackground(touchBackground(Color.TRANSPARENT,Color.TRANSPARENT,13));
+            line.setClickable(true);line.setFocusable(true);clickResponse(line);
+            line.setOnClickListener(v->{line.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);gameSpinner.setSelection(game);refreshGameRows();updateCards();});
+            gameRows.addView(line,dims(-1,55));
+            if(i<Gen5.GAMES.length-1){View divider=new View(this);divider.setBackgroundColor(outlineColor);
+                LinearLayout.LayoutParams d=dims(-1,1);d.leftMargin=dp(9);d.rightMargin=dp(9);gameRows.addView(divider,d);}
+        }
+        parent.addView(gameRows,dims(-1,-2));refreshGameRows();
+    }
+    private void refreshGameRows(){
+        if(gameRows==null||gameSpinner==null)return;
+        int sel=gameSpinner.getSelectedItemPosition();
+        for(int i=0;i<Gen5.GAMES.length;i++){
+            LinearLayout row=(LinearLayout)gameRows.getChildAt(i*2);boolean active=i==sel;
+            row.setBackground(active?gradient(dark?0xFF573272:0xFFF0DFFF,
+                    dark?0xFF342351:0xFFE8D7FF,accentColor,13):touchBackground(Color.TRANSPARENT,Color.TRANSPARENT,13));
+            gameChoices[i].setText(active?"✓":"○");gameChoices[i].setTextSize(active?22:24);
+            gameChoices[i].setTextColor(active?accentColor:mutedColor);
+            row.setSelected(active);
+        }
+    }
+    private void addLanguageTabs(LinearLayout parent){
+        TextView hint=label("LANGUAGE  ·  swipe to see all seven",11,false);hint.setTextColor(mutedColor);
+        marginBottom(parent,hint,5);
+        languageStrip=new HorizontalScrollView(this);languageStrip.setHorizontalScrollBarEnabled(false);
+        languageStrip.setFillViewport(false);languageStrip.setHorizontalFadingEdgeEnabled(true);
+        languageTabRow=horizontal();languageTabRow.setPadding(dp(2),dp(3),dp(2),dp(3));
+        for(int i=0;i<Gen5.LANG.length;i++){
+            final int language=i;
+            TextView tab=label(LANGUAGE_SHORT[i],12,false);tab.setGravity(Gravity.CENTER);
+            tab.setSingleLine(true);tab.setPadding(dp(11),dp(10),dp(11),dp(10));
+            tab.setClickable(true);tab.setFocusable(true);clickResponse(tab);
+            tab.setOnClickListener(v->{tab.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
+                langSpinner.setSelection(language);refreshLanguageTabs();updateCards();});
+            LinearLayout.LayoutParams p=dims(-2,40);p.rightMargin=dp(2);languageTabRow.addView(tab,p);
+        }
+        languageStrip.addView(languageTabRow);
+        LinearLayout.LayoutParams sp=dims(-1,48);sp.bottomMargin=dp(8);parent.addView(languageStrip,sp);
+        refreshLanguageTabs();
+    }
+    private void refreshLanguageTabs(){
+        if(langSpinner==null||languageTabRow==null)return;
+        int selected=langSpinner.getSelectedItemPosition();
+        for(int i=0;i<Gen5.LANG.length;i++){
+            TextView t=(TextView)languageTabRow.getChildAt(i);boolean active=i==selected;
+            t.setTextColor(active?Color.WHITE:textColor);
+            t.setBackground(active?gradient(0xFFAF73FF,0xFF7434D2,accentColor,11):touchBackground(panelColor,outlineColor,11));
+            t.setSelected(active);t.setContentDescription(LANGUAGE_LABELS[i]+(active?", selected":""));
+        }
+        if(selected>=0&&selected<languageTabRow.getChildCount()){
+            View tab=languageTabRow.getChildAt(selected);
+            languageStrip.post(()->languageStrip.smoothScrollTo(Math.max(0,tab.getLeft()-dp(75)),0));
+        }
+    }
+    private void addCardPicker(LinearLayout panel){
+        FrameLayout frame=new FrameLayout(this);
+        frame.setBackground(touchBackground(dark?0xFF1B1B2D:0xFFF8F6FC,outlineColor,11));
+        cardSpinner=new Spinner(this,Spinner.MODE_DROPDOWN);
+        cardSpinner.setBackgroundColor(Color.TRANSPARENT);
+        cardSpinner.setDropDownWidth(-1);
+        cardAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,new ArrayList<>()){
+            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
+                TextView t=(TextView)super.getView(pos,convert,parent);t.setTextColor(textColor);
+                t.setTextSize(15);t.setSingleLine(true);t.setEllipsize(android.text.TextUtils.TruncateAt.END);
+                t.setPadding(dp(14),0,dp(31),0);return t;
+            }
+            @Override public View getDropDownView(int pos,View convert,android.view.ViewGroup parent){
+                TextView t=(TextView)super.getDropDownView(pos,convert,parent);t.setTextColor(textColor);
+                t.setBackgroundColor(panelColor);t.setPadding(dp(15),dp(13),dp(15),dp(13));return t;
+            }
+        };
+        cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cardSpinner.setAdapter(cardAdapter);frame.addView(cardSpinner,new FrameLayout.LayoutParams(-1,-1));
+        // Exactly one chevron on the RIGHT. No native spinner background or arrow on the left.
+        cardChevron=label("⌄",23,false);cardChevron.setTextColor(textColor);cardChevron.setGravity(Gravity.CENTER);
+        FrameLayout.LayoutParams c=new FrameLayout.LayoutParams(dp(33),-1,Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+        frame.addView(cardChevron,c);cardChevron.setClickable(true);cardChevron.setOnClickListener(v->cardSpinner.performClick());
+        LinearLayout.LayoutParams f=dims(-1,51);f.bottomMargin=dp(5);panel.addView(frame,f);
+    }
+    private void addStatusLegend(LinearLayout panel){
+        panel.addView(smallHeader("ⓘ  ESP32-S3 LED Indicator"));
+        String[] lines={"Red — No phone connected","Green — Phone connected (ready)","Blinking green — Distributing a Wonder Card"};
+        int[] colors={0xFFF45259,0xFF4FE958,0xFF5DEA55};
+        for(int i=0;i<lines.length;i++){
+            LinearLayout line=horizontal();View led=circle(colors[i],13);line.addView(led,dims(13,13));
+            TextView name=label(lines[i],12,false);LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,-2,1);p.leftMargin=dp(12);
+            line.addView(name,p);LinearLayout.LayoutParams lp=dims(-1,-2);lp.bottomMargin=dp(9);panel.addView(line,lp);
+        }
+    }
+    private void addDistributionButton(LinearLayout parent,String text,boolean primary,Runnable action){
+        TextView b=interactiveLabel(text,action,primary);
+        LinearLayout.LayoutParams p=dims(-1,62);p.bottomMargin=dp(10);parent.addView(b,p);
+    }
+    private void addHero(LinearLayout root){
+        boolean wide=getResources().getConfiguration().screenWidthDp>=600;
+        LinearLayout hero=wide?horizontal():vertical();hero.setGravity(Gravity.CENTER_VERTICAL);
+        ImageView image=new ImageView(this);image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        image.setContentDescription("Original white Nintendo DS Phat console");
+        try(InputStream in=getAssets().open("nds-phat.png")){image.setImageBitmap(BitmapFactory.decodeStream(in));}catch(Exception ignored){}
+        if(wide){LinearLayout.LayoutParams ip=dims(245,224);ip.rightMargin=dp(22);hero.addView(image,ip);}
+        else{LinearLayout.LayoutParams ip=dims(-1,178);ip.bottomMargin=dp(11);hero.addView(image,ip);}
+        LinearLayout words=vertical();
+        TextView title=label("Send Wonder Cards to your DS",wide?24:22,true);marginBottom(words,title,9);
+        TextView desc=label("Send Wonder Cards to compatible Nintendo DS games using any Nintendo DS family console, including the original DS, DS Lite, DSi, and 3DS family.",wide?15:13,false);
+        desc.setTextColor(mutedColor);marginBottom(words,desc,14);
+        LinearLayout indicator=horizontal();indicator.setPadding(dp(13),dp(11),dp(13),dp(11));
+        indicator.setBackground(surface(blend(panelColor,bgColor,.1f),outlineColor,13));
+        connectionDot=circle(0xFFF45259,13);indicator.addView(connectionDot,dims(13,13));
+        LinearLayout inner=vertical();LinearLayout.LayoutParams ii=new LinearLayout.LayoutParams(0,-2,1);ii.leftMargin=dp(12);indicator.addView(inner,ii);
+        connectionIndicator=label("Not connected",16,true);inner.addView(connectionIndicator);
+        status=label("Tap Connect above to find the ESP32-S3",12,false);status.setTextColor(mutedColor);inner.addView(status);
+        words.addView(indicator,dims(-1,-2));
+        if(wide)hero.addView(words,new LinearLayout.LayoutParams(0,-2,1));else hero.addView(words,dims(-1,-2));
+        LinearLayout.LayoutParams hp=dims(-1,-2);hp.bottomMargin=dp(17);root.addView(hero,hp);
     }
     private void loadBundledCards(){
         new Thread(()->{
@@ -270,96 +374,78 @@ public final class NdsWondercardActivity extends Activity {
         },"wondercard-library").start();
     }
     @Override public void onCreate(Bundle saved){
-        super.onCreate(saved);
-        palette();
-        Window window=getWindow();
-        window.setStatusBarColor(bgColor);window.setNavigationBarColor(bgColor);
+        super.onCreate(saved);palette();
+        Window window=getWindow();window.setStatusBarColor(bgColor);window.setNavigationBarColor(bgColor);
         window.getDecorView().setSystemUiVisibility(dark?0:(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR|View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR));
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // Keep content below the clock, camera cut-out and status bar on modern phones.
-        LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(18),dp(18),dp(18),dp(30));root.setBackgroundColor(bgColor);
-        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
-        scroll.setClipToPadding(false);scroll.setFitsSystemWindows(true);
-        scroll.setVerticalScrollBarEnabled(false);
-        scroll.addView(root);setContentView(scroll);
-        root.setAlpha(0f);
-        root.animate().alpha(1f).setDuration(180).start();
+        ScrollView scroller=new ScrollView(this);scroller.setFillViewport(true);scroller.setVerticalScrollBarEnabled(false);
+        scroller.setFitsSystemWindows(true);scroller.setBackgroundColor(bgColor);
+        LinearLayout root=vertical();root.setPadding(dp(14),dp(12),dp(14),dp(26));scroller.addView(root);
+        setContentView(scroller);
+        root.setAlpha(0);root.animate().alpha(1).setDuration(160).start();
 
-        LinearLayout hero=new LinearLayout(this);hero.setGravity(Gravity.CENTER_VERTICAL);
-        LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);
-        hero.addView(words,new LinearLayout.LayoutParams(0,-2,1f));
-        TextView kicker=label("DS  /  MYSTERY GIFT",11,true);kicker.setTextColor(accentColor);
-        words.addView(kicker);
-        TextView heading=label("Wonder Card Sender",24,true);
-        LinearLayout.LayoutParams hl=new LinearLayout.LayoutParams(-1,-2);hl.topMargin=dp(6);words.addView(heading,hl);
-        TextView intro=label("Wonder Cards for compatible DS family systems  •  ESP32-S3",13,false);intro.setTextColor(mutedColor);
-        LinearLayout.LayoutParams il=new LinearLayout.LayoutParams(-1,-2);il.topMargin=dp(6);words.addView(intro,il);
-        try(InputStream in=getAssets().open("nds-phat.png")){
-            ImageView ds=new ImageView(this);
-            ds.setImageBitmap(BitmapFactory.decodeStream(in));
-            ds.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            ds.setContentDescription("White original Nintendo DS console");
-            LinearLayout.LayoutParams dpImg=new LinearLayout.LayoutParams(dp(104),dp(108));
-            dpImg.leftMargin=dp(6);hero.addView(ds,dpImg);
-        }catch(Exception ignored){} // A missing illustration never prevents the sender from running.
-        LinearLayout.LayoutParams heroLp=new LinearLayout.LayoutParams(-1,-2);
-        heroLp.bottomMargin=dp(18);root.addView(hero,heroLp);
+        // PokéLDN app header, status button and inline connection controls.
+        LinearLayout top=horizontal();top.addView(pokeball(40),dims(40,40));
+        LinearLayout appName=vertical();LinearLayout.LayoutParams a=new LinearLayout.LayoutParams(0,-2,1);a.leftMargin=dp(9);top.addView(appName,a);
+        appName.addView(label("PokéLDN",22,true));TextView subtitle=label("Gift Sender",13,false);subtitle.setTextColor(mutedColor);appName.addView(subtitle);
+        connectionBadge=label("♧ Connect",12,true);connectionBadge.setGravity(Gravity.CENTER);
+        connectionBadge.setPadding(dp(12),dp(8),dp(12),dp(8));connectionBadge.setBackground(touchBackground(panelColor,outlineColor,17));
+        connectionBadge.setClickable(true);clickResponse(connectionBadge);
+        connectionBadge.setOnClickListener(v->{connectionTools.setVisibility(connectionTools.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE);});
+        top.addView(connectionBadge,dims(-2,42));
+        TextView settings=label("⚙",23,false);settings.setGravity(Gravity.CENTER);settings.setContentDescription("Bluetooth settings");
+        settings.setBackground(touchBackground(panelColor,outlineColor,12));settings.setClickable(true);
+        settings.setOnClickListener(v->connectionTools.setVisibility(connectionTools.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE));
+        LinearLayout.LayoutParams st=dims(39,42);st.leftMargin=dp(7);top.addView(settings,st);
+        LinearLayout.LayoutParams topP=dims(-1,-2);topP.bottomMargin=dp(12);root.addView(top,topP);
+        connectionTools=createConnectionTools();connectionTools.setVisibility(View.GONE);
+        LinearLayout.LayoutParams connP=dims(-1,-2);connP.bottomMargin=dp(12);root.addView(connectionTools,connP);
+        View sep=new View(this);sep.setBackgroundColor(outlineColor);
+        LinearLayout.LayoutParams spl=dims(-1,1);spl.bottomMargin=dp(15);root.addView(sep,spl);
+        addHero(root);
 
-        LinearLayout connectionPanel=panel(root);
-        TextView connectionTitle=label("Connection",16,true);connectionPanel.addView(connectionTitle);
-        status=label("Not connected",13,false);status.setTextColor(mutedColor);status.setPadding(0,dp(8),0,dp(12));connectionPanel.addView(status);
-        actionButton(connectionPanel,"Find my ESP32-S3",true,()->startScan());
-        button(connectionPanel,"Disconnect",()->disconnect());
-        ListView deviceList=new ListView(this);deviceList.setDividerHeight(dp(1));
-        deviceList.setDivider(new android.graphics.drawable.ColorDrawable(outlineColor));
-        connectionPanel.addView(deviceList,new LinearLayout.LayoutParams(-1,dp(100)));
-        deviceAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,new ArrayList<>()){
-            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
-                TextView v=(TextView)super.getView(pos,convert,parent);v.setTextColor(textColor);v.setTextSize(12);return v;
-            }
-        };deviceList.setAdapter(deviceAdapter);
-        deviceList.setOnItemClickListener((parent,view,pos,id)->{if(pos<devices.size())connect(devices.get(pos));});
+        // Invisible state holders are retained for the existing Gen IV/V BLE and card logic.
+        gameSpinner=hiddenSpinner(Gen5.GAMES);langSpinner=hiddenSpinner(Gen5.LANG);
+        boolean wide=getResources().getConfiguration().screenWidthDp>=600;
+        LinearLayout content=wide?horizontal():vertical();content.setGravity(Gravity.TOP);
+        LinearLayout gameCard=vertical();gameCard.setPadding(dp(14),dp(14),dp(14),dp(14));
+        gameCard.setBackground(gradient(panelColor,blend(panelColor,bgColor,.28f),outlineColor,19));
+        gameCard.addView(smallHeader("▣  1. Select a game"));addGameRows(gameCard);
+        LinearLayout actions=vertical();
+        LinearLayout selector=panel(actions);
+        selector.addView(smallHeader("♧  2. Select a Wonder Card"));
+        addLanguageTabs(selector);
+        addCardPicker(selector);
+        cardCount=label("Loading Wonder Cards…",12,false);cardCount.setTextColor(mutedColor);cardCount.setGravity(Gravity.CENTER);selector.addView(cardCount);
+        addDistributionButton(actions,"▶  Start Wonder Card Distribution",true,()->sendGift());
+        addDistributionButton(actions,"■  Stop Wonder Card Distribution",false,()->stopGift());
+        LinearLayout legend=panel(actions);addStatusLegend(legend);
+        TextView imported=interactiveLabel("＋  Import Wonder Card",()->{
+            Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT);intent.setType("*/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(intent,FILE_PICK);
+        },false);actions.addView(imported,dims(-1,49));
+        if(wide){
+            LinearLayout.LayoutParams left=new LinearLayout.LayoutParams(0,-2,1);left.rightMargin=dp(12);content.addView(gameCard,left);
+            content.addView(actions,new LinearLayout.LayoutParams(0,-2,1));
+        }else{
+            LinearLayout.LayoutParams left=dims(-1,-2);left.bottomMargin=dp(14);content.addView(gameCard,left);
+            content.addView(actions,dims(-1,-2));
+        }
+        root.addView(content,dims(-1,-2));
 
-        section(root,"CHOOSE YOUR GIFT");
-        LinearLayout selectionPanel=panel(root);
-        selectionPanel.addView(label("Game",13,true));
-        gameSpinner=gamePicker(selectionPanel);
-        selectionPanel.addView(label("Language",13,true));
-        langSpinner=spinner(selectionPanel,Gen5.LANG);
-        langSpinner.setVisibility(View.GONE);
-        addLanguageTabs(selectionPanel);
-        selectionPanel.addView(label("Wonder Card",13,true));
-        cardSpinner=spinner(selectionPanel,new String[]{"Loading Wonder Cards..."});
-        cardAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,new ArrayList<>()){
-            @Override public View getView(int pos,View convert,android.view.ViewGroup parent){
-                TextView v=(TextView)super.getView(pos,convert,parent);v.setTextColor(textColor);v.setPadding(dp(12),dp(10),dp(8),dp(10));return v;
-            }
-            @Override public View getDropDownView(int pos,View convert,android.view.ViewGroup parent){
-                TextView v=(TextView)super.getDropDownView(pos,convert,parent);v.setTextColor(textColor);
-                v.setBackgroundColor(panelColor);v.setPadding(dp(12),dp(12),dp(8),dp(12));return v;
-            }
-        };cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);cardSpinner.setAdapter(cardAdapter);
-        cardCount=label("Loading library...",12,false);cardCount.setTextColor(mutedColor);selectionPanel.addView(cardCount);
-        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){refreshLanguageTabs();updateCards();}});
-        gameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onNothingSelected(AdapterView<?> p){}public void onItemSelected(AdapterView<?> p,View v,int pos,long id){updateCards();}});
-        button(selectionPanel,"Import a Wonder Card",()->{
-            Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("*/*");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,FILE_PICK);
+        gameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onNothingSelected(AdapterView<?> p){}
+            public void onItemSelected(AdapterView<?> p,View v,int pos,long id){refreshGameRows();updateCards();}
         });
-
-        section(root,"DISTRIBUTION CONTROL");
-        LinearLayout sendPanel=panel(root);
-        actionButton(sendPanel,"Start Wonder Card Distribution",true,()->sendGift());
-        button(sendPanel,"Stop Wonder Card Distribution",()->stopGift());
-        TextView help=label("Start uploads the selected gift and tells the ESP32-S3 to broadcast it. Stop sends a command to end the ESP32-S3 wireless broadcast — not just the phone upload.",12,false);
-        help.setTextColor(mutedColor);sendPanel.addView(help);
-        TextView footer=label("Experimental wireless distribution  •  Keep your ESP32-S3 powered during use.",12,false);
-        footer.setTextColor(mutedColor);root.addView(footer);
+        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onNothingSelected(AdapterView<?> p){}
+            public void onItemSelected(AdapterView<?> p,View v,int pos,long id){refreshLanguageTabs();updateCards();}
+        });
         restoreImports();
-        int initialGame=getIntent().getIntExtra("game_index",0);
-        if(initialGame>=0&&initialGame<Gen5.GAMES.length)gameSpinner.setSelection(initialGame);
-        updateCards();requestPermissionsIfNeeded();
-        loadBundledCards();
+        int initial=getIntent().getIntExtra("game_index",0);
+        if(initial>=0&&initial<Gen5.GAMES.length)gameSpinner.setSelection(initial);
+        refreshGameRows();refreshLanguageTabs();updateCards();setStatusVisuals("Tap Connect above to find the ESP32-S3");
+        requestPermissionsIfNeeded();loadBundledCards();
     }
     private byte[] readAsset(String name)throws Exception{try(InputStream in=getAssets().open(name)){return readAll(in);}}
     private static byte[] readAll(InputStream in)throws Exception{ByteArrayOutputStream o=new ByteArrayOutputStream();byte[] buf=new byte[4096];for(int n;(n=in.read(buf))!=-1;)o.write(buf,0,n);return o.toByteArray();}
@@ -373,7 +459,7 @@ public final class NdsWondercardActivity extends Activity {
         if(cardCount!=null)cardCount.setText(libraryLoading?
             "Loading Wonder Card library…":shownCards.size()==0?
             "No matching Wonder Cards for this game and language":
-            shownCards.size()+" compatible Wonder Cards available");
+            shownCards.size()+" Wonder Cards ("+LANGUAGE_LABELS[li]+")");
     }
     private boolean compatible(Card c,int gi,int bit){
         try {return gi<5 ? c.bytes.length==856 && (Gen4.versionMask(c.bytes)&bit)!=0
@@ -486,7 +572,7 @@ public final class NdsWondercardActivity extends Activity {
     }
     private void disconnect(){stopScan();writes.clear();writing=false;ready=false;connected=false;mtuReady=false;
         if(gatt!=null){try{gatt.disconnect();gatt.close();}catch(SecurityException ignored){}gatt=null;}
-        dataChar=null;ctrlChar=null;log("Disconnected");
+        dataChar=null;ctrlChar=null;distributing=false;log("Disconnected");
     }
     private final BluetoothGattCallback gattCb=new BluetoothGattCallback(){
         @Override public void onConnectionStateChange(BluetoothGatt g,int statusCode,int newState){
@@ -514,7 +600,7 @@ public final class NdsWondercardActivity extends Activity {
     private void enqueue(BluetoothGattCharacteristic c,byte[] packet){writes.add(new WriteOp(c,packet));}
     private void nextWrite(){
         if(gatt==null||!connected){writes.clear();writing=false;return;}
-        WriteOp op=writes.poll();if(op==null){writing=false;log(stopCommandPending?"Stop command acknowledged by ESP32-S3. Wireless distribution stopped.":"Gift uploaded. ESP32-S3 is now distributing until you stop it or disconnect.");stopCommandPending=false;return;}
+        WriteOp op=writes.poll();if(op==null){writing=false;distributing=!stopCommandPending;log(stopCommandPending?"Stop command acknowledged by ESP32-S3. Wireless distribution stopped.":"Gift uploaded. ESP32-S3 is now distributing until you stop it or disconnect.");stopCommandPending=false;return;}
         try{
             boolean ok;
             if(Build.VERSION.SDK_INT>=33)ok=gatt.writeCharacteristic(op.characteristic,op.value,BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT)==0;
@@ -533,7 +619,7 @@ public final class NdsWondercardActivity extends Activity {
             byte[][] frags=generation==4?Gen4.prepare(c.name,c.bytes)
                 :Gen5.prepare(c.name,c.bytes,Gen5.LANG_ID[langSpinner.getSelectedItemPosition()],
                         importGame.containsKey(c.path)?Gen5.GAME_ID[gi]:-1);
-            stopCommandPending=false;writes.clear();enqueue(ctrlChar,new byte[]{2});
+            stopCommandPending=false;distributing=false;writes.clear();enqueue(ctrlChar,new byte[]{2});
             enqueue(ctrlChar,new byte[]{3,(byte)generation,(byte)langSpinner.getSelectedItemPosition()});
             for(int i=0;i<frags.length;i++){byte[] pkt=new byte[113];pkt[0]=(byte)i;System.arraycopy(frags[i],0,pkt,1,112);enqueue(dataChar,pkt);}
             enqueue(ctrlChar,new byte[]{1});writing=true;
