@@ -80,6 +80,9 @@ static atomic_uint s_rx_sniff;   /* frames RX_SNIFF carried: the LED's activity 
 static atomic_int s_ap_stations;
 static atomic_uint s_presses;   /* BOOT presses: each wakes the screen */
 static atomic_uint s_led_alarm;   /* a join that failed or a key refused: the LED's warning */
+/* True while a 3DS gift is broadcasting: no console ever joins, so the LED flashes off this instead
+   of the station count (led_state), to show distribution is live. */
+static atomic_bool s_beacon_3ds;
 static atomic_uint s_tx_eth_retried;   /* ETH_TX calls that found the driver's queue full */
 static atomic_int s_tx_eth_last_err;
 /* ETH_TX's own time in the driver: the handler maximum in STATUS covers every command type. */
@@ -635,6 +638,8 @@ static void led_state(led_look_t *look, uint32_t *activity, uint32_t *alarm)
     case MODE_IDLE: *look = (led_look_t){LED_BREATHE, 50, 4000}; break;
     case MODE_STA_JOINING: *look = (led_look_t){LED_BLINK, 255, 250}; break;
     case MODE_AP:
+        /* A 3DS gift broadcasts with no console ever seated: flash while it distributes. */
+        if (atomic_load(&s_beacon_3ds)) { *look = (led_look_t){LED_BLINK, 255, 600}; break; }
         if (atomic_load(&s_ap_stations) <= 0) { *look = (led_look_t){LED_BREATHE, 110, 1500}; break; }
         __attribute__((fallthrough));   /* a seated console looks like a joined one */
     case MODE_STA: *look = (led_look_t){LED_ON, 25, 0}; break;
@@ -865,9 +870,17 @@ static void beacon_task(void *arg)
         /* A fresh nonce per start, as a host takes a random one per network. */
         uint32_t nonce = esp_random();
         unsigned index = 0;
+        uint16_t seq = 0;
+        atomic_store(&s_beacon_3ds, image && image->kind == ADVERT_KIND_3DS);
         int64_t switched = esp_timer_get_time();
         while (image && atomic_load(&s_beacon_on) && atomic_load(&s_mode) == MODE_AP) {
-            const size_t n = advert_frame(image, index, nonce, &beacon_crypto, frame);
+            size_t n;
+            if (image->kind == ADVERT_KIND_3DS) {
+                /* A whole 802.11 beacon, its timestamp refreshed, cycled like the distributor's. */
+                n = advert_beacon_frame(image, index, (uint64_t)esp_timer_get_time(), seq++, frame);
+            } else {
+                n = advert_frame(image, index, nonce, &beacon_crypto, frame);
+            }
             const esp_err_t r = n ? esp_wifi_80211_tx(WIFI_IF_AP, frame, n, true) : ESP_FAIL;
             atomic_fetch_add(r == ESP_OK ? &s_tx_raw : &s_tx_raw_failed, 1);
             vTaskDelay(pdMS_TO_TICKS(image->interval_ms));
@@ -877,6 +890,7 @@ static void beacon_task(void *arg)
                 switched = esp_timer_get_time();
             }
         }
+        atomic_store(&s_beacon_3ds, false);
         atomic_store(&s_beacon_on, false);
         atomic_store(&s_beacon_busy, false);
     }
@@ -891,6 +905,9 @@ static esp_err_t beacon_start(void)
     memcpy(p + 7, image->ssid, 32);
     memcpy(p + 39, image->data_key, 16);
     p[55] = image->max_stations;
+    /* A 3DS image injects its own beacons on the BSSID, so the board's AP beacon must keep clear:
+       the long interval leaves the channel to the distributor's frames. */
+    if (image->kind == ADVERT_KIND_3DS) p[56] = AP_FLAG_LONG_BEACON;
     const esp_err_t r = ap_start(p, sizeof(p));
     if (r != ESP_OK) return r;
     beacon_screen(image);

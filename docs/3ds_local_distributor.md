@@ -89,3 +89,29 @@ is therefore the whole distribution, and the board can replay it alone.
 The board runs the same esp32-uds-bridge firmware. Packs keep the recorded host MAC, because the
 beacon's encrypted node data is keyed to it. Gift packs hold Nintendo's distribution data from your
 own distributor saves; keep them out of the public repository.
+
+## On the PokeLDN board and in the app (no second computer)
+
+The board's own radio firmware (1.10.0 or later) replays a gift pack with nothing attached, the way
+it already hosts Switch and FireRed gifts. Flash PokeLDN's Bluetooth firmware (Board page), not the
+azahar_uds bridge.
+
+Command line:
+
+    POKELDN_RADIO=esp32:auto python tools/uds/gift_send_board.py gifts/krookodile-665.gift.json
+
+In the app, **Nintendo 3DS** appears in the Games list beside **Nintendo DS** (the `n3ds_plugin`
+plugin; bundled in the Android APK, installed from `examples/android/n3ds_plugin` on the desktop).
+Select it, pick a gift (a Wonder Card recorded into a gift pack in the `gifts/` folder), and press
+Start in the Session tab: the board stores the pack's beacons and broadcasts them, and the board's
+LED flashes while it distributes. Put more packs in the `gifts/` folder (or `$POKELDN_GIFTS`).
+
+The bundled Gen 7 Wonder Card catalog (`scripts/gen_3ds_gift_catalog.py` builds it from a Project
+Pokemon EventsGallery archive into `pokeldn/data/gift3ds`, grouped Sun / Moon and Ultra Sun / Ultra
+Moon) names each recorded pack by its card and games; it is the library and the record source, not a
+set of sendable cards on its own.
+
+A card cannot be sent straight from its `.wc7full`: the distributor encrypts part of every beacon,
+so each card is recorded once from a real distributor (above) and then replayed. The firmware image
+is built by `pokeldn/uds/portable3ds.py` (ADVERT_KIND_3DS) and carries only the recorded beacons —
+no console key or save data.

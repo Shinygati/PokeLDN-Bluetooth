@@ -39,6 +39,8 @@ CMD_BEACON = 0x10
 BEACON_FIRMWARE = (1, 8, 0)
 # A host image (portable.KIND_HOST): the board answers the join and plays the session itself.
 BEACON_HOST_FIRMWARE = (1, 9, 0)
+# A 3DS image (portable3ds.KIND_3DS): the board replays a Local Distributor's beacons.
+BEACON_3DS_FIRMWARE = (1, 10, 0)
 BEACON_WRITE, BEACON_COMMIT, BEACON_ERASE, BEACON_START, BEACON_QUERY = range(5)
 BEACON_CHUNK = 1024
 ALIVE_EVERY = 1.0

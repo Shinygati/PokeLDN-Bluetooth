@@ -11,6 +11,10 @@
 #define ADVERT_KIND_CYCLE 1
 /* The board answers a join itself: records after the screen commands say what it hosts (gift.h). */
 #define ADVERT_KIND_HOST 2
+/* A Nintendo 3DS local Mystery Gift: each fragment is a whole 802.11 beacon body (from the fixed
+   parameters), recorded from a Local Distributor, and the board broadcasts them in turn with no
+   host. The game only listens, so there is nothing to answer. docs/3ds_local_distributor.md. */
+#define ADVERT_KIND_3DS 3
 #define ADVERT_IMAGE_MAX 12288
 #define ADVERT_FRAGMENTS_MAX 8
 #define ADVERT_DISPLAY_MAX 4
@@ -18,6 +22,8 @@
 #define ADVERT_HEADER_LEN 40          /* network id 32, version, format, u16 BE size, u32 BE nonce */
 /* 802.11 header 24, LDN action head 12, header 40, SHA-256 or GCM tag 32, payload. */
 #define ADVERT_FRAME_MAX (24 + 12 + ADVERT_HEADER_LEN + 32 + ADVERT_PLAIN_MAX)
+/* A 3DS beacon frame is the 802.11 management header and the stored body. */
+#define ADVERT_BEACON_FRAME_MAX (24 + ADVERT_PLAIN_MAX)
 
 enum { ADVERT_FORMAT_PLAIN = 1, ADVERT_FORMAT_AES_CTR = 2, ADVERT_FORMAT_AES_GCM = 3 };
 
@@ -54,3 +60,9 @@ size_t advert_frame(const advert_image_t *image, unsigned index, uint32_t nonce,
 /* The same for a plaintext the caller built (a host image's, gift_host_advert). */
 size_t advert_frame_plain(const advert_image_t *image, const uint8_t *plain, size_t n, uint32_t nonce,
                           const advert_crypto_t *crypto, uint8_t out[ADVERT_FRAME_MAX]);
+
+/* A 3DS beacon (ADVERT_KIND_3DS): fragment `index` wrapped in a broadcast 802.11 beacon header from
+   the image's bssid, its 8-byte TSF timestamp set to `timestamp_us` and sequence control to `seq`.
+   The body is sent as recorded; no key is involved. Its length, or 0. */
+size_t advert_beacon_frame(const advert_image_t *image, unsigned index, uint64_t timestamp_us,
+                           uint16_t seq, uint8_t out[ADVERT_BEACON_FRAME_MAX]);

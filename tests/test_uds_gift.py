@@ -135,3 +135,40 @@ def test_bridge_conversation(monkeypatch):
     assert kinds == [0x01, 0x02, 0x07, 0x07, 0x03]
     assert board.commands[1][1] == bytes([11]) + mac
     assert board.commands[3][1] == b""                      # stop clears the beacon first
+
+
+def test_catalog_loads_and_groups():
+    from pokeldn.uds.catalog3ds import Catalog, GROUP_SM, GROUP_USUM
+    cat = Catalog.load()
+    if not cat.cards:
+        import pytest
+        pytest.skip("no bundled 3DS catalog")
+    sm = cat.group(GROUP_SM)
+    usum = cat.group(GROUP_USUM)
+    assert sm and usum
+    assert all(c.mask & 0x3 for c in sm) and all(c.mask & 0xC for c in usum)
+    # A card marked for all four games appears in both groups.
+    both = [c for c in cat.cards if c.mask == 0xF]
+    if both:
+        assert both[0].in_group(GROUP_SM) and both[0].in_group(GROUP_USUM)
+    # Filtering by language and query narrows the list.
+    eng = cat.group(GROUP_SM, language_code="ENG")
+    assert all(c.language_code == "ENG" for c in eng)
+    assert cat.group(GROUP_SM, query="zzxzzx-none") == []
+
+
+def test_portable3ds_image_round_trips_fields():
+    from pokeldn.uds.portable3ds import build_image, KIND_3DS
+    pack = GiftPack(bytes.fromhex("606bff9b51dd"), 11, 553,
+                    [bytes(struct.pack("<QHH", 0, 100, 0x0431)) + bytes([0xDD, 4]) + b"\x00\x1f\x32\x15"],
+                    name="Test #665")
+    image = build_image(pack)
+    assert image[:4] == b"PKSA" and image[5] == KIND_3DS
+    assert int.from_bytes(image[6:8], "little") == len(image)
+    assert image[9:15] == pack.host_mac
+    # Rejections.
+    import pytest
+    with pytest.raises(ValueError):
+        build_image(GiftPack(b"\x01\x00\x00\x00\x00\x00", 11, 553, [b"x" * 40]))   # multicast mac
+    with pytest.raises(ValueError):
+        build_image(GiftPack(bytes.fromhex("606bff9b51dd"), 99, 553, [b"x" * 40]))  # bad channel

@@ -92,10 +92,11 @@ def serve(port, files_dir, native_dir):
     import shutil
     shutil.rmtree(home / "outbox", ignore_errors=True)   # copies already handed to Android's pickers
     import pokeldn
-    # Register the built-in Nintendo DS game section before the UI first loads plugins.
-    nds_plugin = Path(pokeldn.__file__).resolve().parent / "nds_plugin"
+    # Register the built-in Nintendo DS and Nintendo 3DS game sections before the UI first loads plugins.
+    bundled = Path(pokeldn.__file__).resolve().parent
     os.environ["POKELDN_PLUGINS"] = os.pathsep.join(filter(None, [
-        os.environ.get("POKELDN_PLUGINS", ""), str(nds_plugin)
+        os.environ.get("POKELDN_PLUGINS", ""),
+        str(bundled / "nds_plugin"), str(bundled / "n3ds_plugin"),
     ]))
     os.chdir(Path(pokeldn.__file__).resolve().parent.parent)
     from pokeldn.app import android

@@ -29,7 +29,8 @@ int advert_parse(const uint8_t *data, size_t length, advert_image_t *image)
 {
     if (length < 128 + 4 || length > ADVERT_IMAGE_MAX || le16(data + 6) != length) return 1;
     if (memcmp(data, ADVERT_MAGIC, 4) || data[4] != ADVERT_LAYOUT) return 2;
-    if (data[5] != ADVERT_KIND_CYCLE && data[5] != ADVERT_KIND_HOST) return 3;
+    if (data[5] != ADVERT_KIND_CYCLE && data[5] != ADVERT_KIND_HOST && data[5] != ADVERT_KIND_3DS)
+        return 3;
     if (le32(data + length - 4) != advert_crc32(data, length - 4)) return 4;
     memset(image, 0, sizeof(*image));
     image->channel = data[8];
@@ -124,4 +125,24 @@ size_t advert_frame_plain(const advert_image_t *image, const uint8_t *plain, siz
         if (crypto->aes_ctr(image->advertise_key, counter, body, body, 32 + n)) return 0;
     }
     return head + 32 + n;
+}
+
+size_t advert_beacon_frame(const advert_image_t *image, unsigned index, uint64_t timestamp_us,
+                           uint16_t seq, uint8_t out[ADVERT_BEACON_FRAME_MAX])
+{
+    if (image->kind != ADVERT_KIND_3DS || index >= image->count) return 0;
+    const uint8_t *body = image->plain[index];
+    const uint16_t n = image->plain_len[index];
+    if (n < 12 || n > ADVERT_PLAIN_MAX) return 0;      /* at least the fixed beacon parameters */
+    memset(out, 0, 24);
+    out[0] = 0x80;                        /* management, beacon */
+    memset(out + 4, 0xff, 6);             /* broadcast */
+    memcpy(out + 10, image->bssid, 6);    /* source: the recorded host MAC */
+    memcpy(out + 16, image->bssid, 6);    /* BSSID: the same */
+    out[22] = (uint8_t)(seq << 4);
+    out[23] = (uint8_t)(seq >> 4);
+    memcpy(out + 24, body, n);
+    /* The TSF timestamp, little-endian microseconds, in place of the recorded one. */
+    for (int i = 0; i < 8; ++i) out[24 + i] = (uint8_t)(timestamp_us >> (8 * i));
+    return 24 + n;
 }

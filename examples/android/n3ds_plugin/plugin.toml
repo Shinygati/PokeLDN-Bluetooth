@@ -1,0 +1,6 @@
+id = "nintendo-3ds-gifts"
+name = "Nintendo 3DS Mystery Gift"
+version = "1.0.0"
+author = "Shinygati"
+description = "Nintendo 3DS Gen 6/7 local Mystery Gift distribution: the board replays a Wonder Card recorded from a Local Distributor over local wireless."
+api = "1.1"

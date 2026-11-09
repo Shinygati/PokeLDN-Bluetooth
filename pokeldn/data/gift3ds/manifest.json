@@ -1,0 +1,8980 @@
+{
+ "format": "pokeldn-3ds-gift-catalog",
+ "version": 1,
+ "source": "c0e5f41f-EventsGallery-20221119_1.zip",
+ "groups": {
+  "sm": "Sun / Moon",
+  "usum": "Ultra Sun / Ultra Moon"
+ },
+ "cards": [
+  {
+   "id": 201,
+   "title": "おたんじょうび　おめでとう！",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0201_JPN_3.wc7full"
+  },
+  {
+   "id": 202,
+   "title": "Getting Revival Herb!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0202_ENG_3.wc7full"
+  },
+  {
+   "id": 203,
+   "title": "サッポロおひっこし　アローラロコン",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0203_JPN_3.wc7full"
+  },
+  {
+   "id": 204,
+   "title": "サッポロおひっこし　どうぐプレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0204_JPN_3.wc7full"
+  },
+  {
+   "id": 205,
+   "title": "コロコロコミック　どうぐプレゼント",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0205_JPN_2.wc7full"
+  },
+  {
+   "id": 205,
+   "title": "コロコロコミック　どうぐプレゼント",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0205_JPN_1.wc7full"
+  },
+  {
+   "id": 206,
+   "title": "ジャンプフェスタ2017    ぎんのおうかん",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0206_JPN_3.wc7full"
+  },
+  {
+   "id": 207,
+   "title": "じせだいWHF'17 Winter でかいきんのたま",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0207_JPN_3.wc7full"
+  },
+  {
+   "id": 208,
+   "title": "ポケモンカードゲーム　ふしぎなアメ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0208_JPN_3.wc7full"
+  },
+  {
+   "id": 210,
+   "title": "こうりゃくぼん　こうにゅうとくてん",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0210_JPN_3.wc7full"
+  },
+  {
+   "id": 211,
+   "title": "サッポロおひっこし　つめたいどうぐ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0211_JPN_3.wc7full"
+  },
+  {
+   "id": 218,
+   "title": "Shiny Magikarp New Year present!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0218_ENG_3.wc7full"
+  },
+  {
+   "id": 219,
+   "title": "サオリの　カイリキー",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0219_JPN_3.wc7full"
+  },
+  {
+   "id": 220,
+   "title": "くろい　カプ・コケコ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0220_JPN_3.wc7full"
+  },
+  {
+   "id": 221,
+   "title": "ピカピカはるまつり　ポケモンのタマゴ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0221_JPN_3.wc7full"
+  },
+  {
+   "id": 222,
+   "title": "きんきゅうほかく！　キテルグマ！",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0222_JPN_3.wc7full"
+  },
+  {
+   "id": 223,
+   "title": "サトシのピカチュウ（アローラキャップ）",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0223_JPN_3.wc7full"
+  },
+  {
+   "id": 224,
+   "title": "コロコロ40しゅうねん　リザードン",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0224_JPN_3.wc7full"
+  },
+  {
+   "id": 225,
+   "title": "バトルポイント　10ＢＰ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0225_JPN_3.wc7full"
+  },
+  {
+   "id": 225,
+   "title": "バトルポイント　10ＢＰ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0225_JPN_f.wc7full"
+  },
+  {
+   "id": 227,
+   "title": "トウホクへのギフトパス♡",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0227_JPN_3.wc7full"
+  },
+  {
+   "id": 228,
+   "title": "まぼろしのポケモン　マーシャドー",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0228_JPN_3.wc7full"
+  },
+  {
+   "id": 229,
+   "title": "テンセイざんの　ホウオウ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0229_JPN_3.wc7full"
+  },
+  {
+   "id": 230,
+   "title": "イーブイとカラフルフレンズ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0230_JPN_3.wc7full"
+  },
+  {
+   "id": 231,
+   "title": "トウホクおひっこし　ビクティニ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0231_JPN_3.wc7full"
+  },
+  {
+   "id": 232,
+   "title": "たなばたジラーチ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0232_JPN_3.wc7full"
+  },
+  {
+   "id": 233,
+   "title": "Shiny Tapu Koko present !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0233_ENG_3.wc7full"
+  },
+  {
+   "id": 234,
+   "title": "マオのアママイコ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0234_JPN_3.wc7full"
+  },
+  {
+   "id": 235,
+   "title": "カキのバクガメス　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0235_JPN_3.wc7full"
+  },
+  {
+   "id": 236,
+   "title": "リーリエのシロン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0236_JPN_3.wc7full"
+  },
+  {
+   "id": 238,
+   "title": "えいが「ミュウツーの逆襲」のミュウ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0238_JPN_3.wc7full"
+  },
+  {
+   "id": 239,
+   "title": "キミにきめた！　サトシのリザードン",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0239_JPN_3.wc7full"
+  },
+  {
+   "id": 240,
+   "title": "キミにきめた！　マコトのポッチャマ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0240_JPN_3.wc7full"
+  },
+  {
+   "id": 241,
+   "title": "キミにきめた！　ソウジのルカリオ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0241_JPN_3.wc7full"
+  },
+  {
+   "id": 242,
+   "title": "きらめきの　シルヴァディ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0242_JPN_3.wc7full"
+  },
+  {
+   "id": 243,
+   "title": "ポケモンミステリーファイル　ルナ…",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0243_JPN_2.wc7full"
+  },
+  {
+   "id": 243,
+   "title": "ポケモンミステリーファイル　ソル…",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0243_JPN_1.wc7full"
+  },
+  {
+   "id": 244,
+   "title": "マオのアママイコ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0244_JPN_3.wc7full"
+  },
+  {
+   "id": 245,
+   "title": "キミにきめた！　サトシのリザードン",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0245_JPN_3.wc7full"
+  },
+  {
+   "id": 246,
+   "title": "えいが「ミュウツーの逆襲」のミュウ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0246_JPN_3.wc7full"
+  },
+  {
+   "id": 248,
+   "title": "いろちがいの　ミミッキュ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0248_JPN_3.wc7full"
+  },
+  {
+   "id": 249,
+   "title": "ピカチュウのおさんぽ",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0249_JPN_3.wc7full"
+  },
+  {
+   "id": 250,
+   "title": "ピカチュウ・カーニバル・パレード",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0250_JPN_3.wc7full"
+  },
+  {
+   "id": 251,
+   "title": "ときわたりポケモン　セレビィ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0251_JPN_f.wc7full"
+  },
+  {
+   "id": 252,
+   "title": "ダブルパック　こうにゅうとくてん",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0252_JPN_c.wc7full"
+  },
+  {
+   "id": 254,
+   "title": "ゼンリョク2017　マナフィ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0254_JPN_f.wc7full"
+  },
+  {
+   "id": 255,
+   "title": "ゼンリョク2017　メロエッタ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0255_JPN_f.wc7full"
+  },
+  {
+   "id": 256,
+   "title": "ゼンリョク2017　フーパ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0256_JPN_f.wc7full"
+  },
+  {
+   "id": 257,
+   "title": "ゼンリョク2017　きんのたま",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0257_JPN_f.wc7full"
+  },
+  {
+   "id": 258,
+   "title": "ゼンリョク2017　おおきなキノコ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0258_JPN_f.wc7full"
+  },
+  {
+   "id": 259,
+   "title": "ゼンリョク2017　きちょうなホネ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0259_JPN_f.wc7full"
+  },
+  {
+   "id": 260,
+   "title": "ゼンリョク2017　おだんごしんじゅ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0260_JPN_f.wc7full"
+  },
+  {
+   "id": 261,
+   "title": "ゼンリョク2017　こだいのきんか",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0261_JPN_f.wc7full"
+  },
+  {
+   "id": 262,
+   "title": "Shiny Silvally present !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0262_ENG_3.wc7full"
+  },
+  {
+   "id": 263,
+   "title": "Max Revive present!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0263_ENG_c.wc7full"
+  },
+  {
+   "id": 264,
+   "title": "ポケモンセンターでロトポン",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0264_JPN_c.wc7full"
+  },
+  {
+   "id": 265,
+   "title": "てんぽべつ　こうにゅうとくてん",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0265_JPN_c.wc7full"
+  },
+  {
+   "id": 266,
+   "title": "おみせでロトポン",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0266_JPN_c.wc7full"
+  },
+  {
+   "id": 267,
+   "title": "スマートフォンに　はいりこんでいた　ロトム",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0267_JPN_c.wc7full"
+  },
+  {
+   "id": 268,
+   "title": "たまたまセット　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0268_JPN_c.wc7full"
+  },
+  {
+   "id": 269,
+   "title": "まぼろしのポケモン　アルセウス",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0269_JPN_c.wc7full"
+  },
+  {
+   "id": 270,
+   "title": "こうりゃくぼん　こうにゅうとくてん",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0270_JPN_c.wc7full"
+  },
+  {
+   "id": 271,
+   "title": "Satoshi's Pikachu (Original Cap)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0271_ENG_3.wc7full"
+  },
+  {
+   "id": 272,
+   "title": "Mythical Pokémon Marshadow",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0272_ENG_f.wc7full"
+  },
+  {
+   "id": 272,
+   "title": "Mythical Pokémon Marshadow",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0272_ENG_c.wc7full"
+  },
+  {
+   "id": 273,
+   "title": "おたんじょうび　おめでとう！",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0273_JPN_f.wc7full"
+  },
+  {
+   "id": 274,
+   "title": "ヒウンアイス　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0274_JPN_c.wc7full"
+  },
+  {
+   "id": 275,
+   "title": "Ash's Pikachu (Original Cap)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0275_ENG_3.wc7full"
+  },
+  {
+   "id": 276,
+   "title": "いろちがいのグラードン　プレゼント",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0276_JPN_8.wc7full"
+  },
+  {
+   "id": 276,
+   "title": "いろちがいのカイオーガ　プレゼント",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0276_JPN_4.wc7full"
+  },
+  {
+   "id": 277,
+   "title": "はっこうのベベノム／せんこうのアーゴヨン",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0277_JPN_c.wc7full"
+  },
+  {
+   "id": 278,
+   "title": "Ｒロケットだんサカキの　ニドキング",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0278_JPN_c.wc7full"
+  },
+  {
+   "id": 279,
+   "title": "Ｒロケットだんマツブサの　クロバット",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0279_JPN_c.wc7full"
+  },
+  {
+   "id": 280,
+   "title": "Ｒロケットだんアオギリの　グラエナ",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0280_JPN_c.wc7full"
+  },
+  {
+   "id": 281,
+   "title": "Ｒロケットだんアカギの　ドンカラス",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0281_JPN_c.wc7full"
+  },
+  {
+   "id": 282,
+   "title": "Ｒロケットだんゲーチスの　デスカーン",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0282_JPN_c.wc7full"
+  },
+  {
+   "id": 283,
+   "title": "Ｒロケットだんフラダリの　コジョンド",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0283_JPN_c.wc7full"
+  },
+  {
+   "id": 285,
+   "title": "はじめしゃちょーの　サニーゴ",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0285_JPN_c.wc7full"
+  },
+  {
+   "id": 286,
+   "title": "にほんばしのカビゴン　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0286_JPN_f.wc7full"
+  },
+  {
+   "id": 287,
+   "title": "ポケモンカフェのピカチュウ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0287_JPN_f.wc7full"
+  },
+  {
+   "id": 288,
+   "title": "かぜのルギア　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0288_JPN_f.wc7full"
+  },
+  {
+   "id": 289,
+   "title": "20しゅうねん　かんしゃの　シェイミ",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0289_JPN_f.wc7full"
+  },
+  {
+   "id": 290,
+   "title": "とどけ　トウホクへのギフトパス",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0290_JPN_f.wc7full"
+  },
+  {
+   "id": 291,
+   "title": "Satoshi's Pikachu (Original Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0291_ENG_c.wc7full"
+  },
+  {
+   "id": 292,
+   "title": "まぼろしのポケモン　ゼラオラ",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0292_JPN_c.wc7full"
+  },
+  {
+   "id": 293,
+   "title": "ポケモンスタンドでロトポン",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0293_JPN_c.wc7full"
+  },
+  {
+   "id": 294,
+   "title": "PJCS2017チャンピオンの　ゴルダック",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0294_JPN_f.wc7full"
+  },
+  {
+   "id": 297,
+   "title": "モンスターボール100コ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0297_JPN_f.wc7full"
+  },
+  {
+   "id": 298,
+   "title": "トウホクから　かんしゃを　こめて",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0298_JPN_f.wc7full"
+  },
+  {
+   "id": 299,
+   "title": "かぜのルギア　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0299_JPN_f.wc7full"
+  },
+  {
+   "id": 300,
+   "title": "まぼろしのポケモン　ゼラオラ",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0300_JPN_c.wc7full"
+  },
+  {
+   "id": 301,
+   "title": "おたんじょうび　おめでとう！",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0301_JPN_f.wc7full"
+  },
+  {
+   "id": 302,
+   "title": "PJCS2018チャンピオンの　ニドクイン",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0302_JPN_f.wc7full"
+  },
+  {
+   "id": 305,
+   "title": "ひみつの　ネクロズマ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0305_JPN_f.wc7full"
+  },
+  {
+   "id": 306,
+   "title": "いろちがいの　ソルガレオ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0306_JPN_f.wc7full"
+  },
+  {
+   "id": 307,
+   "title": "いろちがいの　ルナアーラ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "0307_JPN_f.wc7full"
+  },
+  {
+   "id": 599,
+   "title": "Get a boost with a Bottle Cap!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0599_ENG_3.wc7full"
+  },
+  {
+   "id": 599,
+   "title": "Une Capsule d'Argent !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0599_FRE_3.wc7full"
+  },
+  {
+   "id": 599,
+   "title": "Ein Silberkronkorken!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0599_GER_3.wc7full"
+  },
+  {
+   "id": 599,
+   "title": "Ecco un Tappo d’argento per te!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0599_ITA_3.wc7full"
+  },
+  {
+   "id": 599,
+   "title": "¡Consigue una Chapa Plateada!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0599_SPA_3.wc7full"
+  },
+  {
+   "id": 606,
+   "title": "Lycanroc will not miss!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0606_ENG_3.wc7full"
+  },
+  {
+   "id": 606,
+   "title": "Rien n’échappe à Lougaroc !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0606_FRE_3.wc7full"
+  },
+  {
+   "id": 606,
+   "title": "Wolwerock trifft immer!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0606_GER_3.wc7full"
+  },
+  {
+   "id": 606,
+   "title": "Lycanroc non sbaglia un colpo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0606_ITA_3.wc7full"
+  },
+  {
+   "id": 606,
+   "title": "¡Lycanroc no fallará!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0606_SPA_3.wc7full"
+  },
+  {
+   "id": 607,
+   "title": "Salazzle is ready for battle",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0607_ENG_3.wc7full"
+  },
+  {
+   "id": 607,
+   "title": "Malamandre se prépare au combat !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0607_FRE_3.wc7full"
+  },
+  {
+   "id": 607,
+   "title": "Amfira ist kampfbereit!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0607_GER_3.wc7full"
+  },
+  {
+   "id": 607,
+   "title": "Salazzle si prepara alla lotta!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0607_ITA_3.wc7full"
+  },
+  {
+   "id": 607,
+   "title": "Salazzle está listo para combatir",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0607_SPA_3.wc7full"
+  },
+  {
+   "id": 613,
+   "title": "Power up with Shiny Tapu Koko!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0613_ENG_3.wc7full"
+  },
+  {
+   "id": 613,
+   "title": "Un puissant Tokorico chromatique !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0613_FRE_3.wc7full"
+  },
+  {
+   "id": 613,
+   "title": "Ein starkes Schillerndes Kapu-Riki!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0613_GER_3.wc7full"
+  },
+  {
+   "id": 613,
+   "title": "Un potente Tapu Koko cromatico!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0613_ITA_3.wc7full"
+  },
+  {
+   "id": 613,
+   "title": "¡Un poderoso Tapu Koko variocolor!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0613_SPA_3.wc7full"
+  },
+  {
+   "id": 614,
+   "title": "Red Hot Charizard!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0614_ENG_3.wc7full"
+  },
+  {
+   "id": 614,
+   "title": "Un Dracaufeu chaud comme la braise !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0614_FRE_3.wc7full"
+  },
+  {
+   "id": 614,
+   "title": "¡Un Charizard al rojo rivo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0614_SPA_3.wc7full"
+  },
+  {
+   "id": 615,
+   "title": "Heat up your battles with Arcanine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0615_ENG_3.wc7full"
+  },
+  {
+   "id": 617,
+   "title": "That's no palm tree—it's a Pokémon!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0617_ENG_3.wc7full"
+  },
+  {
+   "id": 626,
+   "title": "Mythical Marshadow!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0626_ENG_3.wc7full"
+  },
+  {
+   "id": 626,
+   "title": "Marshadow, le Pokémon fabuleux",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0626_FRE_3.wc7full"
+  },
+  {
+   "id": 626,
+   "title": "Das Mysteriöse Pokémon Marshadow",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0626_GER_3.wc7full"
+  },
+  {
+   "id": 626,
+   "title": "L'enigmatico Marshadow!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0626_ITA_3.wc7full"
+  },
+  {
+   "id": 626,
+   "title": "¡El Pokémon singular Marshadow!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0626_SPA_3.wc7full"
+  },
+  {
+   "id": 627,
+   "title": "Ash's Pikachu (Alola Cap)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0627_ENG_3.wc7full"
+  },
+  {
+   "id": 627,
+   "title": "Pikachu Casquette d'Alola",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0627_FRE_3.wc7full"
+  },
+  {
+   "id": 627,
+   "title": "Ashs Pikachu (Alola-Kappe)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0627_GER_3.wc7full"
+  },
+  {
+   "id": 627,
+   "title": "Il Pikachu Berretto Alola di Ash",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0627_ITA_3.wc7full"
+  },
+  {
+   "id": 627,
+   "title": "El Pikachu (Gorra Alola) de Ash",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0627_SPA_3.wc7full"
+  },
+  {
+   "id": 628,
+   "title": "A helping hand!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0628_ENG_c.wc7full"
+  },
+  {
+   "id": 628,
+   "title": "Un coup de pouce !",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0628_FRE_c.wc7full"
+  },
+  {
+   "id": 628,
+   "title": "Ein bisschen Unterstützung",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0628_GER_c.wc7full"
+  },
+  {
+   "id": 628,
+   "title": "Un aiuto prezioso!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0628_ITA_c.wc7full"
+  },
+  {
+   "id": 628,
+   "title": "¡Una pequeña ayuda!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0628_SPA_c.wc7full"
+  },
+  {
+   "id": 629,
+   "title": "It's Shiny Silvally!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0629_ENG_3.wc7full"
+  },
+  {
+   "id": 629,
+   "title": "Un Silvallié chromatique !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0629_FRE_3.wc7full"
+  },
+  {
+   "id": 629,
+   "title": "Ein Schillerndes Amigento!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0629_GER_3.wc7full"
+  },
+  {
+   "id": 629,
+   "title": "Un Silvally cromatico!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0629_ITA_3.wc7full"
+  },
+  {
+   "id": 629,
+   "title": "¡Un Silvally variocolor!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0629_SPA_3.wc7full"
+  },
+  {
+   "id": 630,
+   "title": "The Time Travel Pokémon Celebi",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0630_ENG_f.wc7full"
+  },
+  {
+   "id": 630,
+   "title": "Celebi, le Pokémon Temporel !",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0630_FRE_f.wc7full"
+  },
+  {
+   "id": 630,
+   "title": "Das Zeitreise-Pokémon Celebi",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0630_GER_f.wc7full"
+  },
+  {
+   "id": 630,
+   "title": "Celebi, il Pokémon Tempovia!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0630_ITA_f.wc7full"
+  },
+  {
+   "id": 630,
+   "title": "Celebi, el Pokémon Viajetiempo",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0630_SPA_f.wc7full"
+  },
+  {
+   "id": 635,
+   "title": "You received 100 Poké Balls!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0635_ENG_c.wc7full"
+  },
+  {
+   "id": 635,
+   "title": "Vous recevez 100 Poké Balls !",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0635_FRE_c.wc7full"
+  },
+  {
+   "id": 635,
+   "title": "¡Has recibido 100 Poké Balls!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0635_SPA_c.wc7full"
+  },
+  {
+   "id": 636,
+   "title": "You received 12 Revives!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0636_ENG_c.wc7full"
+  },
+  {
+   "id": 636,
+   "title": "Vous recevez 12 Rappels !",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0636_FRE_c.wc7full"
+  },
+  {
+   "id": 636,
+   "title": "¡Has recibido 12 Revivir!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0636_SPA_c.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Timely Dialga!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0638_ENG_2.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Celestial Palkia!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0638_ENG_1.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Timely Dialga!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0638_ENG_8.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Celestial Palkia!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0638_ENG_4.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Dialga, le maître du temps !",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0638_FRE_2.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Palkia, le maître de l’espace !",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0638_FRE_1.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Dialga, le maître du temps !",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0638_FRE_8.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Palkia, le maître de l’espace !",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0638_FRE_4.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Zeit für Dialga!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0638_GER_2.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Schaffe Raum für Palkia!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0638_GER_1.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Zeit für Dialga!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0638_GER_8.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Schaffe Raum für Palkia!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0638_GER_4.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "È il momento di Dialga!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0638_ITA_2.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Oltre ogni confine con Palkia!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0638_ITA_1.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "È il momento di Dialga!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0638_ITA_8.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "Oltre ogni confine con Palkia!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0638_ITA_4.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "¡Dialga, un Pokémon atemporal!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0638_SPA_2.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "¡Palkia, un Pokémon celestial!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0638_SPA_1.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "¡Dialga, un Pokémon atemporal!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0638_SPA_8.wc7full"
+  },
+  {
+   "id": 638,
+   "title": "¡Palkia, un Pokémon celestial!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0638_SPA_4.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Dynamic Raikou!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0648_ENG_2.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Fiery Entei!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0648_ENG_1.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Dynamic Raikou!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0648_ENG_8.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Fiery Entei!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0648_ENG_4.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Raikou, l'étincelle",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0648_FRE_2.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Entei, l'explosif",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0648_FRE_1.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Raikou, l'étincelle",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0648_FRE_8.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Entei, l'explosif",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0648_FRE_4.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Ein dynamisches Raikou!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0648_GER_2.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Feuer und Flamme für Entei!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0648_GER_1.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Ein dynamisches Raikou!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0648_GER_8.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Feuer und Flamme für Entei!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0648_GER_4.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Il dinamico Raikou",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0648_ITA_2.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Il fiammeggiante Entei",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0648_ITA_1.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Il dinamico Raikou",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0648_ITA_8.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "Il fiammeggiante Entei",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0648_ITA_4.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "¡Un Raikou centelleante!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0648_SPA_2.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "¡Un Entei ardiente!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0648_SPA_1.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "¡Un Raikou centelleante!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0648_SPA_8.wc7full"
+  },
+  {
+   "id": 648,
+   "title": "¡Un Entei ardiente!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0648_SPA_4.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Sizzling Heatran!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0649_ENG_2.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Mammoth Regigigas!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0649_ENG_1.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Sizzling Heatran!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0649_ENG_8.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Mammoth Regigigas!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0649_ENG_4.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Heatran, le brasier",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0649_FRE_2.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Regigigas, le colosse",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0649_FRE_1.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Heatran, le brasier",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0649_FRE_8.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Regigigas, le colosse",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0649_FRE_4.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Heiß, heißer, Heatran!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0649_GER_2.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Der Koloss Regigigas!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0649_GER_1.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Heiß, heißer, Heatran!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0649_GER_8.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Der Koloss Regigigas!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0649_GER_4.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "L'ardente Heatran",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0649_ITA_2.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Il gigantesco Regigigas",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0649_ITA_1.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "L'ardente Heatran",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0649_ITA_8.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "Il gigantesco Regigigas",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0649_ITA_4.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "¡Un Heatran explosivo!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0649_SPA_2.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "¡Un Regigigas gigantesco!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0649_SPA_1.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "¡Un Heatran explosivo!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0649_SPA_8.wc7full"
+  },
+  {
+   "id": 649,
+   "title": "¡Un Regigigas gigantesco!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0649_SPA_4.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Brilliant Xerneas!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0650_ENG_2.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Shadowy Yveltal!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0650_ENG_1.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Brilliant Xerneas!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0650_ENG_8.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Shadowy Yveltal!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0650_ENG_4.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Xerneas, le scintillant",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0650_FRE_2.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Yveltal, le ténébreux",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0650_FRE_1.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Xerneas, le scintillant",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0650_FRE_8.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Yveltal, le ténébreux",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0650_FRE_4.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Xerneas glänzt im Kampf!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0650_GER_2.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Yveltal wirft seinen Schatten!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0650_GER_1.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Xerneas glänzt im Kampf!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0650_GER_8.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Yveltal wirft seinen Schatten!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0650_GER_4.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Il radioso Xerneas",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0650_ITA_2.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Il tenebroso Yveltal",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0650_ITA_1.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Il radioso Xerneas",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0650_ITA_8.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "Il tenebroso Yveltal",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0650_ITA_4.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "¡Un Xerneas esplendoroso!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0650_SPA_2.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "¡Un Yveltal sombrío!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0650_SPA_1.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "¡Un Xerneas esplendoroso!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0650_SPA_8.wc7full"
+  },
+  {
+   "id": 650,
+   "title": "¡Un Yveltal sombrío!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0650_SPA_4.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Dazzling Shiny Zygarde!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0651_ENG_3.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Dazzling Shiny Zygarde!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0651_ENG_c.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Un Zygarde chromatique étincelant",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0651_FRE_3.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Un Zygarde chromatique étincelant",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0651_FRE_c.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Ein brillantes Schillerndes Zygarde!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0651_GER_3.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Ein brillantes Schillerndes Zygarde!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0651_GER_c.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Un fantastico Zygarde cromatico",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0651_ITA_3.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "Un fantastico Zygarde cromatico",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0651_ITA_c.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "¡Un Zygarde variocolor deslumbrante!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0651_SPA_3.wc7full"
+  },
+  {
+   "id": 651,
+   "title": "¡Un Zygarde variocolor deslumbrante!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0651_SPA_c.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Storming Tornadus!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0652_ENG_2.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Striking Thundurus!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0652_ENG_1.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Storming Tornadus!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0652_ENG_8.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Striking Thundurus!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0652_ENG_4.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Boréas, la tornade",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0652_FRE_2.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Fulguris, le foudroyant",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0652_FRE_1.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Boréas, la tornade",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0652_FRE_8.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Fulguris, le foudroyant",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0652_FRE_4.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Ein stürmisches Boreos!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0652_GER_2.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Voltolos schlägt ein wie ein Blitz!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0652_GER_1.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Ein stürmisches Boreos!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0652_GER_8.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Voltolos schlägt ein wie ein Blitz!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0652_GER_4.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "L'inarrestabile Tornadus",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0652_ITA_2.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Il folgorante Thundurus",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0652_ITA_1.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "L'inarrestabile Tornadus",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0652_ITA_8.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "Il folgorante Thundurus",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0652_ITA_4.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "¡Un Tornadus huracanado!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0652_SPA_2.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "¡Un Thundurus fulgurante!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0652_SPA_1.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "¡Un Tornadus huracanado!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0652_SPA_8.wc7full"
+  },
+  {
+   "id": 652,
+   "title": "¡Un Thundurus fulgurante!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0652_SPA_4.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Searing Groudon!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0653_ENG_2.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Deluging Kyogre!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0653_ENG_1.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Searing Groudon!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0653_ENG_8.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Deluging Kyogre!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0653_ENG_4.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon, la terre ardente",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0653_FRE_2.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre, le raz-de-marée",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0653_FRE_1.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon, la terre ardente",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0653_FRE_8.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre, le raz-de-marée",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0653_FRE_4.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon sorgt für Dürre!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0653_GER_2.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre schlägt Wellen!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0653_GER_1.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon sorgt für Dürre!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0653_GER_8.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre schlägt Wellen!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0653_GER_4.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon arroventa i nemici",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0653_ITA_2.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre sommerge i nemici",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0653_ITA_1.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Groudon arroventa i nemici",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0653_ITA_8.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "Kyogre sommerge i nemici",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0653_ITA_4.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "¡Un Groudon calcinador!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0653_SPA_2.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "¡Un Kyogre abrumador!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0653_SPA_1.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "¡Un Groudon calcinador!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0653_SPA_8.wc7full"
+  },
+  {
+   "id": 653,
+   "title": "¡Un Kyogre abrumador!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0653_SPA_4.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Swift Latios!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0654_ENG_2.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Agile Latias!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0654_ENG_1.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Swift Latios!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0654_ENG_8.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Agile Latias!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0654_ENG_4.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latios, la fusée",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0654_FRE_2.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latias, l'agile",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0654_FRE_1.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latios, la fusée",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0654_FRE_8.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latias, l'agile",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0654_FRE_4.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Ein schnelles Latios!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0654_GER_2.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Ein agiles Latias!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0654_GER_1.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Ein schnelles Latios!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0654_GER_8.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Ein agiles Latias!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0654_GER_4.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latios sfreccia rapido",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0654_ITA_2.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latias sfreccia leggiadro",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0654_ITA_1.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latios sfreccia rapido",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0654_ITA_8.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "Latias sfreccia leggiadro",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0654_ITA_4.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "¡Un Latios raudo!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0654_SPA_2.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "¡Un Latias veloz y ágil!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0654_SPA_1.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "¡Un Latios raudo!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0654_SPA_8.wc7full"
+  },
+  {
+   "id": 654,
+   "title": "¡Un Latias veloz y ágil!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0654_SPA_4.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Scorching Reshiram!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0655_ENG_2.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Shocking Zekrom!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0655_ENG_1.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Scorching Reshiram!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0655_ENG_8.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Shocking Zekrom!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0655_ENG_4.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Reshiram, la fournaise",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0655_FRE_2.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Zekrom, l'électrique",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0655_FRE_1.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Reshiram, la fournaise",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0655_FRE_8.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Zekrom, l'électrique",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0655_FRE_4.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Ein feuriges Reshiram!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0655_GER_2.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Ein elektrisierendes Zekrom!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0655_GER_1.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Ein feuriges Reshiram!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0655_GER_8.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Ein elektrisierendes Zekrom!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0655_GER_4.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Lotte incandescenti con Reshiram",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0655_ITA_2.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Lotte elettrizzanti con Zekrom",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0655_ITA_1.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Lotte incandescenti con Reshiram",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0655_ITA_8.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "Lotte elettrizzanti con Zekrom",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0655_ITA_4.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "¡Un Reshiram abrasador!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0655_SPA_2.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "¡Un Zekrom impactante!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0655_SPA_1.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "¡Un Reshiram abrasador!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0655_SPA_8.wc7full"
+  },
+  {
+   "id": 655,
+   "title": "¡Un Zekrom impactante!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0655_SPA_4.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ascendant Ho-Oh!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0656_ENG_2.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Diving Lugia!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0656_ENG_1.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ascendant Ho-Oh!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0656_ENG_8.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Diving Lugia!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0656_ENG_4.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh, l'ascendant",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0656_FRE_2.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia, la flèche",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0656_FRE_1.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh, l'ascendant",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0656_FRE_8.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia, la flèche",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0656_FRE_4.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh bringt Aufwind!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0656_GER_2.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia taucht auf!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0656_GER_1.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh bringt Aufwind!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0656_GER_8.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia taucht auf!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0656_GER_4.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh si libra sul campo di lotta",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0656_ITA_2.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia spicca il volo",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0656_ITA_1.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Ho-Oh si libra sul campo di lotta",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0656_ITA_8.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "Lugia spicca il volo",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0656_ITA_4.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "¡Un Ho-Oh ascendente!",
+   "mask": 2,
+   "games": [
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0656_SPA_2.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "¡Un Lugia impetuoso!",
+   "mask": 1,
+   "games": [
+    "Sun"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0656_SPA_1.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "¡Un Ho-Oh ascendente!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0656_SPA_8.wc7full"
+  },
+  {
+   "id": 656,
+   "title": "¡Un Lugia impetuoso!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0656_SPA_4.wc7full"
+  },
+  {
+   "id": 665,
+   "title": "Make them quake with Krookodile!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0665_ENG_f.wc7full"
+  },
+  {
+   "id": 667,
+   "title": "A peculiar Poipole!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0667_ENG_c.wc7full"
+  },
+  {
+   "id": 667,
+   "title": "Un Vémini très spécial",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0667_FRE_c.wc7full"
+  },
+  {
+   "id": 667,
+   "title": "Ein verblüffendes Venicro!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0667_GER_c.wc7full"
+  },
+  {
+   "id": 667,
+   "title": "Un Poipole fuori dal comune!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0667_ITA_c.wc7full"
+  },
+  {
+   "id": 667,
+   "title": "¡Un Poipole muy peculiar!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0667_SPA_c.wc7full"
+  },
+  {
+   "id": 668,
+   "title": "Zero in on Zeraora!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0668_ENG_c.wc7full"
+  },
+  {
+   "id": 668,
+   "title": "Le Zeraora absolu !",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0668_FRE_c.wc7full"
+  },
+  {
+   "id": 668,
+   "title": "Zeit für Zeraora!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0668_GER_c.wc7full"
+  },
+  {
+   "id": 668,
+   "title": "È l’ora di Zeraora!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0668_ITA_c.wc7full"
+  },
+  {
+   "id": 668,
+   "title": "¡La hora de Zeraora!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0668_SPA_c.wc7full"
+  },
+  {
+   "id": 669,
+   "title": "Sing along with Meloetta!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0669_ENG_f.wc7full"
+  },
+  {
+   "id": 684,
+   "title": "Weather the storm with Gastrodon!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0684_ENG_f.wc7full"
+  },
+  {
+   "id": 685,
+   "title": "Unearth Aerodactyl’s primeval power!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0685_ENG_f.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Brilliant Solgaleo",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0693_ENG_a.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Radiant Lunala",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "0693_ENG_5.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Un Solgaleo flamboyant",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0693_FRE_a.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Un Lunala étincelant",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "0693_FRE_5.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Strahlendes Solgaleo",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0693_GER_a.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Leuchtendes Lunala",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "German",
+   "language_code": "GER",
+   "file": "0693_GER_5.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Un Solgaleo sfavillante",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0693_ITA_a.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Un Lunala radiante",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "0693_ITA_5.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Solgaleo brillante",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0693_SPA_a.wc7full"
+  },
+  {
+   "id": 693,
+   "title": "Lunala radiante",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "0693_SPA_5.wc7full"
+  },
+  {
+   "id": 1100,
+   "title": "큰금구슬 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1100_KOR_3.wc7full"
+  },
+  {
+   "id": 1104,
+   "title": "기력의덩어리 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1104_KOR_3.wc7full"
+  },
+  {
+   "id": 1105,
+   "title": "검은 카푸꼬꼬꼭 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1105_KOR_3.wc7full"
+  },
+  {
+   "id": 1107,
+   "title": "식스테일(알로라의 모습) 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1107_KOR_3.wc7full"
+  },
+  {
+   "id": 1108,
+   "title": "모래두지(알로라의 모습) 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1108_KOR_3.wc7full"
+  },
+  {
+   "id": 1109,
+   "title": "디그다(알로라의 모습) 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1109_KOR_3.wc7full"
+  },
+  {
+   "id": 1110,
+   "title": "질퍽이(알로라의 모습) 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1110_KOR_3.wc7full"
+  },
+  {
+   "id": 1111,
+   "title": "포켓몬의 알 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1111_KOR_3.wc7full"
+  },
+  {
+   "id": 1112,
+   "title": "환상의 포켓몬 뮤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1112_KOR_3.wc7full"
+  },
+  {
+   "id": 1114,
+   "title": "이브이 프렌즈 선물 이벤트",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1114_KOR_3.wc7full"
+  },
+  {
+   "id": 1115,
+   "title": "키아웨의 폭거북스 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1115_KOR_3.wc7full"
+  },
+  {
+   "id": 1116,
+   "title": "릴리에의 하양이 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1116_KOR_3.wc7full"
+  },
+  {
+   "id": 1117,
+   "title": "마오의 달무리나 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1117_KOR_3.wc7full"
+  },
+  {
+   "id": 1118,
+   "title": "반짝이는 실버디 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1118_KOR_3.wc7full"
+  },
+  {
+   "id": 1119,
+   "title": "시간이동포켓몬 세레비",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1119_KOR_f.wc7full"
+  },
+  {
+   "id": 1120,
+   "title": "색이 다른 따라큐 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1120_KOR_3.wc7full"
+  },
+  {
+   "id": 1121,
+   "title": "더블 팩 구입 특전",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1121_KOR_c.wc7full"
+  },
+  {
+   "id": 1122,
+   "title": "지우의 피카츄(오리지널캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1122_KOR_3.wc7full"
+  },
+  {
+   "id": 1122,
+   "title": "지우의 피카츄(오리지널캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1122_KOR_c.wc7full"
+  },
+  {
+   "id": 1123,
+   "title": "환상의 포켓몬 마샤도",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1123_KOR_c.wc7full"
+  },
+  {
+   "id": 1125,
+   "title": "너로 정했다! 다연의 팽도리",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1125_KOR_3.wc7full"
+  },
+  {
+   "id": 1126,
+   "title": "너로 정했다! 지우의 리자몽",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1126_KOR_f.wc7full"
+  },
+  {
+   "id": 1127,
+   "title": "너로 정했다! 민준의 루카리오",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1127_KOR_f.wc7full"
+  },
+  {
+   "id": 1128,
+   "title": "천청산의 칠색조",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1128_KOR_c.wc7full"
+  },
+  {
+   "id": 1131,
+   "title": "지우의 피카츄(호연캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1131_KOR_3.wc7full"
+  },
+  {
+   "id": 1131,
+   "title": "지우의 피카츄(호연캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1131_KOR_c.wc7full"
+  },
+  {
+   "id": 1132,
+   "title": "지우의 피카츄(신오캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1132_KOR_3.wc7full"
+  },
+  {
+   "id": 1132,
+   "title": "지우의 피카츄(신오캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1132_KOR_c.wc7full"
+  },
+  {
+   "id": 1133,
+   "title": "지우의 피카츄(하나캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1133_KOR_3.wc7full"
+  },
+  {
+   "id": 1133,
+   "title": "지우의 피카츄(하나캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1133_KOR_c.wc7full"
+  },
+  {
+   "id": 1134,
+   "title": "지우의 피카츄(칼로스캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1134_KOR_3.wc7full"
+  },
+  {
+   "id": 1134,
+   "title": "지우의 피카츄(칼로스캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1134_KOR_c.wc7full"
+  },
+  {
+   "id": 1135,
+   "title": "지우의 피카츄(알로라캡)",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1135_KOR_3.wc7full"
+  },
+  {
+   "id": 1135,
+   "title": "지우의 피카츄(알로라캡)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1135_KOR_c.wc7full"
+  },
+  {
+   "id": 1137,
+   "title": "색이 다른 그란돈 선물",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1137_KOR_8.wc7full"
+  },
+  {
+   "id": 1137,
+   "title": "색이 다른 가이오가 선물",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1137_KOR_4.wc7full"
+  },
+  {
+   "id": 1138,
+   "title": "빛나는 베베놈/섬광의 아고용",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1138_KOR_c.wc7full"
+  },
+  {
+   "id": 1139,
+   "title": "환상의 포켓몬 다크라이",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1139_KOR_f.wc7full"
+  },
+  {
+   "id": 1140,
+   "title": "디아루가 선물",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1140_KOR_a.wc7full"
+  },
+  {
+   "id": 1140,
+   "title": "펄기아 선물",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1140_KOR_5.wc7full"
+  },
+  {
+   "id": 1141,
+   "title": "특별한 피카츄를 선물!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1141_KOR_f.wc7full"
+  },
+  {
+   "id": 1142,
+   "title": "전설의 포켓몬 지가르데를 선물!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1142_KOR_c.wc7full"
+  },
+  {
+   "id": 1144,
+   "title": "감사포켓몬 쉐이미를 선물!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1144_KOR_f.wc7full"
+  },
+  {
+   "id": 1146,
+   "title": "환상의 포켓몬 마나피를 선물!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1146_KOR_f.wc7full"
+  },
+  {
+   "id": 1147,
+   "title": "WCSK 챔피언의 메타그로스를 선물!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1147_KOR_f.wc7full"
+  },
+  {
+   "id": 1148,
+   "title": "환상의 포켓몬 제라오라",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1148_KOR_c.wc7full"
+  },
+  {
+   "id": 1149,
+   "title": "바람의 루기아 선물",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1149_KOR_f.wc7full"
+  },
+  {
+   "id": 1151,
+   "title": "우뢰포켓몬 라이코 선물!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1151_KOR_8.wc7full"
+  },
+  {
+   "id": 1151,
+   "title": "화산포켓몬 앤테이 선물!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1151_KOR_4.wc7full"
+  },
+  {
+   "id": 1152,
+   "title": "선풍포켓몬 토네로스 선물!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1152_KOR_8.wc7full"
+  },
+  {
+   "id": 1152,
+   "title": "뇌격포켓몬 볼트로스 선물!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1152_KOR_4.wc7full"
+  },
+  {
+   "id": 1154,
+   "title": "무한포켓몬 라티오스 선물!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1154_KOR_8.wc7full"
+  },
+  {
+   "id": 1154,
+   "title": "무한포켓몬 라티아스 선물!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1154_KOR_4.wc7full"
+  },
+  {
+   "id": 1155,
+   "title": "백양포켓몬 레시라무 선물!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1155_KOR_8.wc7full"
+  },
+  {
+   "id": 1155,
+   "title": "흑음포켓몬 제크로무 선물!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1155_KOR_4.wc7full"
+  },
+  {
+   "id": 1158,
+   "title": "색이 다른 솔가레오 선물",
+   "mask": 10,
+   "games": [
+    "Moon",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1158_KOR_a.wc7full"
+  },
+  {
+   "id": 1158,
+   "title": "색이 다른 루나아라 선물",
+   "mask": 5,
+   "games": [
+    "Sun",
+    "Ultra Sun"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1158_KOR_5.wc7full"
+  },
+  {
+   "id": 1159,
+   "title": "색이 다른 네크로즈마 선물",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1159_KOR_f.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "Munchlax and Snorlium Z for you!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1601_ENG_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "Un Goinfrex et une Ronflézélite !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1601_FRE_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "Ein Mampfaxo mit Relaxonium Z!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1601_GER_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "Un Munchlax con lo Snorlactium Z!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1601_ITA_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "ゴンベと　カビゴンＺ　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1601_JPN_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "먹고자와 잠만보Z를 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1601_KOR_3.wc7full"
+  },
+  {
+   "id": 1601,
+   "title": "¡Un Munchlax con el Snorlastal Z!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1601_SPA_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "A gift for the downloadable version!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1602_ENG_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "Pour votre version téléchargeable !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1602_FRE_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "Downloadversion-Geschenk!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1602_GER_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "Regali con la versione scaricabile!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1602_ITA_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "ダウンロードばん　とくてん",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1602_JPN_3.wc7full"
+  },
+  {
+   "id": 1602,
+   "title": "Regalo para la versión descargable",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1602_SPA_3.wc7full"
+  },
+  {
+   "id": 1603,
+   "title": "A gift for the dual pack!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1603_ENG_3.wc7full"
+  },
+  {
+   "id": 1603,
+   "title": "Un cadeau avec le pack duo !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1603_FRE_3.wc7full"
+  },
+  {
+   "id": 1603,
+   "title": "ダブルパック　こうにゅうとくてん",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1603_JPN_3.wc7full"
+  },
+  {
+   "id": 1603,
+   "title": "더블 팩 구입 특전",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1603_KOR_3.wc7full"
+  },
+  {
+   "id": 1603,
+   "title": "Regalo con el pack dúo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1603_SPA_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1604_ENG_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1604_FRE_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1604_GER_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1604_ITA_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1604_JPN_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1604_KOR_3.wc7full"
+  },
+  {
+   "id": 1604,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1604_SPA_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1605_ENG_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "Recevez deux Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1605_FRE_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "Erhalte zwei Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1605_GER_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "Due Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1605_ITA_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1605_JPN_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1605_KOR_3.wc7full"
+  },
+  {
+   "id": 1605,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1605_SPA_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1606_ENG_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "Recevez deux Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1606_FRE_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "Erhalte zwei Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1606_GER_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "Due Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1606_ITA_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1606_JPN_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1606_KOR_3.wc7full"
+  },
+  {
+   "id": 1606,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1606_SPA_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1607_ENG_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1607_FRE_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1607_GER_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1607_ITA_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1607_JPN_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1607_KOR_3.wc7full"
+  },
+  {
+   "id": 1607,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1607_SPA_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1608_ENG_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "Recevez deux Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1608_FRE_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "Erhalte zwei Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1608_GER_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "Due Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1608_ITA_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1608_JPN_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1608_KOR_3.wc7full"
+  },
+  {
+   "id": 1608,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1608_SPA_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1609_ENG_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1609_FRE_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1609_GER_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1609_ITA_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1609_JPN_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1609_KOR_3.wc7full"
+  },
+  {
+   "id": 1609,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1609_SPA_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1610_ENG_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1610_FRE_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1610_GER_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1610_ITA_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1610_JPN_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1610_KOR_3.wc7full"
+  },
+  {
+   "id": 1610,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1610_SPA_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1611_ENG_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1611_FRE_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1611_GER_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1611_ITA_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1611_JPN_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1611_KOR_3.wc7full"
+  },
+  {
+   "id": 1611,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1611_SPA_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1612_ENG_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1612_FRE_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1612_GER_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1612_ITA_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1612_JPN_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1612_KOR_3.wc7full"
+  },
+  {
+   "id": 1612,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1612_SPA_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1613_ENG_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "Recevez trois Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1613_FRE_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1613_GER_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1613_ITA_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1613_JPN_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1613_KOR_3.wc7full"
+  },
+  {
+   "id": 1613,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1613_SPA_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1614_ENG_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "Recevez trois Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1614_FRE_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1614_GER_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1614_ITA_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1614_JPN_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1614_KOR_3.wc7full"
+  },
+  {
+   "id": 1614,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1614_SPA_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1615_ENG_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1615_FRE_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1615_GER_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1615_ITA_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1615_JPN_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1615_KOR_3.wc7full"
+  },
+  {
+   "id": 1615,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1615_SPA_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1616_ENG_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "Recevez cinq Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1616_FRE_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1616_GER_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1616_ITA_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1616_JPN_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1616_KOR_3.wc7full"
+  },
+  {
+   "id": 1616,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1616_SPA_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1617_ENG_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "Recevez trois Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1617_FRE_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1617_GER_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1617_ITA_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1617_JPN_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1617_KOR_3.wc7full"
+  },
+  {
+   "id": 1617,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1617_SPA_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1618_ENG_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1618_FRE_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1618_GER_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1618_ITA_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1618_JPN_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1618_KOR_3.wc7full"
+  },
+  {
+   "id": 1618,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1618_SPA_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1619_ENG_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1619_FRE_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1619_GER_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1619_ITA_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1619_JPN_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1619_KOR_3.wc7full"
+  },
+  {
+   "id": 1619,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1619_SPA_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1620_ENG_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1620_FRE_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1620_GER_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1620_ITA_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1620_JPN_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1620_KOR_3.wc7full"
+  },
+  {
+   "id": 1620,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1620_SPA_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "Mega Stone Gift",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1621_ENG_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "Recevez quatre Méga-Gemmes !",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1621_FRE_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "Erhalte Mega-Steine!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1621_GER_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "Megapietre in regalo!",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1621_ITA_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "メガストーン　プレゼント",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1621_JPN_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "메가스톤 선물",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1621_KOR_3.wc7full"
+  },
+  {
+   "id": 1621,
+   "title": "Megapiedras de regalo",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1621_SPA_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1622_ENG_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1622_FRE_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1622_GER_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1622_ITA_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1622_JPN_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1622_KOR_3.wc7full"
+  },
+  {
+   "id": 1622,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1622_SPA_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1623_ENG_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1623_FRE_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1623_GER_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1623_ITA_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1623_JPN_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1623_KOR_3.wc7full"
+  },
+  {
+   "id": 1623,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1623_SPA_3.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "A special Rockruff!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1624_ENG_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "A special Rockruff!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1624_ENG_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Un Rocabot spécial !",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1624_FRE_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Un Rocabot spécial !",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1624_FRE_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Ein besonderes Wuffels!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1624_GER_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Ein besonderes Wuffels!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1624_GER_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Un Rockruff speciale!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1624_ITA_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "Un Rockruff speciale!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1624_ITA_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "イワンコ　プレゼント",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1624_JPN_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "イワンコ　プレゼント",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1624_JPN_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "암멍이 선물",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1624_KOR_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "암멍이 선물",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1624_KOR_4.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "¡Un Rockruff especial!",
+   "mask": 8,
+   "games": [
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1624_SPA_8.wc7full"
+  },
+  {
+   "id": 1624,
+   "title": "¡Un Rockruff especial!",
+   "mask": 4,
+   "games": [
+    "Ultra Sun"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1624_SPA_4.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "You received 12 Quick Balls.",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1625_ENG_c.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "Vous recevez 12 Rapide Balls.",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1625_FRE_c.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "Du erhältst 12 Flottbälle!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1625_GER_c.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "Hai ricevuto 12 Velox Ball!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1625_ITA_c.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "ダウンロードばん　とくてん",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1625_JPN_c.wc7full"
+  },
+  {
+   "id": 1625,
+   "title": "¡Has recibido 12 Veloz Balls!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1625_SPA_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "Gift from the PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1626_ENG_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "Un cadeau de la part du PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1626_FRE_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "Ein Geschenk vom PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1626_GER_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "Un regalo dal PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1626_ITA_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "ポケモングローバルリンク",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1626_JPN_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1626_KOR_c.wc7full"
+  },
+  {
+   "id": 1626,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1626_SPA_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "Spooky Shiny Mimikyu!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1627_ENG_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "Un Mimiqui chromatique effrayant",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1627_FRE_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "Gruseliges Schillerndes Mimigma",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1627_GER_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "Un Mimikyu cromatico da paura!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1627_ITA_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "いろちがいのミミッキュ　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1627_JPN_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "색이 다른 따라큐 선물",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1627_KOR_c.wc7full"
+  },
+  {
+   "id": 1627,
+   "title": "¡Un aterrador Mimikyu variocolor!",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1627_SPA_c.wc7full"
+  },
+  {
+   "id": 1628,
+   "title": "Ash's Pikachu (Hoenn Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1628_ENG_c.wc7full"
+  },
+  {
+   "id": 1628,
+   "title": "Pikachu Casquette de Hoenn",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1628_FRE_c.wc7full"
+  },
+  {
+   "id": 1628,
+   "title": "Ashs Pikachu (Hoenn-Kappe)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1628_GER_c.wc7full"
+  },
+  {
+   "id": 1628,
+   "title": "Il Pikachu Berretto Hoenn di Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1628_ITA_c.wc7full"
+  },
+  {
+   "id": 1628,
+   "title": "El Pikachu (Gorra Hoenn) de Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1628_SPA_c.wc7full"
+  },
+  {
+   "id": 1629,
+   "title": "Ash's Pikachu (Sinnoh Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1629_ENG_c.wc7full"
+  },
+  {
+   "id": 1629,
+   "title": "Pikachu Casquette de Sinnoh",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1629_FRE_c.wc7full"
+  },
+  {
+   "id": 1629,
+   "title": "Ashs Pikachu (Sinnoh-Kappe)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1629_GER_c.wc7full"
+  },
+  {
+   "id": 1629,
+   "title": "Il Pikachu Berretto Sinnoh di Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1629_ITA_c.wc7full"
+  },
+  {
+   "id": 1629,
+   "title": "El Pikachu (Gorra Sinnoh) de Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1629_SPA_c.wc7full"
+  },
+  {
+   "id": 1630,
+   "title": "Ash's Pikachu (Unova Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1630_ENG_c.wc7full"
+  },
+  {
+   "id": 1630,
+   "title": "Pikachu Casquette d'Unys",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1630_FRE_c.wc7full"
+  },
+  {
+   "id": 1630,
+   "title": "Ashs Pikachu (Einall-Kappe)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1630_GER_c.wc7full"
+  },
+  {
+   "id": 1630,
+   "title": "Il Pikachu Berretto Unima di Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1630_ITA_c.wc7full"
+  },
+  {
+   "id": 1630,
+   "title": "El Pikachu (Gorra Teselia) de Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1630_SPA_c.wc7full"
+  },
+  {
+   "id": 1631,
+   "title": "Ash's Pikachu (Kalos Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1631_ENG_c.wc7full"
+  },
+  {
+   "id": 1631,
+   "title": "Pikachu Casquette de Kalos",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1631_FRE_c.wc7full"
+  },
+  {
+   "id": 1631,
+   "title": "Ashs Pikachu (Kalos-Kappe)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1631_GER_c.wc7full"
+  },
+  {
+   "id": 1631,
+   "title": "Il Pikachu Berretto Kalos di Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1631_ITA_c.wc7full"
+  },
+  {
+   "id": 1631,
+   "title": "El Pikachu (Gorra Kalos) de Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1631_SPA_c.wc7full"
+  },
+  {
+   "id": 1632,
+   "title": "Ash's Pikachu (Alola Cap)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1632_ENG_c.wc7full"
+  },
+  {
+   "id": 1632,
+   "title": "Pikachu Casquette d'Alola",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1632_FRE_c.wc7full"
+  },
+  {
+   "id": 1632,
+   "title": "Ashs Pikachu (Alola-Kappe)",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1632_GER_c.wc7full"
+  },
+  {
+   "id": 1632,
+   "title": "Il Pikachu Berretto Alola di Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1632_ITA_c.wc7full"
+  },
+  {
+   "id": 1632,
+   "title": "El Pikachu (Gorra Alola) de Ash",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1632_SPA_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "Shiny Tapu Lele gift",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1633_ENG_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "Un Tokopiyon chromatique en cadeau",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1633_FRE_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "Schillerndes Kapu-Fala als Geschenk",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1633_GER_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "Un Tapu Lele cromatico in regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1633_ITA_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "いろちがいの　カプ・テテフ　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1633_JPN_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "색이 다른 카푸나비나 선물",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1633_KOR_c.wc7full"
+  },
+  {
+   "id": 1633,
+   "title": "Tapu Lele variocolor de regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1633_SPA_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "Shiny Tapu Bulu gift",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1634_ENG_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "Un Tokotoro chromatique en cadeau",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1634_FRE_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "Schillerndes Kapu-Toro als Geschenk",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1634_GER_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "Un Tapu Bulu cromatico in regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1634_ITA_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "いろちがいの　カプ・ブルル　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1634_JPN_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "색이 다른 카푸브루루 선물",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1634_KOR_c.wc7full"
+  },
+  {
+   "id": 1634,
+   "title": "Tapu Bulu variocolor de regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1634_SPA_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "Shiny Tapu Fini gift",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1635_ENG_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "Un Tokopisco chromatique en cadeau",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1635_FRE_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "Schillerndes Kapu-Kime als Geschenk",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1635_GER_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "Un Tapu Fini cromatico in regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1635_ITA_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "いろちがいの　カプ・レヒレ　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1635_JPN_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "색이 다른 카푸느지느 선물",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1635_KOR_c.wc7full"
+  },
+  {
+   "id": 1635,
+   "title": "Tapu Fini variocolor de regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1635_SPA_c.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "Rare Berry gift",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1636_ENG_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "Des Baies rares en cadeau",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1636_FRE_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "Seltene Beeren als Geschenk",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1636_GER_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "Bacche rare in regalo",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1636_ITA_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "めずらしい　きのみ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1636_JPN_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "희귀한 나무열매 선물",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1636_KOR_f.wc7full"
+  },
+  {
+   "id": 1636,
+   "title": "Lote de bayas inusuales de regalo",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1636_SPA_f.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "Shiny Tapu Koko gift",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1637_ENG_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "Un Tokorico chromatique en cadeau",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1637_FRE_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "Schillerndes Kapu-Riki als Geschenk",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1637_GER_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "Un Tapu Koko cromatico in regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1637_ITA_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "いろちがいの　カプ・コケコ　プレゼント",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1637_JPN_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "색이 다른 카푸꼬꼬꼭 선물",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1637_KOR_c.wc7full"
+  },
+  {
+   "id": 1637,
+   "title": "Tapu Koko variocolor de regalo",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1637_SPA_c.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "Fennel’s Munna!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "1638_ENG_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "Le Munna d'Oryse !",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "1638_FRE_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "Vivians Somniam!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "German",
+   "language_code": "GER",
+   "file": "1638_GER_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "Il Munna di Zania!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "1638_ITA_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "マコモのムンナ　プレゼント",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "1638_JPN_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "주리의 몽나 선물",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "1638_KOR_f.wc7full"
+  },
+  {
+   "id": 1638,
+   "title": "¡El Munna de la Profesora Oryza!",
+   "mask": 15,
+   "games": [
+    "Sun",
+    "Moon",
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "both",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "1638_SPA_f.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Gift from the PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "2047_ENG_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Gift from the PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "English",
+   "language_code": "ENG",
+   "file": "2047_ENG_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Cadeau de la part du PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "2047_FRE_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Cadeau de la part du PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "French",
+   "language_code": "FRE",
+   "file": "2047_FRE_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "German",
+   "language_code": "GER",
+   "file": "2047_GER_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Ein Geschenk des PGLs",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "German",
+   "language_code": "GER",
+   "file": "2047_GER_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Un regalo dal PGL",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "2047_ITA_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Un regalo dal PGL",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Italian",
+   "language_code": "ITA",
+   "file": "2047_ITA_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "ポケモングローバルリンク",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "2047_JPN_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "ポケモングローバルリンク",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Japanese",
+   "language_code": "JPN",
+   "file": "2047_JPN_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "2047_KOR_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "포켓몬 글로벌 링크",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Korean",
+   "language_code": "KOR",
+   "file": "2047_KOR_c.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 3,
+   "games": [
+    "Sun",
+    "Moon"
+   ],
+   "group": "sm",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "2047_SPA_3.wc7full"
+  },
+  {
+   "id": 2047,
+   "title": "Un regalo de Pokémon Global Link",
+   "mask": 12,
+   "games": [
+    "Ultra Sun",
+    "Ultra Moon"
+   ],
+   "group": "usum",
+   "language": "Spanish",
+   "language_code": "SPA",
+   "file": "2047_SPA_c.wc7full"
+  }
+ ]
+}

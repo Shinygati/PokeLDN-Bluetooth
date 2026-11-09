@@ -26,8 +26,9 @@ android {
             if (key) {
                 storeFile file(key)
                 storePassword System.getenv('POKELDN_ANDROID_RELEASE_PASSWORD')
-                keyAlias 'pokeldn'
-                keyPassword System.getenv('POKELDN_ANDROID_RELEASE_PASSWORD')
+                keyAlias System.getenv('POKELDN_ANDROID_RELEASE_ALIAS') ?: 'pokeldn'
+                keyPassword System.getenv('POKELDN_ANDROID_RELEASE_KEY_PASSWORD')
+                    ?: System.getenv('POKELDN_ANDROID_RELEASE_PASSWORD')
             }
         }
     }

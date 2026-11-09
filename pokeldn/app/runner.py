@@ -60,14 +60,15 @@ def _execute(argv: list[str]) -> None:
             sys.modules.pop(module, None)   # imported once to read its flags (introspect)
             runpy.run_module(module, run_name="__main__", alter_sys=True)
             return
-        # Nintendo DS integration lives inside the Chaquopy-packaged pokeldn package.
-        # The Android APK may contain its compiled module without a real launch.py file,
-        # so runpy.run_path fails with "can't find '__main__' module". Import by module instead.
+        # The Nintendo DS and Nintendo 3DS game sections live inside the Chaquopy-packaged pokeldn
+        # package. The Android APK may carry their compiled module with no real launch.py file, so
+        # runpy.run_path fails with "can't find '__main__' module". Import by module instead.
+        folder = os.path.basename(os.path.dirname(target))
         if (os.environ.get("POKELDN_PLATFORM") == "android"
                 and os.path.isabs(target)
-                and os.path.basename(os.path.dirname(target)) == "nds_plugin"
+                and folder.endswith("_plugin")
                 and os.path.basename(target) == "launch.py"):
-            runpy.run_module("pokeldn.nds_plugin.launch", run_name="__main__", alter_sys=True)
+            runpy.run_module(f"pokeldn.{folder}.launch", run_name="__main__", alter_sys=True)
             return
         runpy.run_path(path, run_name="__main__")
     else:
