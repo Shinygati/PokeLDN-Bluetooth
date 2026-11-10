@@ -21,6 +21,7 @@
 #include "nvs_flash.h"
 
 #include "beacon.h"
+#include "ds_compat.h"
 #include "display.h"
 #include "gift.h"
 #include "led.h"
@@ -83,6 +84,7 @@ static atomic_uint s_led_alarm;   /* a join that failed or a key refused: the LE
 /* True while a 3DS gift is broadcasting: no console ever joins, so the LED flashes off this instead
    of the station count (led_state), to show distribution is live. */
 static atomic_bool s_beacon_3ds;
+static atomic_bool s_beacon_on;
 static atomic_uint s_tx_eth_retried;   /* ETH_TX calls that found the driver's queue full */
 static atomic_int s_tx_eth_last_err;
 /* ETH_TX's own time in the driver: the handler maximum in STATUS covers every command type. */
@@ -635,7 +637,13 @@ static void button_pressed(uint32_t count, int64_t press_us)
 static void led_state(led_look_t *look, uint32_t *activity, uint32_t *alarm)
 {
     switch (atomic_load(&s_mode)) {
-    case MODE_IDLE: *look = (led_look_t){LED_BREATHE, 50, 4000}; break;
+    case MODE_IDLE:
+#ifdef POKELDN_RGB_GPIO
+        *look = (led_look_t){ble_phone_linked() ? LED_ON : LED_OFF, 50, 0};
+#else
+        *look = (led_look_t){LED_BREATHE, 50, 4000};
+#endif
+        break;
     case MODE_STA_JOINING: *look = (led_look_t){LED_BLINK, 255, 250}; break;
     case MODE_AP:
         /* A 3DS gift broadcasts with no console ever seated: flash while it distributes. */
@@ -645,6 +653,11 @@ static void led_state(led_look_t *look, uint32_t *activity, uint32_t *alarm)
     case MODE_STA: *look = (led_look_t){LED_ON, 25, 0}; break;
     case MODE_SNIFF: *look = (led_look_t){LED_OFF, 0, 0}; break;
     }
+#ifdef POKELDN_RGB_GPIO
+    /* RGB status describes the phone and gift, never the Wi-Fi operating mode. */
+    const bool distributing = atomic_load(&s_beacon_on) && atomic_load(&s_mode) == MODE_AP;
+    *look = (led_look_t){distributing ? LED_BLINK : (ble_phone_linked() ? LED_ON : LED_OFF), 255, 600};
+#endif
     *activity = atomic_load(&s_rx_eth) + atomic_load(&s_tx_acked) + atomic_load(&s_tx_unacked) +
                 atomic_load(&s_rx_sniff);
     *alarm = atomic_load(&s_led_alarm) + wire_dropped() + wire_rx_bad() + wire_rx_fifo_ovf() +
@@ -751,7 +764,7 @@ static _Atomic int64_t s_host_seen;   /* when the host last sent a command */
    docs/hardware_esp32.md, Portable beacon. */
 #define BEACON_GRACE_US 3000000
 enum { BEACON_WRITE = 0, BEACON_COMMIT = 1, BEACON_ERASE = 2, BEACON_START = 3, BEACON_QUERY = 4 };
-static atomic_bool s_beacon_on, s_beacon_busy;
+static atomic_bool s_beacon_busy;
 static TaskHandle_t s_beacon_task;
 
 /* A host image's start screen: every command but the last, which is the delivered one. */
@@ -1091,6 +1104,7 @@ static void rf_switch_on(void)
 
 void app_main(void)
 {
+    led_start(led_state, button_pressed); /* Reserve LED resources before Wi-Fi/BLE. */
 #if CONFIG_IDF_TARGET_ESP32C6
     rf_switch_on();
 #endif
@@ -1121,7 +1135,6 @@ void app_main(void)
     beacon_load();   /* before the wire answers: a host's first BEACON QUERY must see the stored image */
     wire_start(command);
     usbwatch_start();
-    led_start(led_state, button_pressed);
     display_start(display_state);
     send_info();
     bool beacon_due = beacon_image() != NULL;
@@ -1132,6 +1145,24 @@ void app_main(void)
             last_status = esp_timer_get_time();
             send_status();
         }
+#if POKELDN_BLE
+        static ds_upload_t ds_upload;
+        ble_ds_message_t ds_message;
+        while (ble_ds_read(&ds_message)) {
+            beacon_due = false;
+            const int action = ds_receive(&ds_upload, ds_message.which, ds_message.data, ds_message.length);
+            if (action < 0) { wire_log("DS upload rejected"); continue; }
+            if (action == 1) { beacon_stop(); go_idle(); }
+            if (action == 2) {
+                static uint8_t image[2048];
+                const size_t n = ds_image(&ds_upload, image, sizeof(image));
+                beacon_stop();
+                esp_err_t r = n ? beacon_volatile(image, n) : ESP_ERR_INVALID_SIZE;
+                if (r == ESP_OK) r = beacon_start();
+                wire_log("DS Gen %u start: %s", ds_upload.generation, esp_err_to_name(r));
+            }
+        }
+#endif
         uint8_t joined[6];
         while (xQueueReceive(s_ap_joins, joined, 0) == pdTRUE) {
             if (atomic_load(&s_mode) == MODE_AP) ap_open_station(joined);

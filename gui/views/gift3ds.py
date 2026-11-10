@@ -17,6 +17,7 @@ from gui import theme as t
 from pokeldn.app.i18n import t as tr
 from pokeldn.app.paths import ROOT
 from pokeldn.uds.wondercard_library import catalog, import_card
+from pokeldn.uds.prepared_cards import pack_path
 
 LIBRARY = Path(__file__).resolve().parents[2] / "pokeldn" / "data" / "gift3ds" / "wondercards"
 CUSTOM = Path(ROOT) / "wondercards" / "custom"
@@ -43,7 +44,11 @@ class Gift3DSView:
         self._refresh()
 
     def _refresh(self):
-        self.cards = catalog(LIBRARY) + catalog(CUSTOM)
+        self.cards = []
+        for root in (LIBRARY, CUSTOM):
+            for card in catalog(root):
+                card['path'] = str(root / card['path'])
+                self.cards.append(card)
         self._render()
 
     def _header(self):
@@ -53,9 +58,8 @@ class Gift3DSView:
                       alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
         return ft.Column([
             head,
-            t.text("Bundled Gen 6 and Gen 7 Wonder Cards. Direct wireless distribution "
-                   "requires the verified UDS encoder; importing a card does not "
-                   "make it broadcastable yet.", 13, t.MUTED),
+            t.text("Select a prepared Gen 7 card, then start it from the Session tab. "
+                   "Experimental hardware test: Gen 6 and newly imported cards require PC preparation.", 13, t.MUTED),
             search,
         ], spacing=10)
 
@@ -103,15 +107,24 @@ class Gift3DSView:
             details += " · " + ", ".join(card["games"])
         left = ft.Column([t.text(name, 14, weight=ft.FontWeight.W_600),
                           t.text(details, 12, t.MUTED)], spacing=2, expand=True)
-        btn = t.secondary_button("Distribution unavailable", lambda e: self._unsupported(), "info")
+        prepared = pack_path(Path(card['path']).read_bytes()).is_file()
+        btn = t.secondary_button("Select for distribution" if prepared else "PC preparation required",
+                                 lambda e: self._select_card(card) if prepared else self._unsupported(),
+                                 "play" if prepared else "info")
         return t.card_box(ft.Row([left, btn], alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                                  vertical_alignment=ft.CrossAxisAlignment.CENTER))
 
     def _unsupported(self):
-        self.status.value = ("A direct WC6/WC7-to-UDS beacon encoder has not yet passed "
-                             "hardware validation. This source update does not transmit a card.")
+        self.status.value = ("This card has no prepared broadcast data. Gen 7 cards can be prepared "
+                             "on the PC; a Gen 6 distributor profile is still required for Gen 6.")
         if self.status.page:
             self.status.update()
+
+    def _select_card(self, card):
+        stored = self.app.settings.tool_values.setdefault('n3ds-gift', {'values': {}, 'extra': {}})
+        stored['values']['--card'] = card['path']
+        self.app.settings.save()
+        self.app.navigate('games', game='nintendo-3ds', tool='n3ds-gift')
 
     def _choose_group(self, group):
         self.group = group

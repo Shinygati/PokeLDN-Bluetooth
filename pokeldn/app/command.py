@@ -71,7 +71,7 @@ def applies(field: Field, tool: Tool, values: dict) -> bool:
         return True
     flag, wanted = field.when
     other = next(f for f in tool.fields if f.key == flag)
-    return str(value_of(other, values)) == wanted
+    return applies(other, tool, values) and str(value_of(other, values)) == wanted
 
 
 def offers(value) -> list[dict]:

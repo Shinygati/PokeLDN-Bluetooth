@@ -10,6 +10,9 @@
 void ble_start(void);
 /* True while a central is subscribed to the TX characteristic: the wire then reads and writes here. */
 bool ble_linked(void);
+bool ble_phone_linked(void);
+typedef struct { uint8_t which, length, data[113]; } ble_ds_message_t;
+bool ble_ds_read(ble_ds_message_t *message);
 /* Host bytes written to RX, waiting up to `ticks`. */
 int ble_read(uint8_t *out, size_t size, uint32_t ticks);
 /* Notifies `n` bytes in MTU-sized pieces; false when the link went away or stalled 500 ms. */
@@ -18,4 +21,5 @@ bool ble_write(const uint8_t *p, size_t n);
 uint32_t ble_interval_us(void);
 #else
 static inline bool ble_linked(void) { return false; }
+static inline bool ble_phone_linked(void) { return false; }
 #endif

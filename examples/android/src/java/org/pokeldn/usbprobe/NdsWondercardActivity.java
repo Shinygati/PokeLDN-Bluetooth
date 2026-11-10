@@ -544,11 +544,11 @@ public final class NdsWondercardActivity extends Activity {
     private final ScanCallback callback=new ScanCallback(){
         @Override public void onScanResult(int type,ScanResult result){String name=null;
             if(result.getScanRecord()!=null)name=result.getScanRecord().getDeviceName();
-            if(!DEVICE_NAME.equals(name))return;
+            if(!DEVICE_NAME.equals(name)&&!BleStream.NAME.equals(name))return;
             BluetoothDevice dev=result.getDevice();
             handler.post(()->{
                 for (BluetoothDevice x : devices) if (x.getAddress().equals(dev.getAddress())) return;
-                devices.add(dev);deviceAdapter.add(DEVICE_NAME+" — "+dev.getAddress());
+                devices.add(dev);deviceAdapter.add("Wonder Card radio — "+dev.getAddress());
             });
         }
         @Override public void onScanFailed(int error){log("BLE scan error "+error);}
@@ -664,5 +664,5 @@ public final class NdsWondercardActivity extends Activity {
             }catch(Exception ignored){}
         }
     }
-    @Override protected void onDestroy(){disconnect();super.onDestroy();}
+    @Override protected void onDestroy(){disconnect();Bridge.releaseNdsBluetooth();super.onDestroy();}
 }

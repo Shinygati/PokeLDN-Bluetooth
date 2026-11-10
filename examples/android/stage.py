@@ -1,17 +1,24 @@
 from pathlib import Path
+import os
+import sys
 import shutil
 import subprocess
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+sys.path.insert(0, str(ROOT))
 DEST = HERE / 'staged'
 if DEST.exists():
+    assert DEST.resolve().parent == HERE.resolve() and DEST.name == 'staged'
     shutil.rmtree(DEST)
 DEST.mkdir()
 packages = ('pokeldn', 'bin', 'config', 'gui', 'docs', 'vendor/LDN/ldn')
-result = subprocess.run(['git', '-C', str(ROOT), 'ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', *packages],
-                        check=True, capture_output=True)
-for filename in result.stdout.decode().split('\0'):
+filenames = []
+for package in packages:
+    for candidate in (ROOT / package).rglob('*'):
+        if candidate.is_file() and '__pycache__' not in candidate.parts and candidate.suffix not in ('.pyc', '.code', '.jks', '.keystore', '.keys') and 'prepared' not in candidate.parts:
+            filenames.append(candidate.relative_to(ROOT).as_posix())
+for filename in filenames:
     if not filename:
         continue
     relative = Path(filename)
@@ -37,3 +44,12 @@ for filename in ('test_esp32.py', 'test_host_end_to_end.py'):
 shutil.copytree(HERE / 'nds_plugin', DEST / 'pokeldn' / 'nds_plugin', dirs_exist_ok=True)
 shutil.copytree(HERE / 'n3ds_plugin', DEST / 'pokeldn' / 'n3ds_plugin', dirs_exist_ok=True)
 print('Staged tracked repository code and package data:', DEST)
+prepared = os.environ.get('POKELDN_3DS_PREPARED')
+if prepared:
+    source = Path(prepared)
+    target = DEST / 'pokeldn/data/gift3ds/prepared'
+    target.mkdir(parents=True, exist_ok=True)
+    for pack in source.glob('*.gift.json'):
+        from pokeldn.uds.gift_pack import GiftPack
+        GiftPack.load(pack)  # Only validated beacon packs are staged, never key files.
+        shutil.copy2(pack, target / pack.name)

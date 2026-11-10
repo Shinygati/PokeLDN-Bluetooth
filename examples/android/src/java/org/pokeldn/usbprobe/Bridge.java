@@ -33,6 +33,7 @@ public final class Bridge {
     // is open, the way the iOS app does, and listed as a serial port only once connected.
     private static volatile BleStream ble;
     private static volatile boolean bleWanted, bleScanning, bleForeground = true;
+    private static volatile boolean ndsOwnsBluetooth;
     private static volatile String bleError = "";
     private static Thread bleKeeper;
 
@@ -123,6 +124,8 @@ public final class Bridge {
     /** Open Gen IV/V Mystery Gift sender over its dedicated FFF0 BLE service. */
     public static void openNdsWondercards(int gameIndex) {
         if (activity == null) throw new IllegalStateException("Android activity is unavailable");
+        ndsOwnsBluetooth = true;
+        disconnectBle();
         activity.runOnUiThread(() -> {
             Intent intent = new Intent(activity, NdsWondercardActivity.class);
             intent.putExtra("game_index", gameIndex);
@@ -212,14 +215,16 @@ public final class Bridge {
             while (true) {
                 try {
                     BluetoothAdapter adapter = bluetooth();
-                    boolean look = bleForeground && adapter != null && adapter.isEnabled() && !bleConnected();
+                    boolean look = !ndsOwnsBluetooth && bleForeground && adapter != null && adapter.isEnabled() && !bleConnected();
                     if (look) {
                         BleStream old = ble;
                         if (old != null) { ble = null; old.close(); changes++; }
                         bleScanning = true;
                         changes++;
                         try {
-                            ble = BleStream.connect(activity, BleStream.NAME, 10000);
+                            BleStream candidate = BleStream.connect(activity, BleStream.NAME, 10000);
+                            if (ndsOwnsBluetooth) candidate.close();
+                            else ble = candidate;
                             bleError = "";
                             Log.i("PokeLDN", "Bluetooth board connected: " + ble.address());
                         } catch (IOException error) {
@@ -260,6 +265,8 @@ public final class Bridge {
         if (s != null) s.close();
         changes++;
     }
+
+    public static void releaseNdsBluetooth() { ndsOwnsBluetooth = false; changes++; }
 
     /** Asks Android to turn Bluetooth on. */
     public static void enableBluetooth() {

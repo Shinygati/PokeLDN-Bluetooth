@@ -28,12 +28,15 @@ if(DEFINED ENV{POKELDN_BLE})
 endif()
 
 idf_component_register(
-    SRCS "radio.c" "advert.c" "beacon.c" "gift_ldn.c" "gift_pia.c" "gift_link.c" "gift_mg.c" "gift_zstd.c" "ble.c" "wire.c" "led.c" "usbwatch.c" "display.c" ${panel_source} "scene.c" "screen.c"
+    SRCS "radio.c" "advert.c" "beacon.c" "ds_compat.c" "gift_ldn.c" "gift_pia.c" "gift_link.c" "gift_mg.c" "gift_zstd.c" "ble.c" "wire.c" "led.c" "usbwatch.c" "display.c" ${panel_source} "scene.c" "screen.c"
     INCLUDE_DIRS "."
-    PRIV_REQUIRES esp_app_format esp_wifi wpa_supplicant ${wire_driver} esp_driver_ledc esp_driver_gpio ${panel_driver} esp_timer nvs_flash esp_event mbedtls zstd ${ble_component})
+    PRIV_REQUIRES esp_app_format esp_wifi wpa_supplicant ${wire_driver} esp_driver_ledc esp_driver_gpio esp_driver_spi ${panel_driver} esp_timer nvs_flash esp_event mbedtls zstd ${ble_component})
 
 target_compile_definitions(${COMPONENT_LIB} PRIVATE POKELDN_DISPLAY_${POKELDN_DISPLAY}
                            POKELDN_FIRMWARE_VERSION="${POKELDN_FIRMWARE_VERSION}")
+if(DEFINED ENV{POKELDN_RGB_GPIO} AND idf_target STREQUAL "esp32s3")
+    target_compile_definitions(${COMPONENT_LIB} PRIVATE POKELDN_RGB_GPIO=$ENV{POKELDN_RGB_GPIO})
+endif()
 
 # A diagnostic build: POKELDN_USB_BEACON=1 in the environment of idf.py (usbwatch.c).
 if(DEFINED ENV{POKELDN_USB_BEACON})

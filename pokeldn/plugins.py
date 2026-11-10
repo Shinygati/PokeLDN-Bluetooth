@@ -527,6 +527,7 @@ def games() -> tuple[Game, ...]:
     for game in (*_builtin_games(), *added):
         more = tuple(extra.get(game.key, ()))
         out.append(replace(game, tools=game.tools + more) if more else game)
+    out.sort(key=lambda g: {"nintendo-ds": 1, "nintendo-3ds": 2}.get(g.key, 0))
     return tuple(out)
 
 

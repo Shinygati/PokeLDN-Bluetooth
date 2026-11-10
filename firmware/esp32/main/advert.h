@@ -16,7 +16,7 @@
    host. The game only listens, so there is nothing to answer. docs/3ds_local_distributor.md. */
 #define ADVERT_KIND_3DS 3
 #define ADVERT_IMAGE_MAX 12288
-#define ADVERT_FRAGMENTS_MAX 8
+#define ADVERT_FRAGMENTS_MAX 10
 #define ADVERT_DISPLAY_MAX 4
 #define ADVERT_PLAIN_MAX 0x500
 #define ADVERT_HEADER_LEN 40          /* network id 32, version, format, u16 BE size, u32 BE nonce */

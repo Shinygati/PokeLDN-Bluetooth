@@ -187,6 +187,17 @@ static void keep(uint8_t *data, size_t length)
     if (s_valid && s_image.kind == ADVERT_KIND_HOST && !s_gift_valid) s_valid = false;
 }
 
+esp_err_t beacon_volatile(const uint8_t *data, size_t length)
+{
+    advert_image_t check;
+    if (advert_parse(data, length, &check) || check.kind != ADVERT_KIND_3DS) return ESP_ERR_INVALID_ARG;
+    uint8_t *copy = malloc(length);
+    if (!copy) return ESP_ERR_NO_MEM;
+    memcpy(copy, data, length);
+    keep(copy, length);
+    return ESP_OK;
+}
+
 void beacon_load(void)
 {
     nvs_handle_t nvs;

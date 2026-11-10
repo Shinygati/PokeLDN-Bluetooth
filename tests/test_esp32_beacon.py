@@ -34,8 +34,8 @@ class Image(ctypes.Structure):
                 ("max_stations", ctypes.c_uint8), ("advertise_key", ctypes.c_uint8 * 16),
                 ("header", ctypes.c_uint8 * 40), ("interval_ms", ctypes.c_uint16),
                 ("dwell_ms", ctypes.c_uint16), ("count", ctypes.c_uint8),
-                ("display_count", ctypes.c_uint8), ("plain", ctypes.c_void_p * 8),
-                ("plain_len", ctypes.c_uint16 * 8), ("display", ctypes.c_void_p * 4),
+                ("display_count", ctypes.c_uint8), ("plain", ctypes.c_void_p * 10),
+                ("plain_len", ctypes.c_uint16 * 10), ("display", ctypes.c_void_p * 4),
                 ("display_len", ctypes.c_uint16 * 4), ("kind", ctypes.c_uint8),
                 ("records", ctypes.c_void_p), ("records_len", ctypes.c_uint16)]
 

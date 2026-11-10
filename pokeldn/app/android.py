@@ -192,6 +192,9 @@ def install() -> None:
     posix = types.ModuleType("serial.tools.list_ports_posix")
     posix.comports = comports
     sys.modules["serial.tools.list_ports_posix"] = posix
+    # Replace an already imported platform backend too (desktop diagnostics import it early).
+    import serial.tools.list_ports as list_ports
+    list_ports.comports = comports
     serial.Serial = Serial
     protocol = types.ModuleType("pokeldn_android_serial.protocol_android")
     protocol.Serial = Serial

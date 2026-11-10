@@ -51,7 +51,8 @@ int advert_parse(const uint8_t *data, size_t length, advert_image_t *image)
     if (image->channel < 1 || image->channel > 13 || (image->bssid[0] & 1) ||
         (host ? image->count || format != ADVERT_FORMAT_AES_GCM : !image->count) ||
         image->count > ADVERT_FRAGMENTS_MAX || image->display_count > ADVERT_DISPLAY_MAX ||
-        image->interval_ms < 20 || image->interval_ms > 1000 || image->dwell_ms < image->interval_ms ||
+        (image->kind != ADVERT_KIND_3DS && image->count > 8) ||
+        image->interval_ms < (image->kind == ADVERT_KIND_3DS ? 10 : 20) || image->interval_ms > 1000 || image->dwell_ms < image->interval_ms ||
         format < ADVERT_FORMAT_PLAIN || format > ADVERT_FORMAT_AES_GCM)
         return 5;
     const uint8_t *p = data + 128, *end = data + length - 4;

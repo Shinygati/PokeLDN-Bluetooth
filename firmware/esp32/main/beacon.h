@@ -18,6 +18,8 @@ const gift_image_t *beacon_gift(void);
 
 /* Reads the stored image, if any, at boot. */
 void beacon_load(void);
+/* RAM-only DS upload. Caller stops the transmitter before replacing it. */
+esp_err_t beacon_volatile(const uint8_t *data, size_t length);
 /* The stored image, parsed; NULL when none. */
 const advert_image_t *beacon_image(void);
 /* Stages `n` bytes at `offset` of the next image. */

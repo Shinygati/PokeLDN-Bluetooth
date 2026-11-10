@@ -11,6 +11,42 @@
 #include "freertos/task.h"
 
 #include "led.h"
+#include "esp_log.h"
+#ifdef POKELDN_RGB_GPIO
+#include "driver/spi_master.h"
+#include "esp_rom_sys.h"
+static spi_device_handle_t rgb_device;
+static void rgb_write(uint32_t color)
+{
+    if (!rgb_device) return;
+    static uint32_t previous_color = 0xffffffff;
+    if (color == previous_color) return;
+    /* 2.5 MHz: WS2812 zero=100 (0.4/0.8 us), one=110 (0.8/0.4 us).
+       Polling avoids the RMT completion interrupt that times out on this build. */
+    uint8_t waveform[49] = {0};
+    for (unsigned i = 0; i < 24; ++i) {
+        unsigned symbol = (color & (1u << (23-i))) ? 6 : 4;
+        for (unsigned j = 0; j < 3; ++j) {
+            unsigned bit = i*3+j;
+            if (symbol & (1u << (2-j))) waveform[bit/8] |= 1u << (7-bit%8);
+        }
+    }
+    /* The trailing zero bytes end with MOSI low; keep it low for the latch. */
+    spi_transaction_t transfer = {.length = sizeof(waveform)*8, .tx_buffer = waveform};
+    esp_err_t err = spi_device_polling_transmit(rgb_device, &transfer);
+    esp_rom_delay_us(320);
+    if (err == ESP_OK) previous_color = color;
+    static esp_err_t last_error = ESP_OK;
+    if (err != last_error) ESP_LOGW("rgb", "SPI LED transfer: %s", esp_err_to_name(err));
+    last_error = err;
+}
+static void rgb_show(bool connected, bool distributing, int64_t now)
+{
+    uint32_t color = (connected || distributing) ? 5u << 16 : 5u << 8; /* GRB, ~2% */
+    if (distributing && (now / 1000) % 2) color = 0;
+    rgb_write(color);
+}
+#endif
 
 #if CONFIG_IDF_TARGET_ESP32 && defined(POKELDN_DISPLAY_E32R40T)
 #define LED_GPIO 17     /* the E32R40T's blue RGB LED, lit while low: GPIO2 is its LCD's DC */
@@ -33,6 +69,9 @@
 #define BUTTON_TICKS 3  /* 30 ms of one level makes it the button's state */
 #define DUTY_MAX 8191   /* 13 bits at 5 kHz */
 #define TICK_MS 10
+#ifdef POKELDN_RGB_GPIO
+#undef LED_GPIO
+#endif
 #define CROSSFADE_MS 150
 
 static const uint16_t DEFAULT_PERIOD_MS[LED_PATTERNS] = {
@@ -91,6 +130,14 @@ static bool same_look(const led_look_t *a, const led_look_t *b)
 
 static void led_task(void *arg)
 {
+#ifdef POKELDN_RGB_GPIO
+    /* Visible proof that this driver owns the pixel: off, red, off, green, off, blue, off. */
+    const uint32_t startup[] = {0, 5u << 8, 0, 5u << 16, 0, 5u, 0};
+    for (unsigned i = 0; i < sizeof(startup) / sizeof(startup[0]); ++i) {
+        rgb_write(startup[i]);
+        vTaskDelay(pdMS_TO_TICKS(700));
+    }
+#endif
     led_look_t shown = {LED_OFF, 0, 0};
     int64_t look_started = now_ms(), fade_started = look_started;
     float fade_from = 0, output = 0, flash = 0, press_flash = 0;
@@ -151,6 +198,9 @@ static void led_task(void *arg)
         last_activity = activity;
         /* A press answers with a full flash over any look, so the player sees it was taken. */
         const float shown_level = fmaxf(fmaxf(output, is_auto ? flash * 0.7f : 0), press_flash);
+#ifdef POKELDN_RGB_GPIO
+        rgb_show(automatic.pattern != LED_OFF, automatic.pattern == LED_BLINK, now);
+#endif
         flash *= 0.8f;
         press_flash *= 0.9f;
 
@@ -181,6 +231,17 @@ void led_start(led_state_t state, led_button_t button)
 {
     s_state = state;
     s_button = button;
+#ifdef POKELDN_RGB_GPIO
+    const spi_bus_config_t bus = {.mosi_io_num = POKELDN_RGB_GPIO,
+        .miso_io_num = -1, .sclk_io_num = -1, .quadwp_io_num = -1,
+        .quadhd_io_num = -1, .max_transfer_sz = 49};
+    const spi_device_interface_config_t device = {.clock_speed_hz = 2500000,
+        .mode = 0, .spics_io_num = -1, .queue_size = 1};
+    esp_err_t rgb_error = spi_bus_initialize(SPI2_HOST, &bus, SPI_DMA_DISABLED);
+    if (rgb_error == ESP_OK) rgb_error = spi_bus_add_device(SPI2_HOST, &device, &rgb_device);
+    ESP_LOGW("rgb", "GPIO%d GRB SPI polling init: %s", POKELDN_RGB_GPIO, esp_err_to_name(rgb_error));
+    if (rgb_error != ESP_OK) rgb_device = NULL;
+#endif
 #ifdef BUTTON_GPIO
     const gpio_config_t input = {
         .pin_bit_mask = 1ULL << BUTTON_GPIO, .mode = GPIO_MODE_INPUT,
@@ -202,5 +263,6 @@ void led_start(led_state_t state, led_button_t button)
     if (ledc_timer_config(&timer) != ESP_OK || ledc_channel_config(&channel) != ESP_OK) return;
 #endif
     s_host_until_ms = now_ms() + 900;
-    xTaskCreatePinnedToCore(led_task, "led", 3072, NULL, 1, NULL, configNUMBER_OF_CORES - 1);
+    if (xTaskCreatePinnedToCore(led_task, "led", 4096, NULL, 1, NULL, configNUMBER_OF_CORES - 1) != pdPASS)
+        ESP_LOGE("rgb", "LED task creation failed");
 }

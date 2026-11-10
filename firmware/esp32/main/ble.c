@@ -10,6 +10,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/stream_buffer.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
 #include "host/ble_hs.h"
 #include "nimble/nimble_port.h"
 #include "nimble/nimble_port_freertos.h"
@@ -29,6 +30,21 @@ static atomic_int s_conn = -1;
 static atomic_bool s_subscribed;
 static atomic_uint s_mtu = 23;
 static atomic_uint s_interval_us;   /* the connection interval the central granted; STATUS ble_itvl_us */
+static QueueHandle_t s_ds_queue;
+static atomic_bool s_ds_session, s_ds_disconnected;
+
+static int ds_access(uint16_t conn, uint16_t attr, struct ble_gatt_access_ctxt *ctxt, void *arg)
+{
+    const unsigned which = (unsigned)(uintptr_t)arg;
+    const unsigned n = OS_MBUF_PKTLEN(ctxt->om);
+    if (ctxt->op != BLE_GATT_ACCESS_OP_WRITE_CHR) return BLE_ATT_ERR_WRITE_NOT_PERMITTED;
+    if ((which == 1 && n != 113) || (which == 2 && n != 1 && n != 3)) return BLE_ATT_ERR_INVALID_ATTR_VALUE_LEN;
+    ble_ds_message_t message = {.which = which, .length = n};
+    if (ble_hs_mbuf_to_flat(ctxt->om, message.data, n, NULL)) return BLE_ATT_ERR_UNLIKELY;
+    if (xQueueSend(s_ds_queue, &message, 0) != pdTRUE) return BLE_ATT_ERR_INSUFFICIENT_RES;
+    atomic_store(&s_ds_session, true);
+    return 0;
+}
 
 static int rx_access(uint16_t conn, uint16_t attr, struct ble_gatt_access_ctxt *ctxt, void *arg)
 {
@@ -55,6 +71,17 @@ static const struct ble_gatt_svc_def services[] = {
              .flags = BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_NO_RSP},
             {.uuid = &tx_uuid.u, .access_cb = tx_access, .val_handle = &s_tx_handle,
              .flags = BLE_GATT_CHR_F_NOTIFY},
+            {0},
+        },
+    },
+    {
+        .type = BLE_GATT_SVC_TYPE_PRIMARY,
+        .uuid = BLE_UUID16_DECLARE(0xfff0),
+        .characteristics = (struct ble_gatt_chr_def[]){
+            {.uuid = BLE_UUID16_DECLARE(0xfff1), .access_cb = ds_access,
+             .arg = (void *)1, .flags = BLE_GATT_CHR_F_WRITE},
+            {.uuid = BLE_UUID16_DECLARE(0xfff2), .access_cb = ds_access,
+             .arg = (void *)2, .flags = BLE_GATT_CHR_F_WRITE},
             {0},
         },
     },
@@ -88,6 +115,10 @@ static int gap_event(struct ble_gap_event *event, void *arg)
 #endif
         break;
     case BLE_GAP_EVENT_DISCONNECT:
+        if (atomic_exchange(&s_ds_session, false)) {
+            xQueueReset(s_ds_queue);
+            atomic_store(&s_ds_disconnected, true);
+        }
         atomic_store(&s_subscribed, false);
         atomic_store(&s_conn, -1);
         atomic_store(&s_mtu, 23);
@@ -125,6 +156,9 @@ static void advertise(void)
     fields.name = (uint8_t *)name;
     fields.name_len = strlen(name);
     fields.name_is_complete = 1;
+    fields.uuids16 = (ble_uuid16_t[]){BLE_UUID16_INIT(0xfff0)};
+    fields.num_uuids16 = 1;
+    fields.uuids16_is_complete = 1;
     if (ble_gap_adv_set_fields(&fields) != 0) return;
     struct ble_gap_adv_params params = {.conn_mode = BLE_GAP_CONN_MODE_UND,
                                         .disc_mode = BLE_GAP_DISC_MODE_GEN};
@@ -146,6 +180,8 @@ void ble_start(void)
 {
     /* FLOW_WINDOW (8 KB) plus one frame: the host never has more in flight. */
     s_rx = xStreamBufferCreate(10240, 1);
+    s_ds_queue = xQueueCreate(16, sizeof(ble_ds_message_t));
+    configASSERT(s_ds_queue);
 #if CONFIG_IDF_TARGET_ESP32
     esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT);
 #endif
@@ -161,6 +197,15 @@ void ble_start(void)
 }
 
 bool ble_linked(void) { return atomic_load(&s_subscribed); }
+bool ble_phone_linked(void) { return atomic_load(&s_conn) >= 0; }
+bool ble_ds_read(ble_ds_message_t *message)
+{
+    if (atomic_exchange(&s_ds_disconnected, false)) {
+        *message = (ble_ds_message_t){.which=2, .length=1, .data={2}};
+        return true;
+    }
+    return xQueueReceive(s_ds_queue, message, 0) == pdTRUE;
+}
 
 uint32_t ble_interval_us(void) { return atomic_load(&s_interval_us); }
 

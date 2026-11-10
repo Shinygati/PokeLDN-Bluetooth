@@ -1,49 +1,42 @@
-"""Store a recorded Gen 6/7 gift pack on the board and start it broadcasting.
-
-Run by the Session tab's Start. The board keeps broadcasting after this exits (like the FireRed
-host), with the LED flashing while it distributes, until a computer opens the board again.
-"""
+"""Generate card beacons directly from a WC6/WC7; no gift-JSON import."""
 import argparse
-import sys
+from pokeldn.uds.card_selection import GAMES, GAME_FAMILIES, LANGUAGES
 
 
 def build_parser():
-    parser = argparse.ArgumentParser(description="Broadcast a Nintendo 3DS Gen 6/7 Mystery Gift")
-    parser.add_argument("--pack", default="", help="a recorded gift pack (.gift.json)")
-    return parser
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--game-family',choices=GAME_FAMILIES,default='xy')
+    p.add_argument('--game',choices=GAMES,default=None)
+    p.add_argument('--import-card',default='')
+    p.add_argument('--distributor-code',default='')
+    for game in (*GAMES, *GAME_FAMILIES):
+        p.add_argument('--language-'+game,choices=LANGUAGES,default='ENG')
+        for lang in LANGUAGES:
+            p.add_argument('--card-'+game+'-'+lang.lower(),default='')
+    return p
 
 
 def main(argv=None):
-    args = build_parser().parse_args(argv)
-
-    from pokeldn.uds.catalog3ds import load_packs, packs_dir
-
-    pack_path = args.pack
-    if not pack_path:
-        found = [p for entries in load_packs(packs_dir()).values() for p, _ in entries]
-        if len(found) == 1:
-            pack_path = str(found[0])
-        elif not found:
-            print("No gift packs found. Record a Wonder Card from a Local Distributor on the PC "
-                  "(see docs/3ds_local_distributor.md), then put its .gift.json in the gifts folder.")
-            return 1
-        else:
-            print("Several gift packs are available; choose one in the options, then Start.")
-            return 1
-
-    from pokeldn.uds.board3ds import BoardError, send_pack
-    from pokeldn.uds.gift_pack import GiftPack
-
+    args=build_parser().parse_args(argv)
+    game=args.game or args.game_family
+    lang=getattr(args,'language_'+game)
+    card=args.import_card or getattr(args,'card_'+game+'_'+lang.lower())
+    if not card:
+        print('Choose a bundled Wonder Card or import a WC6/WC7 file in Options.')
+        return 1
+    from pokeldn.uds.card_sender import prepare
+    from pokeldn.uds.board3ds import send_pack, BoardError
     try:
-        pack = GiftPack.load(pack_path)
-        length = send_pack(pack, log=print)
-    except (OSError, ValueError, BoardError) as error:
+        print('Preparing selected Wonder Card...')
+        pack=prepare(card,game,lang,args.distributor_code)
+        length=send_pack(pack,log=print)
+    except (OSError,ValueError,BoardError) as error:
         print(str(error))
         return 1
-    print(f"Broadcasting {pack.name or pack_path} ({length} bytes on the board).")
-    print("On the 3DS: Mystery Gift, Receive Gift, Get via Local Wireless.")
+    print(f'Broadcast started: {pack.name} ({length} bytes stored on board).')
+    print('On the 3DS: Mystery Gift, Receive Gift, Get via Local Wireless.')
     return 0
 
 
-if __name__ == "__main__":
+if __name__=='__main__':
     raise SystemExit(main())

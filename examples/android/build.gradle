@@ -11,8 +11,8 @@ android {
         minSdk 26
         targetSdk 36
         // The release workflow numbers each build: a higher versionCode installs as an update.
-        versionCode((System.getenv('POKELDN_ANDROID_VERSION_CODE') ?: '4') as int)
-        versionName System.getenv('POKELDN_ANDROID_VERSION_NAME') ?: '0.4-gui'
+        versionCode((System.getenv('POKELDN_ANDROID_VERSION_CODE') ?: '8') as int)
+        versionName System.getenv('POKELDN_ANDROID_VERSION_NAME') ?: '0.8-ds-bluetooth-unified'
         ndk { abiFilters 'arm64-v8a' }
     }
     signingConfigs {
@@ -127,4 +127,10 @@ chaquopy {
     sourceSets {
         main { srcDirs = ['src/python', 'staged'] }
     }
+}
+
+// Compile in the launcher process: local worker sockets are unavailable in the build host.
+tasks.withType(JavaCompile).configureEach {
+    options.fork = false
+    options.incremental = false
 }
