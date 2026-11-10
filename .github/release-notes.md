@@ -1,18 +1,15 @@
-# pokeldn 0.56.0
+# pokeldn 0.62.2
 
 This desktop app trades with seven Pokemon game families on a Switch or Switch 2
 through an ESP32 radio connected by USB. Nothing is installed on the console.
 
 ## What is new
 
-- Sword and Shield, Trade (Join): a trade that carries a legendary or mythical Pokemon (Spectrier and
-  Zacian among them) now completes. The console paused before its last confirmation and the
-  app's connection went stale, so the console failed the trade.
-- Sword and Shield, Dynamax Adventure (Join) over the board finds a lobby whose player chose a target
-  legendary; before, only LAN mode found it.
-- The Sword and Shield command line accepts a `.pk8` saved by PKHeX as it is.
+- A Let's Go Pikachu or Eevee Pokemon built in the app no longer gets 200 AVs in every stat when Max
+  AVs is not chosen. It now carries only the AVs the player sets, or the small number the game needs
+  for the levels it gained since it was met. A Let's Go Mystery Gift or imported file keeps its own AVs.
 
-The radio firmware stays at 1.9.3 and the controller firmware at 1.3.0.
+The radio firmware stays at 1.11.0; the controller firmware stays at 1.3.0.
 
 pokeldn is an unofficial fan project, not affiliated with Nintendo or The Pokemon Company. It is not
 meant for commercial or promotional use; see the License section of the README.
@@ -22,6 +19,7 @@ meant for commercial or promotional use; see the License section of the README.
 | Computer | File |
 |---|---|
 | macOS, Apple silicon | `pokeldn-macos-arm64.zip` |
+| macOS, Intel | `pokeldn-macos-x64.zip` |
 | Windows, x64 | `pokeldn-windows-x64.zip` |
 | Linux, x64 | `pokeldn-linux-x64.tar.gz` |
 | Android, arm64 | `pokeldn-android-arm64.apk` |
@@ -31,7 +29,8 @@ Each app includes PKHeX.Core and firmware for classic ESP32, ESP32-S3, ESP32-C3 
 and ESP-IDF are bundled or unnecessary for running the app. Supply your own `prod.keys`.
 The separate `pokeldn-radio*.bin` (wireless; `-ble` for Bluetooth wireless) and `pokeldn-pad*.bin` (controller) files are merged
 firmware images for manual flashing at address `0x0`; the app selects the right image for the
-connected chip. `SHA256SUMS` covers all thirteen downloads.
+connected chip; `pokeldn-radio-e32r40t.bin` and `pokeldn-radio-szpi.bin` are for those screen boards.
+`SHA256SUMS` covers all sixteen downloads.
 
 Code signing policy: free code signing provided by [SignPath.io](https://about.signpath.io), certificate by
 [SignPath Foundation](https://signpath.org); [what is signed, team roles and privacy](https://decryptu.github.io/pokeldn/code_signing.html).
@@ -69,7 +68,7 @@ Received Pokemon are saved in `Documents/pokeldn/Received`, with a configurable 
 
 ## Platform notes
 
-macOS requires Apple silicon and macOS 12 or later. Linux requires GTK 3, libsecret and access
+macOS requires macOS 12 or later. Linux requires GTK 3, libsecret and access
 to the serial port; on distributions using the `dialout` group, run `sudo usermod -aG dialout "$USER"`
 and log out and back in. ESP32-S2 is unsupported.
 

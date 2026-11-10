@@ -27,6 +27,8 @@ FIRMWARE_BLE_C6 = ROOT / "gui" / "firmware" / "pokeldn-radio-ble-c6.bin"
 FIRMWARE_BLE_S3 = ROOT / "gui" / "firmware" / "pokeldn-radio-ble-s3.bin"
 FIRMWARE_BLE_EXTRA = tuple(ROOT / "gui" / "firmware" / f"pokeldn-radio-ble-{chip}.bin"
                            for chip in ("c2", "c3", "c5", "c61"))
+FIRMWARE_SCREEN = (ROOT / "gui" / "firmware" / "pokeldn-radio-e32r40t.bin",
+                   ROOT / "gui" / "firmware" / "pokeldn-radio-szpi.bin")
 APP_ID = "io.github.decryptu.pokeldn"
 UNICORN = ROOT / "gui" / "unicorn"
 MARKER_UNICORN = "pokeldn-unicorn"
@@ -131,7 +133,7 @@ def pe_checksum(data: bytes, field: int) -> int:
 def main() -> int:
     argparse.ArgumentParser(description=__doc__).parse_args()
     firmware = (FIRMWARE, FIRMWARE_S3, FIRMWARE_C3, FIRMWARE_C6, FIRMWARE_PAD, FIRMWARE_PAD_ESP32, FIRMWARE_BLE,
-                FIRMWARE_BLE_C6, FIRMWARE_BLE_S3, *FIRMWARE_BLE_EXTRA)
+                FIRMWARE_BLE_C6, FIRMWARE_BLE_S3, *FIRMWARE_BLE_EXTRA, *FIRMWARE_SCREEN)
     missing = [str(path) for path in firmware if not path.is_file()]
     if missing:
         raise SystemExit(f"Missing firmware: {', '.join(missing)}. Build the required images "
